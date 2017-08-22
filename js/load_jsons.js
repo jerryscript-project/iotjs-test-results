@@ -41,6 +41,15 @@ function set_info(device) {
         .text("Raspbian Jessie");
       $("#info-image").attr('src', "img/raspberrypi2.jpg");
       break;
+    case "artik053":
+      $("#info-device")
+        .attr('href', "https://developer.artik.io/documentation/artik-05x/")
+        .text("Artik 053");
+      $("#info-platform")
+        .attr('href', "https://github.com/Samsung/TizenRT")
+        .text("TizenRT");
+      $("#info-image").attr('src', "img/artik053.jpg");
+      break;
   }
 }
 
