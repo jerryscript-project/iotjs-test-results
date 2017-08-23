@@ -284,7 +284,7 @@ function render_testruns(idx, idx_end) {
       add_nochange_between(first_date, prev_testrun_date, testruns_div);
 
       anim_idx = 0;
-      for (; idx < idx_end; idx++) {
+      for (; idx <= idx_end; idx++) {
         if (idx >= testruns.length)
           break;
 
