@@ -169,17 +169,16 @@ function _render_tests_table(uid, tests, earlier_tests_map) {
       !isNaN(parseInt(test.memory))
     );
 
-    var can_compare_prev = (
-      test.name in earlier_tests_map &&
-      earlier_tests_map[test.name].result == "pass" &&
-      "memory" in earlier_tests_map[test.name] &&
-      !isNaN(parseInt(earlier_tests_map[test.name].memory))
-    );
-
-    if (can_compare_current && can_compare_prev) {
-      var diff = test.memory - earlier_tests_map[test.name].memory;
-      var percent = (diff / earlier_tests_map[test.name].memory) * 100.0;
-      raw_html += (diff >= 0 ? '+' : '') + percent.toFixed(1) + '%';
+    if (can_compare_current) {
+      for (var key in earlier_tests_map) {
+        var earlier_test = earlier_tests_map[key];
+        if (earlier_test.name == test.name && earlier_test.result == "pass" && !isNaN(parseInt(earlier_test.memory))) {
+          var diff = test.memory - earlier_test.memory;
+          var percent = (diff / earlier_test.memory) * 100.0;
+          raw_html += (diff >= 0 ? '+' : '') + percent.toFixed(1) + '%';
+          break;
+        }
+      }
     }
     else {
       raw_html += '<span class="light">n/a</span>'
