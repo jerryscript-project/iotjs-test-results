@@ -262,7 +262,7 @@ function render_testruns(idx, idx_end) {
   }
   else
   {
-    for (var i = idx; i < idx_end; i++) {
+    for (var i = idx; i <= idx_end; i++) {
       query = g_db_ref.child(g_db_keys[i]);
       promises.push(query.once('value'));
     }
@@ -347,7 +347,7 @@ function render_pagination(length, step) {
 
     var item = $(raw_html).click(function(idx, start) {
       return function() {
-        render_testruns(start, start + step);
+        render_testruns(start, start + step - 1);
         $(".pagination li").removeClass("active");
         $(".pagination li:nth-child(" + (idx + 1) + ")").addClass("active");
       }

@@ -78,7 +78,7 @@ function fetch_keys(device) {
         var pageCount = g_db_keys.length / g_page_step;
         render_pagination(g_db_keys.length, g_page_step);
         g_db_keys.reverse();
-        render_testruns(0, g_page_step);
+        render_testruns(0, g_page_step - 1);
       }
       fetch_chart_data(device);
 
