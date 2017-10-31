@@ -168,7 +168,7 @@ function update_chart(from, to) {
       });
 
       if (memory_counter > 0)
-        data.average_memory /= memory_counter;
+        data.average_memory = (data.average_memory / memory_counter).toFixed();
 
       slice.push(data);
     });
