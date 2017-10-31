@@ -133,9 +133,8 @@ function fetch_chart_data(device) {
       if (start_date < new Date(first_element.date)) {
         start_date = new Date(first_element.date);
       }
-      else {
-        start_date = iso_date(start_date)
-      }
+
+      start_date = iso_date(start_date)
 
       update_chart(start_date, last_element.date);
 
