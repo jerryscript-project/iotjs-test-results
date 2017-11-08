@@ -159,11 +159,14 @@ function update_chart(from, to) {
 
       data.average_memory = 0;
       data.tests.forEach(function(testname) {
-        var number = parseInt(Number(testname.memory));
-        if (number == testname.memory) {
-          memory_counter++;
-          data.average_memory += number;
+        if (testname.hasOwnProperty('memory')) {
+          var number = parseInt(Number(testname.memory.total));
+          if (number == testname.memory.total) {
+            memory_counter++;
+            data.average_memory += number;
+          }
         }
+
       });
 
       if (memory_counter > 0)

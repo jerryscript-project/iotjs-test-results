@@ -222,6 +222,14 @@ html {
 	overflow-x: hidden;
 }
 
+	.tests tr:nth-child(2) th:nth-child(n+2):nth-child(-n+4) {
+		text-align: center;
+	}
+
+	.tests tr:nth-child(3) th:nth-child(n+1):nth-child(-n+3) {
+		text-align: center;
+	}
+
 	.tests:last-child {
 		margin-bottom: 10px;
 	}
@@ -233,36 +241,21 @@ html {
 	.tests thead {
 		font-weight: bold
 	}
-	.tests thead td:last-child {
+	.tests thead {
 		padding-right: 0;
 	}
 
-	.tests td {
+	.tests td, th {
 		border: 1px solid #eee;
 		padding: 0 8px;
 		position: relative;
 	}
-	.tests td:first-child {
-		width: 310px;
-	}
-	.tests td:nth-child(2) {
-		width: 65px;
-		text-align: center;
-	}
-	.tests td:nth-child(3) {
-		width: 100px;
-		text-align: right;
-	}
-	.tests td:nth-child(4) {
-		width: 75px;
-		text-align: left;
-	}
-	.tests td:last-child div:first-child {
+	.tests div:first-child {
 		max-height: 36px;
 		overflow: hidden;
 		transition: max-height 0.5s ease-out;
 	}
-	.tests td:last-child div:first-child.expanded {
+	.tests div:first-child.expanded {
 		max-height: 1000px;
 	}
 	.tests td .morebtn {

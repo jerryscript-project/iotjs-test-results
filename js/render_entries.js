@@ -125,12 +125,24 @@ function _render_showhide() {
 
 function _render_tests_table(uid, tests, earlier_tests_map) {
   var raw_html = '<div class="tests">';
-  raw_html += '<table><thead><tr>'
-    + '<td>Test</td><td>Result</td><td>Memory</td><td>Change</td>'
-    + '<td>Output/Reason' + _render_showhide() + '</td>'
-    + '</tr></thead></table>';
-
-  raw_html += '</div><div class="tests"><table>';
+  raw_html += '<table>'
+  raw_html += '<thead>'
+  raw_html += '<tr>'
+  raw_html +=  _render_showhide()
+  raw_html += '</tr>'
+  raw_html += '<tr>'
+  raw_html += '<th rowspan="2">Test</th>'
+  raw_html += '<th rowspan="2">Result</th>'
+  raw_html += '<th colspan="3">Memory</th>'
+  raw_html += '<th rowspan="2">Change</th>'
+  raw_html += '<th rowspan="2">Output/Reason</th>'
+  raw_html += '</tr>'
+  raw_html += '<tr>'
+  raw_html += '<th>Jerry</th>'
+  raw_html += '<th>Malloc</th>'
+  raw_html += '<th>Stack</th>'
+  raw_html += '</tr>'
+  raw_html += '</thead>'
 
   $.each(tests, function(idx, test) {
     var row_class = "fail";
@@ -154,31 +166,57 @@ function _render_tests_table(uid, tests, earlier_tests_map) {
     raw_html += '<td>' + test.name + '</td>';
     raw_html += '<td>' + test.result + '</td>';
 
-    raw_html += '<td class="mono">';
-    if (test.hasOwnProperty("memory"))
-      raw_html += test.memory + " B";
-    else
-      raw_html += "n/a";
+    if (test.hasOwnProperty('memory')) {
+      if (test.memory.jerry != 'n/a') {
+        raw_html += '<td class="mono">' + test.memory.jerry + ' B</td>';
+      } else {
+        raw_html += '<td class="mono">' + test.memory.jerry + '</td>';
+      }
 
-    raw_html += '</td>';
+      if (test.memory.malloc != 'n/a') {
+        raw_html += '<td class="mono">' + test.memory.malloc + ' B</td>';
+      } else {
+        raw_html += '<td class="mono">' + test.memory.malloc + '</td>';
+      }
+
+      if (test.memory.stack != 'n/a') {
+        raw_html += '<td class="mono">' + test.memory.stack + ' B</td>';
+      } else {
+        raw_html += '<td class="mono">' + test.memory.stack + '</td>';
+      }
+    }
+    else
+    {
+      raw_html += '<td class="mono">n/a</td>';
+      raw_html += '<td class="mono">n/a</td>';
+      raw_html += '<td class="mono">n/a</td>';
+    }
+
     raw_html += '<td class="mono">';
 
     var can_compare_current = (
       test.hasOwnProperty("memory") &&
       test.result == "pass" &&
-      !isNaN(parseInt(test.memory))
+      !isNaN(parseInt(test.memory.total))
     );
 
     if (can_compare_current) {
+      var compared = false;
       for (var key in earlier_tests_map) {
         var earlier_test = earlier_tests_map[key];
-        if (earlier_test.name == test.name && earlier_test.result == "pass" && !isNaN(parseInt(earlier_test.memory))) {
-          var diff = test.memory - earlier_test.memory;
-          var percent = (diff / earlier_test.memory) * 100.0;
+        if (earlier_test.name == test.name
+            && earlier_test.result == "pass"
+            && earlier_test.hasOwnProperty("memory")
+            && !isNaN(parseInt(earlier_test.memory.total))) {
+          var diff = test.memory.total - earlier_test.memory.total;
+          var percent = (diff / earlier_test.memory.total) * 100.0;
           raw_html += (diff >= 0 ? '+' : '') + percent.toFixed(1) + '%';
+          compared = true;
           break;
         }
       }
+      if (!compared)
+        raw_html += '<span class="light">n/a</span>'
     }
     else {
       raw_html += '<span class="light">n/a</span>'
