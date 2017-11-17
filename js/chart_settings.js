@@ -153,6 +153,7 @@ function update_chart(from, to) {
   date_to.setDate(date_to.getDate() + 1);
   g_db_ref.orderByChild('date').startAt(iso_date(from)).endAt(iso_date(date_to)).once("value", function(testcases) {
     testcases.forEach(function (testcase) {
+      var average_memory = 0;
       var memory_counter = 0;
       var data = testcase.val();
       data.date = iso_date(data.date);
@@ -161,20 +162,20 @@ function update_chart(from, to) {
       // Convert it to kilobytes
       data.bin.total = (bin_total / 1024).toFixed();
 
-      data.average_memory = 0;
+
       data.tests.forEach(function(testname) {
         if (testname.hasOwnProperty('memory')) {
           var number = parseInt(Number(testname.memory.total));
           if (number == testname.memory.total) {
             memory_counter++;
-            data.average_memory += number;
+            average_memory += number;
           }
         }
 
       });
 
       if (memory_counter > 0) {
-        data.average_memory = (data.average_memory / memory_counter);
+        data.average_memory = average_memory / memory_counter;
         // Convert it to kilobytes
         data.average_memory = (data.average_memory / 1024).toFixed();
       }
