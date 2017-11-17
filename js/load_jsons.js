@@ -3,7 +3,7 @@ var g_db_keys = [];
 var g_db_ref = "";
 
 $(document).ready(function() {
-  change_device("stm32");
+  change_device("artik053");
 });
 
 function change_device(device) {
