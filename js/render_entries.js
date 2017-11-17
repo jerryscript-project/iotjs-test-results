@@ -29,7 +29,7 @@ function render_testrun(uid, testrun, earlier_testrun) {
   raw_html += '<div class="preview">';
 
   raw_html += _render_summary(passed, failed, skipped);
-  raw_html += _render_binary(testrun.bin);
+  raw_html += _render_binary(testrun.bin.target_profile);
   raw_html += _render_submodules(testrun.submodules);
 
   raw_html += '</div>'; // top-div

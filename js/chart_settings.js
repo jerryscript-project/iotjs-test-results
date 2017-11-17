@@ -37,7 +37,7 @@ function init_datepickers(first_date, last_date) {
 
 function generate_chart(data, type, y_axis_min) {
   var line_color = '#1f77b4';
-  var type_key = 'bin.total';
+  var type_key = 'bin.target_profile.total';
   var label_name = 'binary size (KB)';
 
   if (type === 'memory') {
@@ -164,9 +164,9 @@ function update_chart(from, to) {
       var data = testcase.val();
       data.date = iso_date(data.date);
 
-      var bin_total = parseInt(Number(data.bin.total));
+      var bin_total = parseInt(Number(data.bin.target_profile.total));
       // Convert it to kilobytes
-      data.bin.total = (bin_total / 1024).toFixed();
+      data.bin.target_profile.total = (bin_total / 1024).toFixed();
 
 
       data.tests.forEach(function(testname) {
@@ -190,8 +190,8 @@ function update_chart(from, to) {
         }
       }
 
-      if (min_bin_size == 0 || min_bin_size > data.bin.total) {
-        min_bin_size = data.bin.total;
+      if (min_bin_size == 0 || min_bin_size > data.bin.target_profile.total) {
+        min_bin_size = data.bin.target_profile.total;
       }
 
       slice.push(data);
