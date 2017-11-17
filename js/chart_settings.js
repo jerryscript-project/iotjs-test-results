@@ -36,22 +36,13 @@ function init_datepickers(first_date, last_date) {
 }
 
 function generate_chart(data, type, y_axis_min) {
-  var line_color = '#1f77b4';
-  var type_key = 'bin.target_profile.total';
-  var label_name = 'binary size (KB)';
+  var typedColor = ['#ff7f0e'];
 
   if (type === 'memory') {
-    line_color = '#ff7f0e';
-    type_key = 'average_memory';
-    label_name = 'average memory (KB)';
-  }
+    var type_key = 'average_memory';
+    var label_name = 'average memory (KB)';
 
-  var chart = c3.generate({
-    bindto: '#' + type + '-chart',
-    size: {
-      height: 220
-    },
-    data: {
+    var typedData = {
       json: data,
       names: {
         [type_key] : label_name
@@ -68,7 +59,44 @@ function generate_chart(data, type, y_axis_min) {
         enabled: true,
         multiple: false
       }
+    };
+  } else if (type === 'binary') {
+    typedColor.push('#aec7e8');
+    var target_profile = 'bin.target_profile.total';
+    var minimal_profile = 'bin.minimal_profile.total';
+
+    var label_name_first = 'target-profile binary size (KB)';
+    var label_name_second = 'minimal-profile binary size (KB)';
+    console.log(data)
+    var typedData = {
+      json: data,
+      names: {
+        [target_profile] : label_name_first,
+        [minimal_profile] : label_name_second,
+      },
+      keys: {
+        x: 'date',
+        value: [target_profile, minimal_profile],
+      },
+      onclick: function(d, element) {
+        chart.unselect([type],[d.index]);
+        window.open('https://github.com/Samsung/iotjs/commit/' + data[d.index].submodules.iotjs.commit);
+      },
+      selection: {
+        enabled: true,
+        multiple: false
+      }
+    };
+  } else {
+    console.error('Unsupported type in generate_chart function!')
+  }
+
+  var chart = c3.generate({
+    bindto: '#' + type + '-chart',
+    size: {
+      height: 220
     },
+    data: typedData,
     axis: {
       x: {
         type: 'timeseries',
@@ -83,7 +111,7 @@ function generate_chart(data, type, y_axis_min) {
       }
     },
     color: {
-      pattern: [line_color]
+      pattern: typedColor
     },
     tooltip: {
       contents: function (d, defaultTitleFormat, defaultValueFormat, color) {
@@ -98,8 +126,17 @@ function generate_chart(data, type, y_axis_min) {
               d[0].name +
             '</td>' +
             '<td class="value">' + ((d[0].value === null) ? 'N/A' : d[0].value) + '</td>' +
-          '</tr>' +
-          '<tr class="c3-tooltip-name--commit">' +
+          '</tr>';
+          if (type === 'binary') {
+            tt += '<tr class="c3-tooltip-name--binary">' +
+            '<td class="name">' +
+              '<span style="background-color: ' + color(d[1]) + '"></span>' +
+              d[1].name +
+            '</td>' +
+            '<td class="value">' + ((d[1].value === null) ? 'N/A' : d[1].value) + '</td>' +
+          '</tr>';
+          }
+          tt += '<tr class="c3-tooltip-name--commit">' +
             '<td class="name">commit</td>' +
             '<td class="value">' + data[d[0].index].submodules.iotjs.commit.substring(0, 7) + '</td>' +
           '</tr>' +
@@ -164,10 +201,13 @@ function update_chart(from, to) {
       var data = testcase.val();
       data.date = iso_date(data.date);
 
-      var bin_total = parseInt(Number(data.bin.target_profile.total));
+      var bin_target_total = parseInt(Number(data.bin.target_profile.total));
       // Convert it to kilobytes
-      data.bin.target_profile.total = (bin_total / 1024).toFixed();
+      data.bin.target_profile.total = (bin_target_total / 1024).toFixed();
 
+      var bin_minimal_total = parseInt(Number(data.bin.minimal_profile.total));
+      // Convert it to kilobytes
+      data.bin.minimal_profile.total = (bin_minimal_total / 1024).toFixed();
 
       data.tests.forEach(function(testname) {
         if (testname.hasOwnProperty('memory')) {
