@@ -35,7 +35,7 @@ function init_datepickers(first_date, last_date) {
   }
 }
 
-function generate_chart(data, type) {
+function generate_chart(data, type, y_axis_min) {
   var line_color = '#1f77b4';
   var type_key = 'bin.total';
   var label_name = 'binary size (KB)';
@@ -77,6 +77,9 @@ function generate_chart(data, type) {
           fit: true,
           format: '%Y-%m-%d'
         }
+      },
+      y: {
+        min: y_axis_min
       }
     },
     color: {
@@ -114,8 +117,8 @@ function iso_date(date) {
 }
 
 function fetch_chart_data(device) {
-  generate_chart([], 'binary');
-  generate_chart([], 'memory');
+  generate_chart([], 'binary', 0);
+  generate_chart([], 'memory', 0);
 
   if (!firebase.apps.length || g_db_keys.length <= 0) {
     return;
@@ -152,6 +155,9 @@ function update_chart(from, to) {
   var date_to = new Date(to);
   date_to.setDate(date_to.getDate() + 1);
   g_db_ref.orderByChild('date').startAt(iso_date(from)).endAt(iso_date(date_to)).once("value", function(testcases) {
+    var min_avg_memory = 0;
+    var min_bin_size = 0;
+
     testcases.forEach(function (testcase) {
       var average_memory = 0;
       var memory_counter = 0;
@@ -178,12 +184,23 @@ function update_chart(from, to) {
         data.average_memory = average_memory / memory_counter;
         // Convert it to kilobytes
         data.average_memory = (data.average_memory / 1024).toFixed();
+
+        if (min_avg_memory == 0 || min_avg_memory > data.average_memory) {
+          min_avg_memory = data.average_memory;
+        }
+      }
+
+      if (min_bin_size == 0 || min_bin_size > data.bin.total) {
+        min_bin_size = data.bin.total;
       }
 
       slice.push(data);
     });
 
-    generate_chart(slice, 'binary');
-    generate_chart(slice, 'memory');
+    y_axis_min = (min_bin_size / 2).toFixed();
+    generate_chart(slice, 'binary', y_axis_min);
+
+    y_axis_min = (min_avg_memory / 2).toFixed();
+    generate_chart(slice, 'memory', y_axis_min);
   });
 }
