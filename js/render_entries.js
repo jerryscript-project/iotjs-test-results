@@ -207,7 +207,8 @@ function _render_tests_table(uid, tests, earlier_tests_map) {
         if (earlier_test.name == test.name
             && earlier_test.result == "pass"
             && earlier_test.hasOwnProperty("memory")
-            && !isNaN(parseInt(earlier_test.memory.total))) {
+            && !isNaN(parseInt(earlier_test.memory.total))
+            && parseInt(earlier_test.memory.total) > 0) {
           var diff = test.memory.total - earlier_test.memory.total;
           var percent = (diff / earlier_test.memory.total) * 100.0;
           raw_html += (diff >= 0 ? '+' : '') + percent.toFixed(1) + '%';
