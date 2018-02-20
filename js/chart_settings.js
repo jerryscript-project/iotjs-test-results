@@ -64,8 +64,8 @@ function generate_chart(data, type, y_axis_min) {
     };
   } else if (type === 'binary') {
     typedColor.push('#aec7e8');
-    var target_profile = 'bin.target_profile.total';
-    var minimal_profile = 'bin.minimal_profile.total';
+    var target_profile = 'bin.target_binary_size';
+    var minimal_profile = 'bin.minimal_binary_size';
 
     var label_name_first = 'target-profile binary size (KB)';
     var label_name_second = 'minimal-profile binary size (KB)';
@@ -200,13 +200,24 @@ function update_chart(from, to) {
       var data = testcase.val();
       data.date = iso_date(data.date);
 
-      var bin_target_total = parseInt(Number(data.bin.target_profile.total));
-      // Convert it to kilobytes
-      data.bin.target_profile.total = (bin_target_total / 1024).toFixed(1);
 
-      var bin_minimal_total = parseInt(Number(data.bin.minimal_profile.total));
-      // Convert it to kilobytes
-      data.bin.minimal_profile.total = (bin_minimal_total / 1024).toFixed(1);
+      var target_binary_size = parseInt(data.bin['target-profile']['data'] +
+                                        data.bin['target-profile']['rodata'] +
+                                        data.bin['target-profile']['text'])
+
+      data.bin.target_binary_size = NaN;
+      if (target_binary_size >= 0) {
+        data.bin.target_binary_size = (target_binary_size / 1024).toFixed(1);
+      }
+
+      var minimal_binary_size = parseInt(data.bin['minimal-profile']['data'] +
+                                         data.bin['minimal-profile']['rodata'] +
+                                         data.bin['minimal-profile']['text'])
+
+      data.bin.minimal_binary_size = NaN;
+      if (minimal_binary_size >= 0) {
+        data.bin.minimal_binary_size = (minimal_binary_size / 1024).toFixed(1);
+      }
 
       data.tests.forEach(function(testname) {
         if (testname.hasOwnProperty('memstat')) {
@@ -229,8 +240,8 @@ function update_chart(from, to) {
         }
       }
 
-      if (min_bin_size == 0 || min_bin_size > data.bin.target_profile.total) {
-        min_bin_size = data.bin.target_profile.total;
+      if (min_bin_size == 0 || min_bin_size > data.bin.target_binary_size) {
+        min_bin_size = data.bin.target_binary_size;
       }
 
       slice.push(data);
