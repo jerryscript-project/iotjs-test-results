@@ -209,8 +209,8 @@ function update_chart(from, to) {
       data.bin.minimal_profile.total = (bin_minimal_total / 1024).toFixed(1);
 
       data.tests.forEach(function(testname) {
-        if (testname.hasOwnProperty('memory')) {
-          var total_memory = parseInt(testname.memory.jerry + testname.memory.malloc + testname.memory.stack);
+        if (testname.hasOwnProperty('memstat')) {
+          var total_memory = parseInt(testname.memstat['heap-jerry'] + testname.memstat['heap-system'] + testname.memstat['stack']);
           if (total_memory >= 0) {
             memory_counter++;
             average_memory += total_memory;

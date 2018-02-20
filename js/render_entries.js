@@ -167,23 +167,23 @@ function _render_tests_table(uid, tests, earlier_tests_map) {
     raw_html += '<td>' + test.name + '</td>';
     raw_html += '<td>' + test.result + '</td>';
 
-    if (test.hasOwnProperty('memory')) {
-      if (test.memory.jerry != 'n/a') {
-        raw_html += '<td class="mono">' + test.memory.jerry + ' B</td>';
+    if (test.hasOwnProperty('memstat')) {
+      if (test.memstat['heap-jerry'] != 'n/a') {
+        raw_html += '<td class="mono">' + test.memstat['heap-jerry'] + ' B</td>';
       } else {
-        raw_html += '<td class="mono">' + test.memory.jerry + '</td>';
+        raw_html += '<td class="mono">' + test.memstat['heap-jerry'] + '</td>';
       }
 
-      if (test.memory.malloc != 'n/a') {
-        raw_html += '<td class="mono">' + test.memory.malloc + ' B</td>';
+      if (test.memstat['heap-system'] != 'n/a') {
+        raw_html += '<td class="mono">' + test.memstat['heap-system'] + ' B</td>';
       } else {
-        raw_html += '<td class="mono">' + test.memory.malloc + '</td>';
+        raw_html += '<td class="mono">' + test.memstat['heap-system'] + '</td>';
       }
 
-      if (test.memory.stack != 'n/a') {
-        raw_html += '<td class="mono">' + test.memory.stack + ' B</td>';
+      if (test.memstat['stack'] != 'n/a') {
+        raw_html += '<td class="mono">' + test.memstat['stack'] + ' B</td>';
       } else {
-        raw_html += '<td class="mono">' + test.memory.stack + '</td>';
+        raw_html += '<td class="mono">' + test.memstat['stack'] + '</td>';
       }
     }
     else
@@ -196,8 +196,8 @@ function _render_tests_table(uid, tests, earlier_tests_map) {
     raw_html += '<td class="mono">';
 
     var total_memory = NaN;
-    if (test.hasOwnProperty("memory")) {
-      total_memory = parseInt(test.memory.jerry + test.memory.malloc + test.memory.stack);
+    if (test.hasOwnProperty("memstat")) {
+      total_memory = parseInt(test.memstat['heap-jerry'] + test.memstat['heap-system'] + test.memstat['stack']);
     }
 
     var can_compare_current = (
@@ -210,10 +210,10 @@ function _render_tests_table(uid, tests, earlier_tests_map) {
       for (var key in earlier_tests_map) {
         var earlier_test = earlier_tests_map[key];
         var earlier_total_memory = NaN;
-        if (earlier_test.hasOwnProperty("memory")) {
-          var earlier_total_memory = parseInt(earlier_test.memory.jerry +
-                                              earlier_test.memory.malloc +
-                                              earlier_test.memory.stack);
+        if (earlier_test.hasOwnProperty("memstat")) {
+          var earlier_total_memory = parseInt(earlier_test.memstat['heap-jerry'] +
+                                              earlier_test.memstat['heap-system'] +
+                                              earlier_test.memstat['stack']);
         }
         if (earlier_test.name == test.name
             && earlier_test.result == "pass"
