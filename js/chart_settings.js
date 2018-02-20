@@ -210,10 +210,10 @@ function update_chart(from, to) {
 
       data.tests.forEach(function(testname) {
         if (testname.hasOwnProperty('memory')) {
-          var number = parseInt(Number(testname.memory.total));
-          if (number == testname.memory.total) {
+          var total_memory = parseInt(testname.memory.jerry + testname.memory.malloc + testname.memory.stack);
+          if (total_memory >= 0) {
             memory_counter++;
-            average_memory += number;
+            average_memory += total_memory;
           }
         }
 

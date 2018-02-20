@@ -54,9 +54,11 @@ function _render_binary(binary) {
     return parseInt(Number(value)) == value;
   }
 
+  var bin_size = binary.text + binary.rodata + binary.data;
+
   var raw_html = '<div class="binary"><table>';
-  raw_html += '<tr><td class="sumlabel" title="Total binary size">binary</td><td class="mono">'
-    + binary.total + (isInt(binary.total) ? ' B' : '') + '</td></tr>';
+  raw_html += '<tr><td class="sumlabel" title="Total binary size">binary size</td><td class="mono">'
+    + bin_size + (isInt(bin_size) ? ' B' : '') + '</td></tr>';
   raw_html += '<tr><td>text</td><td class="mono">' + binary.text + (isInt(binary.text) ? ' B' : '') + '</td></tr>';
   raw_html += '<tr><td>bss</td><td class="mono">' + binary.bss + (isInt(binary.bss) ? ' B' : '') + '</td></tr>';
   raw_html += '<tr><td>data</td><td class="mono">' + binary.data + (isInt(binary.data) ? ' B' : '') + '</td></tr>';
@@ -193,23 +195,31 @@ function _render_tests_table(uid, tests, earlier_tests_map) {
 
     raw_html += '<td class="mono">';
 
+    var total_memory = NaN;
+    if (test.hasOwnProperty("memory")) {
+      total_memory = parseInt(test.memory.jerry + test.memory.malloc + test.memory.stack);
+    }
+
     var can_compare_current = (
-      test.hasOwnProperty("memory") &&
       test.result == "pass" &&
-      !isNaN(parseInt(test.memory.total))
+      !isNaN(total_memory)
     );
 
     if (can_compare_current) {
       var compared = false;
       for (var key in earlier_tests_map) {
         var earlier_test = earlier_tests_map[key];
+        var earlier_total_memory = NaN;
+        if (earlier_test.hasOwnProperty("memory")) {
+          var earlier_total_memory = parseInt(earlier_test.memory.jerry +
+                                              earlier_test.memory.malloc +
+                                              earlier_test.memory.stack);
+        }
         if (earlier_test.name == test.name
             && earlier_test.result == "pass"
-            && earlier_test.hasOwnProperty("memory")
-            && !isNaN(parseInt(earlier_test.memory.total))
-            && parseInt(earlier_test.memory.total) > 0) {
-          var diff = test.memory.total - earlier_test.memory.total;
-          var percent = (diff / earlier_test.memory.total) * 100.0;
+            && earlier_total_memory > 0) {
+          var diff = total_memory - earlier_total_memory;
+          var percent = (diff / earlier_total_memory) * 100.0;
           raw_html += (diff >= 0 ? '+' : '') + percent.toFixed(1) + '%';
           compared = true;
           break;
