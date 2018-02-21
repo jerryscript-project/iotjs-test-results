@@ -54,7 +54,7 @@ function clear() {
 
 function set_info(device) {
   switch (device) {
-    case "stm32":
+    case "stm32f4dis":
       $("#info-device")
         .attr('href', "http://www.st.com/en/evaluation-tools/stm32f4discovery.html")
         .text("STM32F4-Discovery");

@@ -72,21 +72,21 @@ var g_submod_nice_name = {
   "iotjs": "IoT.js",
   "jerryscript": "JerryScript",
   "nuttx": "NuttX",
-  "apps": "NuttX Apps",
+  "nuttx-apps": "NuttX Apps",
   "tizenrt": "TizenRT"
 };
 var g_submod_baseurl = {
   "iotjs": "https://github.com/Samsung/iotjs/commit/",
   "jerryscript": "https://github.com/jerryscript-project/jerryscript/commit/",
   "nuttx": "https://bitbucket.org/nuttx/nuttx/commits/",
-  "apps": "https://bitbucket.org/nuttx/apps/commits/",
+  "nuttx-apps": "https://bitbucket.org/nuttx/apps/commits/",
   "tizenrt": "https://github.com/Samsung/TizenRT/commit/"
 };
 
 var g_submod_order = [
   "iotjs",
   "nuttx",
-  "apps",
+  "nuttx-apps",
   "tizenrt"
 ];
 
