@@ -44,7 +44,7 @@ function fetch_stats(tests) {
         stats.pass++;
       } else if (element.result === 'skip') {
         stats.skip++;
-      } else if (element.result === 'fail') {
+      } else if (['fail', 'timeout'].includes(element.result)) {
         stats.fail++;
       }
     }
