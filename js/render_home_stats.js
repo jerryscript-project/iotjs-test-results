@@ -8,9 +8,19 @@ function fetch_last_entries() {
   if (firebase.apps.length) {
     data = [];
 
+    device_counts = Object.keys(devices).length;
+
     for (const i in devices) {
       if (devices.hasOwnProperty(i)) {
+
+        firebase.database().ref('iotjs/' + i).limitToLast(1).once("value", function(snapshot) {
+          if (!snapshot.val()) {
+            device_counts--;
+          }
+        });
+
         firebase.database().ref('iotjs/' + i).limitToLast(1).on('child_added', function(childSnapshot) {
+          console.log(childSnapshot.val());
           var snapshot = childSnapshot.val();
 
           data.push({
@@ -20,7 +30,7 @@ function fetch_last_entries() {
             stats: fetch_stats(snapshot.tests)
           });
 
-          if (data.length === Object.keys(devices).length) {
+          if (data.length === device_counts) {
             render_project_targets();
           }
         });
