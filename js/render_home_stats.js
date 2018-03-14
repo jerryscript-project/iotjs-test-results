@@ -87,7 +87,7 @@ function render_project_target_col() {
 
   for (const i in data) {
     if (data.hasOwnProperty(i)) {
-      raw_html += '<div class="col-sm-4 col-md-4 col-lg-4 target-block">';
+      raw_html += '<div class="col-sm-3 col-md-3 col-lg-3 target-block">';
       raw_html += render_target_block_content(data[i]);
       raw_html += '</div>';
     }

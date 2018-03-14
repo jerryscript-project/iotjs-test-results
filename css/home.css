@@ -55,6 +55,14 @@ body {
   min-height: 165px;
 }
 
+#home-info .project-targets .target-block-content h3 {
+  height: 50px;
+}
+
+#home-info .project-targets .target-block-content p {
+  margin-bottom: 10px;
+}
+
 #home-info .project-targets .target-block-content:hover {
   border-color: #66afe9;
   -webkit-box-shadow: 0 0 8px rgba(102,175,233,.6);
