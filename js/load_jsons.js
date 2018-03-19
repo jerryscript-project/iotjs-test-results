@@ -80,6 +80,7 @@ function set_info(device) {
         .attr('href', "https://github.com/Samsung/TizenRT")
         .text("TizenRT");
       $("#info-image").attr('src', "img/artik053.jpg");
+      break;
     case "artik530":
       $("#info-device")
         .attr('href', "https://www.artik.io/modules/artik-530/")
