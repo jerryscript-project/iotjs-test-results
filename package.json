@@ -1,0 +1,58 @@
+{
+  "name": "iotjs-test-results",
+  "description": "Automated correctness and performance testing.",
+  "version": "1.0.0",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "webpack-dev-server --mode development --progress",
+    "build": "webpack --mode production -p --progress",
+    "lint": "eslint src ./*.js -f table --ext .js > eslint.log",
+    "lint-travis": "eslint src ./*.js --ext .js",
+    "lint-autofix": "eslint src ./*.js -f table --ext .js --fix > eslint.log"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Samsung/iotjs-test-results.git"
+  },
+  "author": "Samsung Electronics Co., Ltd.",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "bootstrap": "^4.0.0",
+    "firebase": "^4.12.0",
+    "history": "^4.7.2",
+    "jquery": "^3.3.1",
+    "popper.js": "^1.14.1",
+    "prop-types": "^15.6.1",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "react-helmet": "^5.2.0",
+    "react-redux": "^5.0.7",
+    "react-responsive": "^4.0.5",
+    "react-router": "^4.2.0",
+    "react-router-dom": "^4.2.2",
+    "react-router-redux": "^5.0.0-alpha.9",
+    "react-scripts": "^1.1.1",
+    "redux": "^3.7.2",
+    "redux-devtools-extension": "^2.13.2",
+    "redux-thunk": "^2.2.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.4",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.24.1",
+    "clean-webpack-plugin": "^0.1.19",
+    "css-loader": "^0.28.11",
+    "eslint": "^4.19.1",
+    "extract-text-webpack-plugin": "^4.0.0-beta.0",
+    "file-loader": "^1.1.11",
+    "html-loader": "^0.5.5",
+    "html-webpack-plugin": "^3.1.0",
+    "node-sass": "^4.8.3",
+    "sass-loader": "^6.0.7",
+    "style-loader": "^0.20.3",
+    "webpack": "^4.2.0",
+    "webpack-cli": "^2.0.13",
+    "webpack-dev-server": "^3.1.1"
+  }
+}

@@ -1,0 +1,28 @@
+language: node_js
+node_js: 9
+os: linux
+install:
+  - npm install
+cache:
+  directories:
+    - node_modules
+jobs:
+  include:
+  - stage: Check
+    script:
+    - ./tools/check_signed_off.sh
+    - npm run lint-travis
+  - stage: Build
+    script:
+    - npm run build
+  - stage: Deploy
+    deploy:
+      provider: pages
+      skip_cleanup: true
+      github_token: $GITHUB_TOKEN
+      local_dir: dist
+      on:
+        branch: master
+      verbose: true
+    script:
+    - "if ! test -d dist; then npm install && npm run build; fi"
