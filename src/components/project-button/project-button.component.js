@@ -27,7 +27,11 @@ export default class ProjectButton extends React.Component {
     const { active, children, onClick } = this.props;
 
     return (
-      <button type="button" className={`btn btn-sm btn-outline-secondary${active ? ' active': ''}`} onClick={onClick}>
+      <button
+        type="button"
+        className={`btn btn-sm ${active ? 'btn-success active': 'btn-outline-secondary'}`}
+        disabled={active}
+        onClick={onClick}>
         {children}
       </button>
     );
