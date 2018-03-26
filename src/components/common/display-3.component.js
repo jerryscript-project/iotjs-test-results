@@ -15,30 +15,25 @@
  */
 
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
-export default class HomePage extends React.Component {
+export default class Display3 extends React.Component {
 
   constructor(props) {
     super(props);
   }
 
   render() {
-    return (
-      <div className="container">
-        <Switch>
-          <Route path='/iotjs' render={() => (
-            <h1 className="display-3 text-center font-weight-bold text-secondary mt-5">IoT.js</h1>
-          )}/>
-          <Route path='/jerryscript' render={() => (
-            <h1 className="display-3 text-center font-weight-bold text-secondary mt-5">JerryScript</h1>
-          )}/>
-        </Switch>
+    const { children } = this.props;
 
-        <p className="text-center font-weight-bold text-secondary h5 mb-5">
-          Automated correctness and performance test results
-        </p>
-      </div>
+    return (
+      <h1 className="display-3 text-center font-weight-bold text-secondary mt-5">
+        {children}
+      </h1>
     );
   }
 }
+
+Display3.propTypes = {
+  children: PropTypes.node.isRequired,
+};
