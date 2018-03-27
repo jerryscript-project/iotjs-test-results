@@ -14,19 +14,19 @@
  * limitations under the License.
  */
 
-import * as firebase from 'firebase';
+import { connect } from 'react-redux';
+import Overview from './overview.component';
+import { fetchProjectResults, getLoading, getResults, cleanPathname } from '../../state/overview';
+import { devices } from '../../constants';
 
-const config = {
-  apiKey: 'AIzaSyDMgyPr0V49Rdf5ODAU9nLY02ZGEUNoxiM',
-  authDomain: 'remote-testrunner.firebaseapp.com',
-  databaseURL: 'https://remote-testrunner.firebaseio.com',
-  projectId: 'remote-testrunner',
-  storageBucket: 'remote-testrunner.appspot.com',
-  messagingSenderId: '183582255751',
-};
+const mapStateToProps = state => ({
+  loading: getLoading(state),
+  results: getResults(state),
+  devices,
+});
 
-firebase.initializeApp(config);
+const mapDispatchToProps = (dispatch, props) => ({
+  fetchResults: () => dispatch(fetchProjectResults(cleanPathname(props.location.pathname), devices)),
+});
 
-export const deviceLastResultDatabase = (project, device) => {
-  return firebase.database().ref(`${project}/${device}/`).limitToLast(1).once('value');
-};
+export default connect(mapStateToProps, mapDispatchToProps)(Overview);

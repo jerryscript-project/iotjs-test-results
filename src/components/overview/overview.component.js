@@ -15,6 +15,7 @@
  */
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Switch, Route } from 'react-router-dom';
 import Display3 from '../common/display-3.component';
 
@@ -24,7 +25,13 @@ export default class Overview extends React.Component {
     super(props);
   }
 
+  componentWillMount() {
+    this.props.fetchResults();
+  }
+
   render() {
+    const { loading } = this.props;
+
     return (
       <div className="container">
 
@@ -65,7 +72,20 @@ export default class Overview extends React.Component {
           </div>
         </div>
 
+        {loading &&
+          <div className="my-6 py-2">
+            <p className="text-center text-muted">Loading data...</p>
+          </div>
+        }
+
       </div>
     );
   }
 }
+
+Overview.propTypes = {
+  fetchResults: PropTypes.func.isRequired,
+  results: PropTypes.array.isRequired,
+  loading: PropTypes.bool.isRequired,
+  devices: PropTypes.array.isRequired,
+};

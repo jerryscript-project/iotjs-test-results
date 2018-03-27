@@ -19,3 +19,7 @@
 body {
   padding-top: 48px;
 }
+
+.progress-bar {
+  transition: width 0.3s linear;
+}
