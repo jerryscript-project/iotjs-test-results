@@ -27,7 +27,7 @@ export default class Header extends React.Component {
   render() {
     return (
       <header>
-        <nav className="navbar fixed-top navbar-expand navbar-light bg-light">
+        <nav className="navbar fixed-top navbar-expand navbar-dark bg-dark">
           <div className="container">
 
             <div className="form-inline">
