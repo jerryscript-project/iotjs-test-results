@@ -15,17 +15,25 @@
  */
 
 import React from 'react';
-import { Route, Switch, Redirect } from 'react-router';
-import App from './components/app';
-import IotjsOverview from './components/overview/iotjs-overview.component';
-import JerryscriptOverview from './components/overview/jerryscript-overview.component';
+import PropTypes from 'prop-types';
 
-export default (
-  <App>
-    <Switch>
-      <Route exact path="/iotjs" component={IotjsOverview} />
-      <Route exact path="/jerryscript" component={JerryscriptOverview} />
-      <Redirect to="/iotjs" />
-    </Switch>
-  </App>
-);
+export default class Subtitle extends React.Component {
+
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    const { children } = this.props;
+
+    return (
+      <p className="text-center font-weight-bold text-secondary h5 mb-5">
+        {children}
+      </p>
+    );
+  }
+}
+
+Subtitle.propTypes = {
+  children: PropTypes.node.isRequired,
+};

@@ -15,17 +15,27 @@
  */
 
 import React from 'react';
-import { Route, Switch, Redirect } from 'react-router';
-import App from './components/app';
-import IotjsOverview from './components/overview/iotjs-overview.component';
-import JerryscriptOverview from './components/overview/jerryscript-overview.component';
+import PropTypes from 'prop-types';
 
-export default (
-  <App>
-    <Switch>
-      <Route exact path="/iotjs" component={IotjsOverview} />
-      <Route exact path="/jerryscript" component={JerryscriptOverview} />
-      <Redirect to="/iotjs" />
-    </Switch>
-  </App>
-);
+export default class Jumbotron extends React.Component {
+
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    const { children } = this.props;
+
+    return (
+      <div className="jumbotron jumbotron-fluid rounded">
+          <div className="container">
+            {children}
+          </div>
+        </div>
+    );
+  }
+}
+
+Jumbotron.propTypes = {
+  children: PropTypes.node.isRequired,
+};
