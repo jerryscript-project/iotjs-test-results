@@ -18,6 +18,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Switch, Route } from 'react-router-dom';
 import Display3 from '../common/display-3.component';
+import OvervireDeviceList from '../overview-device-list/overview-device-list.component';
 
 export default class Overview extends React.Component {
 
@@ -30,7 +31,7 @@ export default class Overview extends React.Component {
   }
 
   render() {
-    const { loading } = this.props;
+    const { devices, results, loading } = this.props;
 
     return (
       <div className="container">
@@ -72,11 +73,13 @@ export default class Overview extends React.Component {
           </div>
         </div>
 
-        {loading &&
+        {loading ? (
           <div className="my-6 py-2">
             <p className="text-center text-muted">Loading data...</p>
           </div>
-        }
+        ) : (
+          <OvervireDeviceList devices={devices} results={results}/>
+        )}
 
       </div>
     );

@@ -28,5 +28,5 @@ const config = {
 firebase.initializeApp(config);
 
 export const deviceLastResultDatabase = (project, device) => {
-  return firebase.database().ref(`${project}/${device}/`).limitToLast(1).once('value');
+  return firebase.database().ref(`${project}/${device}/`).limitToLast(1).once('child_added');
 };

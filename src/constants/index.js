@@ -22,7 +22,7 @@ export const devices = [{
     name: 'ARTIK 530',
   }, {
     key: 'rpi2',
-    name: 'Raspbery Pi 2',
+    name: 'Raspberry Pi 2',
   }, {
     key: 'stm32f4dis',
     name: 'STM32F4-Discovery',
