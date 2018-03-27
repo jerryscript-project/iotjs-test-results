@@ -14,16 +14,26 @@
  * limitations under the License.
  */
 
-@import "~bootstrap/scss/bootstrap";
+import React from 'react';
 
-body {
-  padding-top: 48px;
-}
+export default class Footer extends React.Component {
 
-.footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  height: 48px;
-  line-height: 48px;
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    return (
+      <footer className="footer bg-dark text-center text-white">
+
+        <p className="m-0">
+          IoT.js Test Results is an open source project under the
+          <a className="ml-1" target="_self" href="https://github.com/Samsung/iotjscode/blob/master/LICENSE">
+            Apache License, Version 2.0
+          </a>
+        </p>
+
+      </footer>
+    );
+  }
 }

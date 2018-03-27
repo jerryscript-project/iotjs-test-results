@@ -17,6 +17,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Header from './header/header.component';
+import Footer from './footer/footer.component';
 
 export default class App extends React.Component {
 
@@ -30,6 +31,7 @@ export default class App extends React.Component {
       <div className="wrapper">
         <Header />
         {children}
+        <Footer />
       </div>
     );
   }
