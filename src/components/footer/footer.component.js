@@ -28,7 +28,7 @@ export default class Footer extends React.Component {
 
         <p className="m-0">
           IoT.js Test Results is an open source project under the
-          <a className="ml-1" target="_self" href="https://github.com/Samsung/iotjscode/blob/master/LICENSE">
+          <a className="ml-1" target="_self" href="https://github.com/Samsung/iotjs-test-results/blob/master/LICENSE">
             Apache License, Version 2.0
           </a>
         </p>
