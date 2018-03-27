@@ -27,9 +27,6 @@ export default class OverviewDevice extends React.Component {
 
   render() {
     const { name, data } = this.props;
-    const pass = data.tests.filter(t => t.result === 'pass').length;
-    const fail = data.tests.filter(t => t.result === 'fail').length;
-    const skip = data.tests.filter(t => t.result === 'skip').length;
 
     return (
       <div className="col-xl-3 col-lg-6 col-md-6 col-sm-12 my-2">
@@ -38,25 +35,41 @@ export default class OverviewDevice extends React.Component {
 
             <h5 className="card-title text-center">{name}</h5>
 
-            <h6 className="card-subtitle mb-4 text-muted text-center">
-              <span>Last measured </span>
-              <span className="font-weight-bold">{data.date.substr(0, 10)}</span>
-            </h6>
+            {data ? (
+              <div>
+                <h6 className="card-subtitle mb-4 text-muted text-center">
+                  <span>Last measured </span>
+                  <span className="font-weight-bold">{data.date.substr(0, 10)}</span>
+                </h6>
 
-            <div className="row mt-4">
-              <div className="col text-center" title="Passed">
-                <FontAwesomeIcon className="text-success" icon={faCheckCircle} />
-                <span className="ml-1">{pass}</span>
+                <div className="row mt-4">
+                  <div className="col text-center" title="Passed">
+                    <FontAwesomeIcon className="text-success" icon={faCheckCircle} />
+                    <span className="ml-1">{data.tests.filter(t => t.result === 'pass').length}</span>
+                  </div>
+                  <div className="col text-center" title="Failed">
+                    <FontAwesomeIcon className="text-danger" icon={faTimesCircle} />
+                    <span className="ml-1">{data.tests.filter(t => t.result === 'fail').length}</span>
+                  </div>
+                  <div className="col text-center" title="Skipped">
+                    <FontAwesomeIcon className="text-warning" icon={faArrowAltCircleRight} />
+                    <span className="ml-1">{data.tests.filter(t => t.result === 'skip').length}</span>
+                  </div>
+                </div>
               </div>
-              <div className="col text-center" title="Failed">
-                <FontAwesomeIcon className="text-danger" icon={faTimesCircle} />
-                <span className="ml-1">{fail}</span>
+            ) : (
+              <div>
+                <h6 className="card-subtitle mb-4 text-muted text-center">
+                  <span>---</span>
+                </h6>
+
+                <div className="row mt-4">
+                  <div className="col text-center text-muted">
+                    <span>Not measured yet...</span>
+                  </div>
+                </div>
               </div>
-              <div className="col text-center" title="Skipped">
-                <FontAwesomeIcon className="text-warning" icon={faArrowAltCircleRight} />
-                <span className="ml-1">{skip}</span>
-              </div>
-            </div>
+            )}
 
           </div>
         </div>
@@ -67,5 +80,5 @@ export default class OverviewDevice extends React.Component {
 
 OverviewDevice.propTypes = {
   name: PropTypes.string.isRequired,
-  data: PropTypes.object.isRequired,
+  data: PropTypes.object,
 };

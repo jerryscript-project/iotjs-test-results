@@ -52,7 +52,10 @@ export const fetchProjectResults = (project, devices) => {
 
     return devices.forEach((device, index) => {
       deviceLastResultDatabase(project, device.key).then(snapshot => {
-        dispatch(receiveDeviceResult(project, device.key, snapshot.val()));
+        const value = snapshot.val();
+        const data = value ? value[Object.keys(value)[0]] : null;
+
+        dispatch(receiveDeviceResult(project, device.key, data));
 
         if ((index + 1) / devices.length === 1) dispatch(setLoading(false));
       });
