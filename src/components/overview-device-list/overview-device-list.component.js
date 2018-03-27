@@ -24,24 +24,35 @@ export default class OverviewDeviceList extends React.Component {
     super(props);
   }
 
+  componentWillMount() {
+    this.props.fetchResults();
+  }
+
   render() {
-    const { devices, results } = this.props;
+    const { loading, results, devices } = this.props;
     const list = results.map(data => {
       return <OverviewDevice
-              key={data.device}
+              key={`${data.project}-${data.device}`}
               name={devices.filter(device => device.key === data.device).pop().name}
               data={data.result} />;
     });
 
     return (
       <div className="row my-2">
-        {list}
+        {loading ? (
+          <div className="col my-4 py-2">
+            <p className="text-center text-muted">Loading data...</p>
+          </div>
+        ) : (
+          list
+        )}
       </div>
     );
   }
 }
 
 OverviewDeviceList.propTypes = {
-  devices: PropTypes.array.isRequired,
+  loading: PropTypes.bool.isRequired,
   results: PropTypes.array.isRequired,
+  devices: PropTypes.array.isRequired,
 };

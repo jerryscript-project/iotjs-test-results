@@ -16,9 +16,9 @@
 
 import { combineReducers } from 'redux';
 import { routerReducer } from 'react-router-redux';
-import overview from './overview';
+import overviewDeviceList from './overview-device-list';
 
 export default combineReducers({
   router: routerReducer,
-  overview,
+  overviewDeviceList,
 });

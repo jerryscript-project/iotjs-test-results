@@ -17,7 +17,7 @@
 import React from 'react';
 import { Route, Switch, Redirect } from 'react-router';
 import App from './components/app';
-import Overview from './components/overview/overview.container';
+import Overview from './components/overview/overview.component';
 
 export default (
   <App>

@@ -15,10 +15,9 @@
  */
 
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Switch, Route } from 'react-router-dom';
 import Display3 from '../common/display-3.component';
-import OvervireDeviceList from '../overview-device-list/overview-device-list.component';
+import OvervireDeviceList from '../overview-device-list/overview-device-list.container';
 
 export default class Overview extends React.Component {
 
@@ -26,12 +25,7 @@ export default class Overview extends React.Component {
     super(props);
   }
 
-  componentWillMount() {
-    this.props.fetchResults();
-  }
-
   render() {
-    const { devices, results, loading } = this.props;
 
     return (
       <div className="container">
@@ -73,22 +67,16 @@ export default class Overview extends React.Component {
           </div>
         </div>
 
-        {loading ? (
-          <div className="my-6 py-2">
-            <p className="text-center text-muted">Loading data...</p>
-          </div>
-        ) : (
-          <OvervireDeviceList devices={devices} results={results}/>
-        )}
+        <Switch>
+          <Route path='/iotjs' render={() => (
+            <OvervireDeviceList project="iotjs" />
+          )}/>
+          <Route path='/jerryscript' render={() => (
+            <OvervireDeviceList project="jerryscript" />
+          )}/>
+        </Switch>
 
       </div>
     );
   }
 }
-
-Overview.propTypes = {
-  fetchResults: PropTypes.func.isRequired,
-  results: PropTypes.array.isRequired,
-  loading: PropTypes.bool.isRequired,
-  devices: PropTypes.array.isRequired,
-};

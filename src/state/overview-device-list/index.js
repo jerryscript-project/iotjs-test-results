@@ -19,6 +19,7 @@ import initialState from './initial.state';
 
 // Action types.
 export const REQUEST_PROJECT_RESULTS = 'REQUEST_PROJECT_RESULTS';
+export const REMOVE_PROJECT_RESULTS = 'REMOVE_PROJECT_RESULTS';
 export const RECEIVE_DEVICE_RESULT = 'RECEIVE_DEVICE_RESULT';
 export const SET_LOADING = 'SET_LOADING';
 
@@ -26,6 +27,10 @@ export const SET_LOADING = 'SET_LOADING';
 export const requestProjectResults = project => ({
   type: REQUEST_PROJECT_RESULTS,
   project,
+});
+
+export const removeProjectResults = () => ({
+  type: REMOVE_PROJECT_RESULTS,
 });
 
 export const receiveDeviceResult = (project, device, result) => ({
@@ -42,6 +47,7 @@ export const setLoading = loading => ({
 
 export const fetchProjectResults = (project, devices) => {
   return dispatch => {
+    dispatch(removeProjectResults());
     dispatch(requestProjectResults(project));
 
     return devices.forEach((device, index) => {
@@ -55,14 +61,9 @@ export const fetchProjectResults = (project, devices) => {
 };
 
 // Selectors.
-export const getLoading = state => state.overview.loading;
-export const getLoadingProject = state => state.overview.loadingProject;
-export const getResults = state => state.overview.results;
-
-// Helpers.
-export const cleanPathname = pathname => {
-  return pathname.replace(/\//g, '');
-};
+export const getLoading = state => state.overviewDeviceList.loading;
+export const getLoadingProject = state => state.overviewDeviceList.loadingProject;
+export const getResults = state => state.overviewDeviceList.results;
 
 // Reducers.
 export default (state = initialState, action = {}) => {
@@ -71,6 +72,10 @@ export default (state = initialState, action = {}) => {
       return Object.assign({}, state, {
         loading: true,
         loadingProject: action.project,
+      });
+    case REMOVE_PROJECT_RESULTS:
+      return Object.assign({}, state, {
+        results: [],
       });
     case RECEIVE_DEVICE_RESULT:
       return Object.assign({}, state, {

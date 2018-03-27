@@ -15,8 +15,8 @@
  */
 
 import { connect } from 'react-redux';
-import Overview from './overview.component';
-import { fetchProjectResults, getLoading, getResults, cleanPathname } from '../../state/overview';
+import OverviewDeviceList from './overview-device-list.component';
+import { fetchProjectResults, getLoading, getResults } from '../../state/overview-device-list';
 import { devices } from '../../constants';
 
 const mapStateToProps = state => ({
@@ -26,7 +26,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = (dispatch, props) => ({
-  fetchResults: () => dispatch(fetchProjectResults(cleanPathname(props.location.pathname), devices)),
+  fetchResults: () => dispatch(fetchProjectResults(props.project, devices)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Overview);
+export default connect(mapStateToProps, mapDispatchToProps)(OverviewDeviceList);
