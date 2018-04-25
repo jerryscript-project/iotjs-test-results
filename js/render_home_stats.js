@@ -20,7 +20,6 @@ function fetch_last_entries() {
         });
 
         firebase.database().ref('iotjs/' + i).limitToLast(1).on('child_added', function(childSnapshot) {
-          console.log(childSnapshot.val());
           var snapshot = childSnapshot.val();
 
           data.push({

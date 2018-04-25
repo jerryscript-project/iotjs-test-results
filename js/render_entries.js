@@ -4,6 +4,7 @@ function render_testrun(uid, testrun, earlier_testrun) {
   var passed = 0;
   var skipped = 0;
   var failed = 0;
+
   $.each(testrun.tests, function(name, test_info) {
     if (test_info.result == "pass")
       passed++;
@@ -99,7 +100,7 @@ function _render_submodules(submodules) {
     var submod = submodules[name];
     raw_html += '<tr class="submod-row submod-' + name + '">';
     raw_html += '<td>' + g_submod_nice_name[name] + '</td>';
-    raw_html += '<td class="mono"><a href="' + g_submod_baseurl[name] + submod.commit + '">' + submod.commit.substring(0, 7) + '</a></td>';
+    raw_html += '<td class="mono"><a href="' + g_submod_baseurl[name] + submod.commit + '">' + submod.commit.substring(0, 6) + '</a></td>';
     raw_html += '<td>';
     raw_html += '<span class="message">' + submod.message + '</span>';
     raw_html += '<span class="author">' + submod.author + '</span>';
@@ -410,3 +411,10 @@ function render_pagination(length, step) {
 
   $(".pagination li:first-child").addClass("active");
 }
+
+$(document).ready(function() {
+  var query = window.location.search.substring(1);
+  var vars = query.split("&");
+  var pair = vars[0].split("=");
+  $('#coverage_link').attr('href','./coverage/index.html?v=' + pair[1]);
+});

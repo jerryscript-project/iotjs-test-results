@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Code coverage report for All files</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../css/prettify.css" />
+    <link rel="stylesheet" href="../css/base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="../js/constants.js"></script>
+    <script src="../js/firebase_init.js"></script>
+    <script src="../js/load_jsons.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.1.3/firebase.js"></script>
+    <script src="../js/index_load.js"></script>
+    <script src="../js/prettify.js"></script>
+  </head>
+  <body>
+    <div id="target-info-placeholder" class="center">
+      <p>Loading the tests information...</p>
+    </div>
+    <div class="wrapper loading-part" id="target-info">
+      <div class="head pad1">
+        <h1>All files</h1>
+        <div class="clearfix"></div>
+        <div class="fl pad1y space-right2">
+          <span class="strong" id="average"></span>
+          <span class="quiet">Statements</span>
+          <span class="fraction" id="fraction"></span>
+        </div>
+        <div class="fl pad1y space-right2">
+          <span class="strong" id="average_l"></span>
+          <span class="quiet">Lines</span>
+          <span class="fraction" id="fraction_l"></span>
+        </div>
+      </div>
+      <div class="container pad1">
+          <div class="coverage" id="coverage"></div>
+      </div>
+      <div class="status-line high"></div>
+      <div class="pad1">
+        <table class="coverage-summary">
+          <thead>
+            <tr>
+              <th onclick="sortTable(0,0)" class="file">File <span class="sorter"></span></th>
+              <th onclick="sortTable(1,1)" class="pic"> <span class="sorter"></span></th>
+              <th onclick="sortTable(2,1)" class="pct">Lines <span class="sorter"></span></th>
+              <th onclick="sortTable(3,1)" class="abs"> <span class="sorter"></span></th>
+            </tr>
+          </thead>
+          <tbody id="coverage_files">
+          </tbody>
+        </table>
+      </div>
+      <div class="push"></div><!-- for sticky footer -->
+    </div><!-- /wrapper -->
+    <div class="footer quiet pad2 space-top1 center small">
+    </div>
+  </body>
+</html>

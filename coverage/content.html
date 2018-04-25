@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+  <head>
+      <title>Code coverage report for assert.js</title>
+      <meta charset="utf-8" />
+      <link rel="stylesheet" href="../css/prettify.css" />
+      <link rel="stylesheet" href="../css/base.css" />
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+      <script src="../js/constants.js"></script>
+      <script src="../js/firebase_init.js"></script>
+      <script src="../js/load_jsons.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/4.1.3/firebase.js"></script>
+      <script src="../js/prettify.js"></script>
+      <script src="../js/content_load.js"></script>
+  </head>
+  <body>
+    <div id="target-info-placeholder" class="center">
+      <p>Loading the file information...</p>
+    </div>
+    <div class="wrapper" id="target-info">
+      <div class="pad1">
+        <h1><a id="all_files" href="">All files</a> <span id="jsfilename"></span></h1>
+        <div class="clearfix">
+          <div class="fl pad1y space-right2">
+            <span class="strong" id="pct"></span>
+            <span class="quiet">Lines</span>
+            <span class="fraction" id="lines"></span>
+          </div>
+        </div>
+      </div>
+      <div class="status-line high"></div>
+      <table class="coverage">
+        <tr>
+            <td class="line-count quiet">
+                <pre id="line-count">
+                </pre>
+            </td>
+            <td class="text">
+                <pre class="prettyprint lang-js" id="prettyprint">
+                </pre>
+            </td>
+        </tr>
+      </table>
+    <div class="push"></div><!-- for sticky footer -->
+    </div><!-- /wrapper -->
+    <div class="footer quiet pad2 space-top1 center small">
+    </div>
+  </body>
+</html>

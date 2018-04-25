@@ -65,9 +65,9 @@ body {
 
 #home-info .project-targets .target-block-content:hover {
   border-color: #66afe9;
-  -webkit-box-shadow: 0 0 8px rgba(102,175,233,.6);
-  -moz-box-shadow: 0 0 8px rgba(102,175,233,.6);
-  box-shadow: 0 0 8px rgba(102,175,233,.6);
+  -webkit-box-shadow: 0 0 8px rgba(102, 175, 233, 0.6);
+  -moz-box-shadow: 0 0 8px rgba(102, 175, 233, 0.6);
+  box-shadow: 0 0 8px rgba(102, 175, 233, 0.6);
   cursor: pointer;
 }
 
@@ -87,14 +87,26 @@ body {
   position: relative;
 }
 
-#home-info .project-targets .target-block-content .target-block-result .target-block-result-passed {
+#home-info
+  .project-targets
+  .target-block-content
+  .target-block-result
+  .target-block-result-passed {
   color: #4a6;
 }
 
-#home-info .project-targets .target-block-content .target-block-result .target-block-result-failed {
+#home-info
+  .project-targets
+  .target-block-content
+  .target-block-result
+  .target-block-result-failed {
   color: #e44;
 }
 
-#home-info .project-targets .target-block-content .target-block-result .target-block-result-skipped {
+#home-info
+  .project-targets
+  .target-block-content
+  .target-block-result
+  .target-block-result-skipped {
   color: #eb1;
 }
