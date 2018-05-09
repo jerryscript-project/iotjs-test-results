@@ -75,7 +75,6 @@ const common = {
     path: paths.dist,
     filename: 'js/[name].bundle.js',
     chunkFilename: 'js/[name].bundle.js',
-    publicPath: '/',
   },
   resolve,
   plugins,
