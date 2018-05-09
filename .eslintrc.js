@@ -83,6 +83,7 @@ module.exports = {
     'es6': true,
     'jquery': true,
   },
+  'parser': 'babel-eslint',
   'parserOptions': {
     'ecmaVersion': 6,
     'sourceType': 'module',

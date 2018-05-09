@@ -72,16 +72,19 @@ export const getResults = state => state.overviewDeviceList.results;
 export default (state = initialState, action = {}) => {
   switch (action.type) {
     case REQUEST_PROJECT_RESULTS:
-      return Object.assign({}, state, {
+      return {
+        ...state,
         loading: true,
         loadingProject: action.project,
-      });
+      };
     case REMOVE_PROJECT_RESULTS:
-      return Object.assign({}, state, {
+      return {
+        ...state,
         results: [],
-      });
+      };
     case RECEIVE_DEVICE_RESULT:
-      return Object.assign({}, state, {
+      return {
+        ...state,
         results: [
           ...state.results,
           {
@@ -90,11 +93,12 @@ export default (state = initialState, action = {}) => {
             result: action.result,
           },
         ],
-      });
+      };
     case SET_LOADING:
-      return Object.assign({}, state, {
+      return {
+        ...state,
         loading: action.loading,
-      });
+      };
     default:
       return state;
   }
