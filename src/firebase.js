@@ -14,7 +14,8 @@
  * limitations under the License.
  */
 
-import * as firebase from 'firebase';
+import * as firebase from 'firebase/app';
+import 'firebase/database';
 
 const config = {
   apiKey: 'AIzaSyDMgyPr0V49Rdf5ODAU9nLY02ZGEUNoxiM',
