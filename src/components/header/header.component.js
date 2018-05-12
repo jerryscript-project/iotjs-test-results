@@ -16,7 +16,7 @@
 
 import React from 'react';
 import ProjectButton from '../project-button/project-button.container';
-import { project } from '../project-button/project-button.constans';
+import { projects } from '../../constants';
 
 export default class Header extends React.Component {
 
@@ -32,10 +32,10 @@ export default class Header extends React.Component {
 
             <div className="form-inline">
               <div className="btn-group" role="group">
-                <ProjectButton project={project.iotjs}>
+                <ProjectButton project={projects.iotjs.key}>
                   <span>IoT.js</span>
                 </ProjectButton>
-                <ProjectButton project={project.jerryscript}>
+                <ProjectButton project={projects.jerryscript.key}>
                   <span>JerryScript</span>
                 </ProjectButton>
               </div>

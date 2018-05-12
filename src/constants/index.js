@@ -28,3 +28,14 @@ export const devices = [{
     name: 'STM32F4-Discovery',
   },
 ];
+
+export const projects = {
+  iotjs: {
+    key: 'iotjs',
+    name: 'IoT.js',
+  },
+  jerryscript: {
+    key: 'jerryscript',
+    name: 'JerryScript',
+  },
+};
