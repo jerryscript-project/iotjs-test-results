@@ -15,9 +15,7 @@
  */
 
 import React from 'react';
-import Display3 from '../common/display-3.component';
-import Subtitle from '../common/subtitle.component';
-import Jumbotron from '../common/jumbotron.component';
+import OverviewIntro from '../overview-intro/overview-intro.component';
 import OvervireDeviceList from '../overview-device-list/overview-device-list.container';
 
 export default class IotjsOverview extends React.Component {
@@ -30,28 +28,8 @@ export default class IotjsOverview extends React.Component {
 
     return (
       <div className="container">
-
-        <Display3>IoT.js</Display3>
-        <Subtitle>Automated correctness and performance test results</Subtitle>
-        <Jumbotron>
-          <p>
-            The purpose of the project is to run the official IoT.js test-suite on different platforms.
-            The testing happens once a day (at UTC 17:00) using the latest master.
-          </p>
-          <p>
-            Since IoT.js focuses on low footprint devices, the run-time memory consumption is tracked
-            during the test execution. This means that each passed tests have information
-            about their peak usage of the stack and the heap memory areas.
-            The size of the compiled IoT.js is also saved.
-          </p>
-          <p>
-            The collected values are visualized on charts that help to observe how IoT.js evolves day by day.
-            If you are interested in a platform, please choose one of the options below.
-          </p>
-        </Jumbotron>
-
+        <OverviewIntro title="IoT.js"/>
         <OvervireDeviceList project="iotjs" />
-
       </div>
     );
   }
