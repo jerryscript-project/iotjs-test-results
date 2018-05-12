@@ -25,11 +25,12 @@ export default class IotjsOverview extends React.Component {
   }
 
   render() {
+    const { projects, match } = this.props;
 
     return (
       <div className="container">
-        <OverviewIntro title="IoT.js"/>
-        <OvervireDeviceList project="iotjs" />
+        <OverviewIntro title={projects[match.params[0]].name} />
+        <OvervireDeviceList project={match.params[0]} />
       </div>
     );
   }

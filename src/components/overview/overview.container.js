@@ -14,23 +14,14 @@
  * limitations under the License.
  */
 
-import React from 'react';
-import OverviewIntro from '../overview-intro/overview-intro.component';
-import OvervireDeviceList from '../overview-device-list/overview-device-list.container';
+import { connect } from 'react-redux';
+import Overview from './overview.component';
+import { projects } from '../../constants';
 
-export default class JerryscriptOverview extends React.Component {
+const mapStateToProps = () => ({
+  projects,
+});
 
-  constructor(props) {
-    super(props);
-  }
+const mapDispatchToProps = () => ({});
 
-  render() {
-
-    return (
-      <div className="container">
-        <OverviewIntro title="JerryScript"/>
-        <OvervireDeviceList project="jerryscript" />
-      </div>
-    );
-  }
-}
+export default connect(mapStateToProps, mapDispatchToProps)(Overview);

@@ -24,8 +24,14 @@ export default class OverviewDeviceList extends React.Component {
     super(props);
   }
 
-  componentWillMount() {
-    this.props.fetchResults();
+  componentDidMount() {
+    this.props.fetchResults(this.props.project);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.props.project !== nextProps.project) {
+      this.props.fetchResults(nextProps.project);
+    }
   }
 
   render() {

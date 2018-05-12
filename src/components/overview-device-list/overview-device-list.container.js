@@ -25,8 +25,8 @@ const mapStateToProps = state => ({
   devices,
 });
 
-const mapDispatchToProps = (dispatch, props) => ({
-  fetchResults: () => dispatch(fetchProjectResults(props.project, devices)),
+const mapDispatchToProps = dispatch => ({
+  fetchResults: project => dispatch(fetchProjectResults(project, devices)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(OverviewDeviceList);

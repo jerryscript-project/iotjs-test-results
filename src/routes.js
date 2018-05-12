@@ -17,14 +17,12 @@
 import React from 'react';
 import { Route, Switch, Redirect } from 'react-router';
 import App from './components/app';
-import IotjsOverview from './components/overview/iotjs-overview.component';
-import JerryscriptOverview from './components/overview/jerryscript-overview.component';
+import Overview from './components/overview/overview.container';
 
 export default (
   <App>
     <Switch>
-      <Route exact path="/iotjs" component={IotjsOverview} />
-      <Route exact path="/jerryscript" component={JerryscriptOverview} />
+      <Route exact path="/(iotjs|jerryscript)" component={Overview}/>
       <Redirect to="/iotjs" />
     </Switch>
   </App>
