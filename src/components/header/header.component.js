@@ -32,12 +32,8 @@ export default class Header extends React.Component {
 
             <div className="form-inline">
               <div className="btn-group" role="group">
-                <ProjectButton project={projects.iotjs.key}>
-                  <span>IoT.js</span>
-                </ProjectButton>
-                <ProjectButton project={projects.jerryscript.key}>
-                  <span>JerryScript</span>
-                </ProjectButton>
+                <ProjectButton project={projects.iotjs} />
+                <ProjectButton project={projects.jerryscript} />
               </div>
             </div>
 

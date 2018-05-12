@@ -27,3 +27,11 @@ body {
   height: 48px;
   line-height: 48px;
 }
+
+.btn-light.focus, .btn-light:focus,
+.btn-outline-info.focus, .btn-outline-info:focus,
+.btn-outline-success.focus, .btn-outline-success:focus,
+.btn-outline-danger.focus, .btn-outline-danger:focus,
+.btn-outline-secondary.focus, .btn-outline-secondary:focus, {
+  box-shadow: none !important;
+}

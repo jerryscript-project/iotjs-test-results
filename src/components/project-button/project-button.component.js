@@ -15,6 +15,7 @@
  */
 
 import React from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 export default class ProjectButton extends React.Component {
@@ -24,23 +25,22 @@ export default class ProjectButton extends React.Component {
   }
 
   render() {
-    const { active, children, onClick } = this.props;
+    const { project, active, link } = this.props;
 
     return (
-      <button
-        type="button"
-        className={`btn btn-sm ${active ? 'btn-success active': 'btn-outline-success'}`}
+      <Link
+        className={`btn btn-sm ${active ? 'btn-light disabled': 'btn-outline-secondary'}`}
         disabled={active}
-        onClick={onClick}>
-        {children}
-      </button>
+        to={link} >
+        {project.name}
+      </Link>
     );
   }
 }
 
 
 ProjectButton.propTypes = {
+  project: PropTypes.object.isRequired,
   active: PropTypes.bool.isRequired,
-  children: PropTypes.node.isRequired,
-  onClick: PropTypes.func.isRequired,
+  link: PropTypes.string.isRequired,
 };

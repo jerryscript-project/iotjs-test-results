@@ -15,19 +15,19 @@
  */
 
 import { connect } from 'react-redux';
-import { push } from 'react-router-redux';
 import ProjectButton from './project-button.component';
+import { projects } from '../../constants';
 
-const mapStateToProps = (state, props) => {
-  return {
-    active: state.router.location.pathname === `/${props.project}`,
-  };
+const getLink = (path, project) => {
+  if (path.includes(project)) return path;
+  return path.replace(Object.keys(projects).find(p => projects[p].key !== project), project);
 };
 
-const mapDispatchToProps = (dispatch, props) => {
-  return {
-    onClick: () => dispatch(push(`/${props.project}`)),
-  };
-};
+const mapStateToProps = (state, props) => ({
+  active: state.router.location.pathname.includes(`/${props.project.key}`),
+  link: getLink(state.router.location.pathname, props.project.key),
+});
+
+const mapDispatchToProps = () => ({});
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProjectButton);
