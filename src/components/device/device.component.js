@@ -17,6 +17,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
+import DeviceHeader from '../device-header/device-header.component';
 
 export default class Device extends React.Component {
 
@@ -36,7 +37,7 @@ export default class Device extends React.Component {
           <title>{project.name} Test Results - {device.name}</title>
         </Helmet>
 
-        <h3 className="my-5 text-center">{project.name} - {device.name}</h3>
+        <DeviceHeader device={device} />
       </div>
     );
   }

@@ -17,15 +17,51 @@
 export const devices = [{
     key: 'artik053',
     name: 'ARTIK 053',
+    link: 'https://developer.artik.io/documentation/artik-05x/',
+    platform: {
+      name: 'TizenRT',
+      link: 'https://github.com/Samsung/TizenRT',
+    },
+    repo: {
+      name: 'IoT.js master branch',
+      link: 'https://github.com/Samsung/iotjs',
+    },
   }, {
     key: 'artik530',
     name: 'ARTIK 530',
+    link: 'https://www.artik.io/modules/artik-530/',
+    platform: {
+      name: 'Tizen',
+      link: 'https://www.tizen.org/',
+    },
+    repo: {
+      name: 'IoT.js master branch',
+      link: 'https://github.com/Samsung/iotjs',
+    },
   }, {
     key: 'rpi2',
     name: 'Raspberry Pi 2',
+    link: 'https://www.raspberrypi.org/products/raspberry-pi-2-model-b/',
+    platform: {
+      name: 'Raspbian Jessie',
+      link: 'https://www.raspbian.org/',
+    },
+    repo: {
+      name: 'IoT.js master branch',
+      link: 'https://github.com/Samsung/iotjs',
+    },
   }, {
     key: 'stm32f4dis',
     name: 'STM32F4-Discovery',
+    link: 'http://www.st.com/en/evaluation-tools/stm32f4discovery.html',
+    platform: {
+      name: 'NuttX',
+      link: 'http://nuttx.org/',
+    },
+    repo: {
+      name: 'IoT.js master branch',
+      link: 'https://github.com/Samsung/iotjs',
+    },
   },
 ];
 
