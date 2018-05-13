@@ -14,13 +14,15 @@
  * limitations under the License.
  */
 
-import React from 'react';
-import { Route, Switch, Redirect } from 'react-router';
-import App from './components/app.component.js';
+import { connect } from 'react-redux';
+import Header from './header.component';
+import { devices, projects } from '../../constants';
 
-export default (
-  <Switch>
-    <Route path="/:project" component={App} />
-    <Redirect to="/iotjs" />
-  </Switch>
-);
+const mapStateToProps = () => ({
+  devices,
+  projects,
+});
+
+const mapDispatchToProps = () => ({});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

@@ -33,9 +33,11 @@ export const projects = {
   iotjs: {
     key: 'iotjs',
     name: 'IoT.js',
+    url: 'https://github.com/Samsung/iotjs',
   },
   jerryscript: {
     key: 'jerryscript',
     name: 'JerryScript',
+    url: 'https://github.com/jerryscript-project/jerryscript',
   },
 };

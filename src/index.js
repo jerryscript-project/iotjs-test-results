@@ -17,21 +17,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { ConnectedRouter } from 'react-router-redux';
-import createHistory from 'history/createHashHistory';
+import { HashRouter } from 'react-router-dom';
 import routes from './routes';
 import configureStore from './state/configure.store';
 
 import '../public/style/index.scss';
 
-const history = createHistory();
-const store = configureStore(history);
+const store = configureStore();
 
 ReactDOM.render(
   <Provider store={store}>
-    <ConnectedRouter history={history}>
+    <HashRouter>
       {routes}
-    </ConnectedRouter>
+    </HashRouter>
   </Provider>,
   document.getElementById('root')
 );

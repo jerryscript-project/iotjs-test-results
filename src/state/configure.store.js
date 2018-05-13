@@ -16,15 +16,12 @@
 
 import { createStore, applyMiddleware } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import { routerMiddleware } from 'react-router-redux';
 import thunk from 'redux-thunk';
 import RootReducer from './root.reducer';
 
-const apply = history => applyMiddleware(thunk, routerMiddleware(history));
-
-export default history => {
+export default () => {
   return createStore(
     RootReducer,
-    process.env.NODE_ENV === 'development' ? composeWithDevTools(apply(history)) : apply(history)
+    process.env.NODE_ENV === 'development' ? composeWithDevTools(applyMiddleware(thunk)) : applyMiddleware(thunk)
   );
 };

@@ -16,28 +16,36 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import OverviewIntro from '../overview-intro/overview-intro.component';
-import OvervireDeviceList from '../overview-device-list/overview-device-list.container';
+import { Switch, Route } from 'react-router';
+import Header from './header/header.container';
+import Footer from './footer/footer.component';
+import Overview from './overview/overview.container';
+import Device from './device/device.component';
 
-export default class Overview extends React.Component {
+export default class App extends React.Component {
 
   constructor(props) {
     super(props);
   }
 
   render() {
-    const { projects, match } = this.props;
+    const { match } = this.props;
 
     return (
-      <div className="container">
-        <OverviewIntro title={projects[match.params.project].name} />
-        <OvervireDeviceList project={match.params.project} />
+      <div className="wrapper">
+        <Header {...this.props} />
+
+        <Switch>
+          <Route exact path={match.path} component={Overview} />
+          <Route path={`${match.path}/:device`} component={Device} />
+        </Switch>
+
+        <Footer />
       </div>
     );
   }
 }
 
-Overview.propTypes = {
-  projects: PropTypes.object.isRequired,
+App.propTypes = {
   match: PropTypes.object.isRequired,
 };

@@ -16,27 +16,30 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import Header from './header/header.component';
-import Footer from './footer/footer.component';
+import MenuItem from '../menu-item/menu-item.component';
 
-export default class App extends React.Component {
+export default class Menu extends React.Component {
 
   constructor(props) {
     super(props);
   }
 
   render() {
-    const { children } = this.props;
+    const { items, homeProject } = this.props;
+    const list = items.map((i, index) => {
+      return <MenuItem key={`${i.key}${index}`} title={i.name} link={`/${homeProject}/${i.key}`} />;
+    });
+
     return (
-      <div className="wrapper">
-        <Header />
-        {children}
-        <Footer />
+      <div className="navbar-nav">
+        <MenuItem title="Home" link={`/${homeProject}`} />
+        {list}
       </div>
     );
   }
 }
 
-App.propTypes = {
-  children: PropTypes.object.isRequired,
+Menu.propTypes = {
+  items: PropTypes.array.isRequired,
+  homeProject: PropTypes.string.isRequired,
 };

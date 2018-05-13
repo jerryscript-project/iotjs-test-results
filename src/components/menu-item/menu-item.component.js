@@ -15,12 +15,27 @@
  */
 
 import React from 'react';
-import { Route, Switch, Redirect } from 'react-router';
-import App from './components/app.component.js';
+import PropTypes from 'prop-types';
+import { NavLink } from 'react-router-dom';
 
-export default (
-  <Switch>
-    <Route path="/:project" component={App} />
-    <Redirect to="/iotjs" />
-  </Switch>
-);
+export default class MenuItem extends React.Component {
+
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    const { title, link } = this.props;
+
+    return (
+      <NavLink className="nav-item nav-link" activeClassName="active" exact to={link}>
+        {title}
+      </NavLink>
+    );
+  }
+}
+
+MenuItem.propTypes = {
+  title: PropTypes.string.isRequired,
+  link: PropTypes.string.isRequired,
+};

@@ -25,14 +25,16 @@ export default class ProjectButton extends React.Component {
   }
 
   render() {
-    const { project, active, link } = this.props;
+    const { select, current, url } = this.props;
+    const active = select.key === current.key;
+    const link = url.includes(select.key) ? url : url.replace(current.key, select.key);
 
     return (
       <Link
         className={`btn btn-sm ${active ? 'btn-light disabled': 'btn-outline-secondary'}`}
         disabled={active}
         to={link} >
-        {project.name}
+        {select.name}
       </Link>
     );
   }
@@ -40,7 +42,7 @@ export default class ProjectButton extends React.Component {
 
 
 ProjectButton.propTypes = {
-  project: PropTypes.object.isRequired,
-  active: PropTypes.bool.isRequired,
-  link: PropTypes.string.isRequired,
+  select: PropTypes.object.isRequired,
+  current: PropTypes.object.isRequired,
+  url: PropTypes.string.isRequired,
 };

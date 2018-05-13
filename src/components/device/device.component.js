@@ -14,20 +14,26 @@
  * limitations under the License.
  */
 
-import { connect } from 'react-redux';
-import ProjectButton from './project-button.component';
-import { projects } from '../../constants';
+import React from 'react';
+import PropTypes from 'prop-types';
 
-const getLink = (path, project) => {
-  if (path.includes(project)) return path;
-  return path.replace(Object.keys(projects).find(p => projects[p].key !== project), project);
+export default class Device extends React.Component {
+
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    const { match } = this.props;
+
+    return (
+      <div className="container">
+        <h3 className="my-5 text-center">{match.params.project} - {match.params.device}</h3>
+      </div>
+    );
+  }
+}
+
+Device.propTypes = {
+  match: PropTypes.object.isRequired,
 };
-
-const mapStateToProps = (state, props) => ({
-  active: state.router.location.pathname.includes(`/${props.project.key}`),
-  link: getLink(state.router.location.pathname, props.project.key),
-});
-
-const mapDispatchToProps = () => ({});
-
-export default connect(mapStateToProps, mapDispatchToProps)(ProjectButton);

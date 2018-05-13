@@ -15,8 +15,11 @@
  */
 
 import React from 'react';
-import ProjectButton from '../project-button/project-button.container';
-import { projects } from '../../constants';
+import PropTypes from 'prop-types';
+import FontAwesomeIcon from '@fortawesome/react-fontawesome';
+import { faGithub } from '@fortawesome/fontawesome-free-brands';
+import ProjectButton from '../project-button/project-button.component';
+import Menu from '../menu/menu.component';
 
 export default class Header extends React.Component {
 
@@ -25,21 +28,51 @@ export default class Header extends React.Component {
   }
 
   render() {
+    const { devices, projects, match, location } = this.props;
+    const currentProject = projects[match.params.project];
+
     return (
       <header>
-        <nav className="navbar fixed-top navbar-expand navbar-dark bg-dark">
+        <nav className="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
           <div className="container">
 
             <div className="form-inline">
               <div className="btn-group" role="group">
-                <ProjectButton project={projects.iotjs} />
-                <ProjectButton project={projects.jerryscript} />
+                <ProjectButton select={projects.iotjs} current={currentProject} url={location.pathname} />
+                <ProjectButton select={projects.jerryscript} current={currentProject} url={location.pathname} />
               </div>
             </div>
 
+            <button
+              className="navbar-toggler"
+              type="button"
+              data-toggle="collapse"
+              data-target="#device-menu"
+              aria-controls="device-menu"
+              aria-expanded="false"
+              aria-label="Toggle navigation">
+              <span className="navbar-toggler-icon"></span>
+            </button>
+
+            <div className="collapse navbar-collapse" id="device-menu">
+              <Menu items={devices} homeProject={currentProject.key} />
+
+              <div className="ml-lg-auto">
+                <a className="nav-link text-light px-0" target="_blank" href={currentProject.url}>
+                  {currentProject.name} <FontAwesomeIcon icon={faGithub} />
+                </a>
+              </div>
+            </div>
           </div>
         </nav>
       </header>
     );
   }
 }
+
+Header.propTypes = {
+  devices: PropTypes.array.isRequired,
+  projects: PropTypes.object.isRequired,
+  match: PropTypes.object.isRequired,
+  location: PropTypes.object.isRequired,
+};
