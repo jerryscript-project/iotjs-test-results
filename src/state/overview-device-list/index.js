@@ -24,9 +24,8 @@ export const RECEIVE_DEVICE_RESULT = 'RECEIVE_DEVICE_RESULT';
 export const SET_LOADING = 'SET_LOADING';
 
 // Actions.
-export const requestProjectResults = project => ({
+export const requestProjectResults = () => ({
   type: REQUEST_PROJECT_RESULTS,
-  project,
 });
 
 export const removeProjectResults = () => ({
@@ -65,7 +64,6 @@ export const fetchProjectResults = (project, devices) => {
 
 // Selectors.
 export const getLoading = state => state.overviewDeviceList.loading;
-export const getLoadingProject = state => state.overviewDeviceList.loadingProject;
 export const getResults = state => state.overviewDeviceList.results;
 
 // Reducers.
@@ -75,7 +73,6 @@ export default (state = initialState, action = {}) => {
       return {
         ...state,
         loading: true,
-        loadingProject: action.project,
       };
     case REMOVE_PROJECT_RESULTS:
       return {

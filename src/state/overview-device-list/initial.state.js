@@ -16,6 +16,5 @@
 
 export default ({
   loading: false,
-  loadingProject: '',
   results: [],
 });
