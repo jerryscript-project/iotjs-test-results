@@ -16,5 +16,8 @@
 
 export default ({
   loading: false,
+  project: '',
+  device: '',
   data: {},
+  error: null,
 });

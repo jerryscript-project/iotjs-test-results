@@ -31,3 +31,7 @@ firebase.initializeApp(config);
 export const deviceLastResultDatabase = (project, device) => {
   return firebase.database().ref(`${project}/${device}/`).limitToLast(1).once('value');
 };
+
+export const deviceResultDatabase = (project, device) => {
+  return firebase.database().ref(`${project}/${device}/`).once('value');
+};

@@ -15,16 +15,79 @@
  */
 
 import initialState from './initial.state';
+import { deviceResultDatabase } from '../../firebase';
 
 // Action types
+export const FETCH_DEVICE_DATA_REQUEST = 'FETCH_DEVICE_DATA_REQUEST';
+export const FETCH_DEVICE_DATA_SUCCESS = 'FETCH_DEVICE_DATA_SUCCESS';
+export const FETCH_DEVICE_DATA_FAILURE = 'FETCH_DEVICE_DATA_FAILURE';
 
 // Action creators
+export const fetchDeviceDataRequest = (project, device) => ({
+  type: FETCH_DEVICE_DATA_REQUEST,
+  project,
+  device,
+});
+
+export const fetchDeviceDataSuccess = (project, device, data) => ({
+  type: FETCH_DEVICE_DATA_SUCCESS,
+  project,
+  device,
+  data,
+});
+
+export const fetchDeviceDataFailure = (project, device, error) => ({
+  type: FETCH_DEVICE_DATA_FAILURE,
+  project,
+  device,
+  error,
+});
+
+// Async action creators
+export const fetchDeviceData = (project, device) => dispatch => {
+  dispatch(fetchDeviceDataRequest(project, device));
+
+  deviceResultDatabase(project, device).then(snapshot => {
+    const value = snapshot.val();
+    const data = value ? value[Object.keys(value)[0]] : null;
+
+    dispatch(fetchDeviceDataSuccess(project, device, data));
+  }, error => {
+    dispatch(fetchDeviceDataFailure(project, device, error));
+  });
+};
 
 // Selectors
+export const getLoading = state => state.device.loading;
+export const getData = state => state.device.data;
+export const getError = state => state.device.error;
 
 // Reducers
 export default (state = initialState, action = {}) => {
   switch (action.type) {
+    case FETCH_DEVICE_DATA_REQUEST:
+      return {
+        ...state,
+        loading: true,
+        project: action.project,
+        device: action.device,
+      };
+    case FETCH_DEVICE_DATA_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        project: action.project,
+        device: action.device,
+        data: action.data,
+      };
+    case FETCH_DEVICE_DATA_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        project: action.project,
+        device: action.device,
+        error: action.error,
+      };
     default:
       return state;
   }
