@@ -18,68 +18,71 @@ import { deviceLastResultDatabase } from '../../firebase';
 import initialState from './initial.state';
 
 // Action types.
-export const REQUEST_PROJECT_RESULTS = 'REQUEST_PROJECT_RESULTS';
-export const REMOVE_PROJECT_RESULTS = 'REMOVE_PROJECT_RESULTS';
-export const RECEIVE_DEVICE_RESULT = 'RECEIVE_DEVICE_RESULT';
-export const SET_LOADING = 'SET_LOADING';
+export const FETCH_OVERVIEW_RESULTS_REQUEST = 'FETCH_OVERVIEW_RESULTS_REQUEST';
+export const FETCH_OVERVIEW_RESULTS_SUCCESS = 'FETCH_OVERVIEW_RESULTS_SUCCESS';
+export const FETCH_OVERVIEW_RESULTS_FAILURE = 'FETCH_OVERVIEW_RESULTS_FAILURE';
+export const REMOVE_OVERVIEW_RESULTS = 'REMOVE_OVERVIEW_RESULTS';
+export const SET_OVERVIEW_LOADING = 'SET_OVERVIEW_LOADING';
 
 // Actions.
-export const requestProjectResults = () => ({
-  type: REQUEST_PROJECT_RESULTS,
+export const fetchOverviewResultsRequest = () => ({
+  type: FETCH_OVERVIEW_RESULTS_REQUEST,
 });
 
-export const removeProjectResults = () => ({
-  type: REMOVE_PROJECT_RESULTS,
-});
-
-export const receiveDeviceResult = (project, device, result) => ({
-  type: RECEIVE_DEVICE_RESULT,
+export const fetchOverviewResultsSuccess = (project, device, result) => ({
+  type: FETCH_OVERVIEW_RESULTS_SUCCESS,
   project,
   device,
   result,
 });
 
-export const setLoading = loading => ({
-  type: SET_LOADING,
+export const fetchOverviewResultsFailure = error => ({
+  type: FETCH_OVERVIEW_RESULTS_FAILURE,
+  error,
+});
+
+export const removeOverviewResults = () => ({
+  type: REMOVE_OVERVIEW_RESULTS,
+});
+
+export const setOverviewLoading = loading => ({
+  type: SET_OVERVIEW_LOADING,
   loading,
 });
 
-export const fetchProjectResults = (project, devices) => {
-  return dispatch => {
-    dispatch(removeProjectResults());
-    dispatch(requestProjectResults(project));
+// Async action creators.
+export const fetchOverviewResults = (project, devices) => dispatch => {
+  dispatch(removeOverviewResults());
+  dispatch(fetchOverviewResultsRequest());
 
-    return devices.forEach((device, index) => {
-      deviceLastResultDatabase(project, device.key).then(snapshot => {
-        const value = snapshot.val();
-        const data = value ? value[Object.keys(value)[0]] : null;
+  return devices.forEach((device, index) => {
+    deviceLastResultDatabase(project, device.key).then(snapshot => {
+      const value = snapshot.val();
+      const data = value ? value[Object.keys(value)[0]] : null;
 
-        dispatch(receiveDeviceResult(project, device.key, data));
+      dispatch(fetchOverviewResultsSuccess(project, device.key, data));
 
-        if ((index + 1) / devices.length === 1) dispatch(setLoading(false));
-      });
+      if ((index + 1) / devices.length === 1) dispatch(setOverviewLoading(false));
+    }, error => {
+      dispatch(fetchOverviewResultsFailure(error));
     });
-  };
+  });
 };
 
 // Selectors.
-export const getLoading = state => state.overviewDeviceList.loading;
-export const getResults = state => state.overviewDeviceList.results;
+export const getOverviewLoading = state => state.overviewDeviceList.loading;
+export const getOverviewError = state => state.overviewDeviceList.error;
+export const getOverviewResults = state => state.overviewDeviceList.results;
 
 // Reducers.
 export default (state = initialState, action = {}) => {
   switch (action.type) {
-    case REQUEST_PROJECT_RESULTS:
+    case FETCH_OVERVIEW_RESULTS_REQUEST:
       return {
         ...state,
         loading: true,
       };
-    case REMOVE_PROJECT_RESULTS:
-      return {
-        ...state,
-        results: [],
-      };
-    case RECEIVE_DEVICE_RESULT:
+    case FETCH_OVERVIEW_RESULTS_SUCCESS:
       return {
         ...state,
         results: [
@@ -91,7 +94,18 @@ export default (state = initialState, action = {}) => {
           },
         ],
       };
-    case SET_LOADING:
+    case FETCH_OVERVIEW_RESULTS_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        error: action.error,
+      };
+    case REMOVE_OVERVIEW_RESULTS:
+      return {
+        ...state,
+        results: [],
+      };
+    case SET_OVERVIEW_LOADING:
       return {
         ...state,
         loading: action.loading,
