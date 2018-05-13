@@ -20,7 +20,7 @@ import { Switch, Route } from 'react-router';
 import Header from './header/header.container';
 import Footer from './footer/footer.component';
 import Overview from './overview/overview.container';
-import Device from './device/device.component';
+import Device from './device/device.container';
 
 export default class App extends React.Component {
 

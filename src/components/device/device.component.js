@@ -16,6 +16,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Helmet } from 'react-helmet';
 
 export default class Device extends React.Component {
 
@@ -24,11 +25,18 @@ export default class Device extends React.Component {
   }
 
   render() {
-    const { match } = this.props;
+    const { match, devices, projects } = this.props;
+    const project = projects[match.params.project];
+    const device = devices.find(d => d.key === match.params.device);
 
     return (
       <div className="container">
-        <h3 className="my-5 text-center">{match.params.project} - {match.params.device}</h3>
+        <Helmet>
+          <meta charSet="utf-8" />
+          <title>{project.name} Test Results - {device.name}</title>
+        </Helmet>
+
+        <h3 className="my-5 text-center">{project.name} - {device.name}</h3>
       </div>
     );
   }
