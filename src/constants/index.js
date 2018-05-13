@@ -22,10 +22,6 @@ export const devices = [{
       name: 'TizenRT',
       link: 'https://github.com/Samsung/TizenRT',
     },
-    repo: {
-      name: 'IoT.js master branch',
-      link: 'https://github.com/Samsung/iotjs',
-    },
   }, {
     key: 'artik530',
     name: 'ARTIK 530',
@@ -33,10 +29,6 @@ export const devices = [{
     platform: {
       name: 'Tizen',
       link: 'https://www.tizen.org/',
-    },
-    repo: {
-      name: 'IoT.js master branch',
-      link: 'https://github.com/Samsung/iotjs',
     },
   }, {
     key: 'rpi2',
@@ -46,10 +38,6 @@ export const devices = [{
       name: 'Raspbian Jessie',
       link: 'https://www.raspbian.org/',
     },
-    repo: {
-      name: 'IoT.js master branch',
-      link: 'https://github.com/Samsung/iotjs',
-    },
   }, {
     key: 'stm32f4dis',
     name: 'STM32F4-Discovery',
@@ -57,10 +45,6 @@ export const devices = [{
     platform: {
       name: 'NuttX',
       link: 'http://nuttx.org/',
-    },
-    repo: {
-      name: 'IoT.js master branch',
-      link: 'https://github.com/Samsung/iotjs',
     },
   },
 ];

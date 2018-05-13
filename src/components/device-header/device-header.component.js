@@ -24,7 +24,7 @@ export default class DeviceHeader extends React.Component {
   }
 
   render() {
-    const { device } = this.props;
+    const { device, project } = this.props;
     const imgStyle = {
       height: '120px',
     };
@@ -50,7 +50,7 @@ export default class DeviceHeader extends React.Component {
           </p>
           <p>
             <span className="font-weight-bold">Repository: </span>
-            <a href={device.repo.link} target="_blank">{device.repo.name}</a>
+            <a href={project.url} target="_blank">{project.name} master branch</a>
           </p>
         </div>
       </div>
@@ -60,4 +60,5 @@ export default class DeviceHeader extends React.Component {
 
 DeviceHeader.propTypes = {
   device: PropTypes.object.isRequired,
+  project: PropTypes.object.isRequired,
 };

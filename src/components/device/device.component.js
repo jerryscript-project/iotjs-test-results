@@ -37,7 +37,7 @@ export default class Device extends React.Component {
           <title>{project.name} Test Results - {device.name}</title>
         </Helmet>
 
-        <DeviceHeader device={device} />
+        <DeviceHeader device={device} project={project} />
       </div>
     );
   }
