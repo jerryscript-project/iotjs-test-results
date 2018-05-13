@@ -40,7 +40,7 @@ export default class OverviewDeviceList extends React.Component {
       return <OverviewDevice
               key={`${data.project}-${data.device}`}
               name={devices.filter(device => device.key === data.device).pop().name}
-              data={data.result} />;
+              data={data} />;
     });
 
     return (

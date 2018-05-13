@@ -35,3 +35,15 @@ body {
 .btn-outline-secondary.focus, .btn-outline-secondary:focus, {
   box-shadow: none !important;
 }
+
+.overview-device-link,
+.overview-device-link:hover {
+  text-decoration: none;
+  outline: 0;
+}
+
+.overview-device-link {
+  .card:hover {
+    box-shadow: 0 0 8px rgba(108, 117, 125, 0.6);
+  }
+}

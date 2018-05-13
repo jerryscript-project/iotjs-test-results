@@ -16,6 +16,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import { faCheckCircle, faTimesCircle, faArrowAltCircleRight } from '@fortawesome/fontawesome-free-regular';
 
@@ -30,49 +31,51 @@ export default class OverviewDevice extends React.Component {
 
     return (
       <div className="col-xl-3 col-lg-6 col-md-6 col-sm-12 my-2">
-        <div className="card">
-          <div className="card-body">
+        <Link className="text-dark overview-device-link" to={`${data.project}/${data.device}`}>
+          <div className="card">
+            <div className="card-body">
 
-            <h5 className="card-title text-center">{name}</h5>
+              <h5 className="card-title text-center">{name}</h5>
 
-            {data ? (
-              <div>
-                <h6 className="card-subtitle mb-4 text-muted text-center">
-                  <span>Last measured </span>
-                  <span className="font-weight-bold">{data.date.substr(0, 10)}</span>
-                </h6>
+              {data && data.result ? (
+                <div>
+                  <h6 className="card-subtitle mb-4 text-muted text-center">
+                    <span>Last measured </span>
+                    <span className="font-weight-bold">{data.result.date.substr(0, 10)}</span>
+                  </h6>
 
-                <div className="row mt-4">
-                  <div className="col text-center" title="Passed">
-                    <FontAwesomeIcon className="text-success" icon={faCheckCircle} />
-                    <span className="ml-1">{data.tests.filter(t => t.result === 'pass').length}</span>
-                  </div>
-                  <div className="col text-center" title="Failed">
-                    <FontAwesomeIcon className="text-danger" icon={faTimesCircle} />
-                    <span className="ml-1">{data.tests.filter(t => t.result === 'fail').length}</span>
-                  </div>
-                  <div className="col text-center" title="Skipped">
-                    <FontAwesomeIcon className="text-warning" icon={faArrowAltCircleRight} />
-                    <span className="ml-1">{data.tests.filter(t => t.result === 'skip').length}</span>
-                  </div>
-                </div>
-              </div>
-            ) : (
-              <div>
-                <h6 className="card-subtitle mb-4 text-muted text-center">
-                  <span>---</span>
-                </h6>
-
-                <div className="row mt-4">
-                  <div className="col text-center text-muted">
-                    <span>Not measured yet...</span>
+                  <div className="row mt-4">
+                    <div className="col text-center" title="Passed">
+                      <FontAwesomeIcon className="text-success" icon={faCheckCircle} />
+                      <span className="ml-1">{data.result.tests.filter(t => t.result === 'pass').length}</span>
+                    </div>
+                    <div className="col text-center" title="Failed">
+                      <FontAwesomeIcon className="text-danger" icon={faTimesCircle} />
+                      <span className="ml-1">{data.result.tests.filter(t => t.result === 'fail').length}</span>
+                    </div>
+                    <div className="col text-center" title="Skipped">
+                      <FontAwesomeIcon className="text-warning" icon={faArrowAltCircleRight} />
+                      <span className="ml-1">{data.result.tests.filter(t => t.result === 'skip').length}</span>
+                    </div>
                   </div>
                 </div>
-              </div>
-            )}
+              ) : (
+                <div>
+                  <h6 className="card-subtitle mb-4 text-muted text-center">
+                    <span>---</span>
+                  </h6>
 
+                  <div className="row mt-4">
+                    <div className="col text-center text-muted">
+                      <span>Not measured yet...</span>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+            </div>
           </div>
-        </div>
+        </Link>
       </div>
     );
   }
