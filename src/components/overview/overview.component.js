@@ -15,10 +15,11 @@
  */
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import OverviewIntro from '../overview-intro/overview-intro.component';
 import OvervireDeviceList from '../overview-device-list/overview-device-list.container';
 
-export default class IotjsOverview extends React.Component {
+export default class Overview extends React.Component {
 
   constructor(props) {
     super(props);
@@ -35,3 +36,8 @@ export default class IotjsOverview extends React.Component {
     );
   }
 }
+
+Overview.propTypes = {
+  projects: PropTypes.object.isRequired,
+  match: PropTypes.object.isRequired,
+};

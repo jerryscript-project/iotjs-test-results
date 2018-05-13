@@ -15,6 +15,7 @@
  */
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import Display3 from '../common/display-3.component';
 import Subtitle from '../common/subtitle.component';
 import Jumbotron from '../common/jumbotron.component';
@@ -54,3 +55,7 @@ export default class OverviewIntro extends React.Component {
     );
   }
 }
+
+OverviewIntro.propTypes = {
+  title: PropTypes.string.isRequired,
+};
