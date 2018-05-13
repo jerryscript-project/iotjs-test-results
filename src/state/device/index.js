@@ -14,11 +14,18 @@
  * limitations under the License.
  */
 
-import { combineReducers } from 'redux';
-import overviewDeviceList from './overview-device-list';
-import device from './device';
+import initialState from './initial.state';
 
-export default combineReducers({
-  overviewDeviceList,
-  device,
-});
+// Action types
+
+// Action creators
+
+// Selectors
+
+// Reducers
+export default (state = initialState, action = {}) => {
+  switch (action.type) {
+    default:
+      return state;
+  }
+};

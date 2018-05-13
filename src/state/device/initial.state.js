@@ -14,11 +14,7 @@
  * limitations under the License.
  */
 
-import { combineReducers } from 'redux';
-import overviewDeviceList from './overview-device-list';
-import device from './device';
-
-export default combineReducers({
-  overviewDeviceList,
-  device,
+export default ({
+  loading: false,
+  data: {},
 });
