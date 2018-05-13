@@ -25,6 +25,17 @@ export default class Device extends React.Component {
     super(props);
   }
 
+  componentDidMount() {
+    this.props.fetchData(this.props.match.params.project, this.props.match.params.device);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.props.match.params.project !== nextProps.match.params.project ||
+        this.props.match.params.device !== nextProps.match.params.device) {
+      this.props.fetchData(nextProps.match.params.project, nextProps.match.params.device);
+    }
+  }
+
   render() {
     const { match, devices, projects } = this.props;
     const project = projects[match.params.project];

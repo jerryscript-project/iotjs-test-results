@@ -16,13 +16,19 @@
 
 import { connect } from 'react-redux';
 import Device from './device.component';
+import { fetchDeviceData, getLoading, getData, getError } from '../../state/device';
 import { devices, projects } from '../../constants';
 
-const mapStateToProps = () => ({
+const mapStateToProps = state => ({
+  loading: getLoading(state),
+  data: getData(state),
+  error: getError(state),
   devices,
   projects,
 });
 
-const mapDispatchToProps = () => ({});
+const mapDispatchToProps = dispatch => ({
+  fetchData: (project, device) => dispatch(fetchDeviceData(project, device)),
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Device);
