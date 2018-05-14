@@ -36,7 +36,7 @@ export default class Header extends React.Component {
         <nav className="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
           <div className="container">
 
-            <div className="form-inline">
+            <div className="form-inline mr-2">
               <div className="btn-group" role="group">
                 <ProjectButton select={projects.iotjs} current={currentProject} url={location.pathname} />
                 <ProjectButton select={projects.jerryscript} current={currentProject} url={location.pathname} />

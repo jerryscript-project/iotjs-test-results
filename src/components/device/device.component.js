@@ -49,6 +49,7 @@ export default class Device extends React.Component {
         </Helmet>
 
         <DeviceHeader device={device} project={project} />
+        <hr />
       </div>
     );
   }

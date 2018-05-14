@@ -28,9 +28,11 @@ export default class MenuItem extends React.Component {
     const { title, link } = this.props;
 
     return (
-      <NavLink className="nav-item nav-link" activeClassName="active" exact to={link}>
-        {title}
-      </NavLink>
+      <li className="nav-item">
+        <NavLink className=" nav-link" activeClassName="active" exact to={link}>
+          {title}
+        </NavLink>
+      </li>
     );
   }
 }

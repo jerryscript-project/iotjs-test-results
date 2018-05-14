@@ -30,7 +30,7 @@ export default class DeviceHeader extends React.Component {
     };
 
     return (
-      <div className="row mt-2 border rounded py-1">
+      <div className="row my-2">
         <div className="col-auto">
           <img
             src={require(`../../../public/images/devices/${device.key}.jpg`)}
@@ -39,7 +39,7 @@ export default class DeviceHeader extends React.Component {
             alt={device.name}
             title={device.name} />
         </div>
-        <div className="col-auto">
+        <div className="col">
           <p className="mt-1">
             <span className="font-weight-bold">Test device: </span>
             <a href={device.link} target="_blank">{device.name}</a>
