@@ -18,6 +18,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
 import DeviceHeader from '../device-header/device-header.component';
+import DeviceLoading from '../device-loading/device-loading.component';
+import DeviceAlert from '../device-alert/device-alert.component';
 
 export default class Device extends React.Component {
 
@@ -37,7 +39,7 @@ export default class Device extends React.Component {
   }
 
   render() {
-    const { match, devices, projects } = this.props;
+    const { match, loading, data, error, devices, projects } = this.props;
     const project = projects[match.params.project];
     const device = devices.find(d => d.key === match.params.device);
 
@@ -49,12 +51,28 @@ export default class Device extends React.Component {
         </Helmet>
 
         <DeviceHeader device={device} project={project} />
+
         <hr />
+
+        {loading ? (
+          <DeviceLoading deviceName={device.name} />
+        ) : (
+          error ? (
+            <DeviceAlert device={device} error={error} />
+          ) : (
+            <p className="text-center">{data.date}</p>
+          )
+        )}
       </div>
     );
   }
 }
 
 Device.propTypes = {
+  loading: PropTypes.bool.isRequired,
+  data: PropTypes.object.isRequired,
+  error: PropTypes.any,
+  devices: PropTypes.array.isRequired,
+  projects: PropTypes.object.isRequired,
   match: PropTypes.object.isRequired,
 };
