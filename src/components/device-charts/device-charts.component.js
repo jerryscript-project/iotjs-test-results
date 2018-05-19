@@ -89,7 +89,7 @@ export default class DeviceCharts extends React.Component {
       labels,
       datasets: [
         {
-          label: 'target-profile minimal size',
+          label: 'target-profile binary size',
           borderColor: '#ff7f0e',
           backgroundColor: '#ff7f0e',
           data: target,
@@ -98,7 +98,7 @@ export default class DeviceCharts extends React.Component {
           lineTension: 0,
           spanGaps: true,
         }, {
-          label: 'minimal-profile minimal size',
+          label: 'minimal-profile binary size',
           borderColor: '#aec7e8',
           backgroundColor: '#aec7e8',
           data: minimal,
