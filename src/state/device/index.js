@@ -21,6 +21,7 @@ import { deviceResultDatabase } from '../../firebase';
 export const FETCH_DEVICE_DATA_REQUEST = 'FETCH_DEVICE_DATA_REQUEST';
 export const FETCH_DEVICE_DATA_SUCCESS = 'FETCH_DEVICE_DATA_SUCCESS';
 export const FETCH_DEVICE_DATA_FAILURE = 'FETCH_DEVICE_DATA_FAILURE';
+export const RESET_DEVICE_STATE = 'RESET_DEVICE_STATE';
 
 // Action creators
 export const fetchDeviceDataRequest = (project, device) => ({
@@ -43,13 +44,19 @@ export const fetchDeviceDataFailure = (project, device, error) => ({
   error,
 });
 
+export const resetDeviceState = () => ({
+  type: RESET_DEVICE_STATE,
+});
+
 // Async action creators
 export const fetchDeviceData = (project, device) => dispatch => {
   dispatch(fetchDeviceDataRequest(project, device));
 
   deviceResultDatabase(project, device).then(snapshot => {
-    const value = snapshot.val();
-    const data = value ? value[Object.keys(value)[0]] : null;
+    let data = [];
+    snapshot.forEach(child => {
+      data = [...data, child.val()];
+    });
 
     dispatch(fetchDeviceDataSuccess(project, device, data));
   }, error => {
@@ -88,6 +95,8 @@ export default (state = initialState, action = {}) => {
         device: action.device,
         error: action.error,
       };
+    case RESET_DEVICE_STATE:
+      return initialState;
     default:
       return state;
   }

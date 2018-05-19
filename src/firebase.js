@@ -33,5 +33,5 @@ export const deviceLastResultDatabase = (project, device) => {
 };
 
 export const deviceResultDatabase = (project, device) => {
-  return firebase.database().ref(`${project}/${device}/`).once('value');
+  return firebase.database().ref().child(`${project}/${device}/`).once('value');
 };

@@ -25,7 +25,7 @@ export default class ProjectButton extends React.Component {
   }
 
   render() {
-    const { select, current, url } = this.props;
+    const { select, current, url, resetDevice } = this.props;
     const active = select.key === current.key;
     const link = url.includes(select.key) ? url : url.replace(current.key, select.key);
 
@@ -33,7 +33,8 @@ export default class ProjectButton extends React.Component {
       <Link
         className={`btn btn-sm ${active ? 'btn-light disabled': 'btn-outline-secondary'}`}
         disabled={active}
-        to={link} >
+        to={link}
+        onClick={resetDevice} >
         {select.name}
       </Link>
     );
@@ -45,4 +46,5 @@ ProjectButton.propTypes = {
   select: PropTypes.object.isRequired,
   current: PropTypes.object.isRequired,
   url: PropTypes.string.isRequired,
+  resetDevice: PropTypes.func.isRequired,
 };

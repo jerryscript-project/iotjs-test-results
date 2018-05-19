@@ -18,7 +18,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import { faGithub } from '@fortawesome/fontawesome-free-brands';
-import ProjectButton from '../project-button/project-button.component';
+import ProjectButton from '../project-button/project-button.container';
 import Menu from '../menu/menu.component';
 
 export default class Header extends React.Component {

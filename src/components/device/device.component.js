@@ -20,6 +20,7 @@ import { Helmet } from 'react-helmet';
 import DeviceHeader from '../device-header/device-header.component';
 import DeviceLoading from '../device-loading/device-loading.component';
 import DeviceAlert from '../device-alert/device-alert.component';
+import DeviceCharts from '../device-charts/device-charts.component';
 
 export default class Device extends React.Component {
 
@@ -60,7 +61,7 @@ export default class Device extends React.Component {
           error ? (
             <DeviceAlert device={device} error={error} />
           ) : (
-            <p className="text-center">{data.date}</p>
+            <DeviceCharts data={data} project={project} />
           )
         )}
       </div>
@@ -70,9 +71,10 @@ export default class Device extends React.Component {
 
 Device.propTypes = {
   loading: PropTypes.bool.isRequired,
-  data: PropTypes.object.isRequired,
+  data: PropTypes.array.isRequired,
   error: PropTypes.any,
   devices: PropTypes.array.isRequired,
   projects: PropTypes.object.isRequired,
   match: PropTypes.object.isRequired,
+  fetchData: PropTypes.func.isRequired,
 };
