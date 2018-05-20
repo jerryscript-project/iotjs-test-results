@@ -29,18 +29,18 @@ export default class Device extends React.Component {
   }
 
   componentDidMount() {
-    this.props.fetchData(this.props.match.params.project, this.props.match.params.device);
+    this.props.fetchMeasurements(this.props.match.params.project, this.props.match.params.device);
   }
 
   componentWillReceiveProps(nextProps) {
     if (this.props.match.params.project !== nextProps.match.params.project ||
         this.props.match.params.device !== nextProps.match.params.device) {
-      this.props.fetchData(nextProps.match.params.project, nextProps.match.params.device);
+      this.props.fetchMeasurements(nextProps.match.params.project, nextProps.match.params.device);
     }
   }
 
   render() {
-    const { match, loading, data, error, devices, projects } = this.props;
+    const { match, loading, measurements, error, devices, projects } = this.props;
     const project = projects[match.params.project];
     const device = devices.find(d => d.key === match.params.device);
 
@@ -61,7 +61,7 @@ export default class Device extends React.Component {
           error ? (
             <Alert device={device} error={error} />
           ) : (
-            <Charts data={data} project={project} />
+            <Charts data={measurements} project={project} />
           )
         )}
       </div>
@@ -71,10 +71,10 @@ export default class Device extends React.Component {
 
 Device.propTypes = {
   loading: PropTypes.bool.isRequired,
-  data: PropTypes.array.isRequired,
+  measurements: PropTypes.array.isRequired,
   error: PropTypes.any,
   devices: PropTypes.array.isRequired,
   projects: PropTypes.object.isRequired,
   match: PropTypes.object.isRequired,
-  fetchData: PropTypes.func.isRequired,
+  fetchMeasurements: PropTypes.func.isRequired,
 };

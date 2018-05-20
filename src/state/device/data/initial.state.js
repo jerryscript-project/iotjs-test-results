@@ -18,6 +18,6 @@ export default ({
   loading: true,
   project: '',
   device: '',
-  data: [],
+  measurements: [],
   error: null,
 });

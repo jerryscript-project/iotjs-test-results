@@ -16,7 +16,7 @@
 
 import { combineReducers } from 'redux';
 import overview from './overview/overview.reducer';
-import device from './device';
+import device from './device/device.reducer';
 
 export default combineReducers({
   overview,

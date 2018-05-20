@@ -16,12 +16,12 @@
 
 import { connect } from 'react-redux';
 import ProjectSwitcher from './project-switcher.component';
-import { resetDeviceState } from '../../../state/device';
+import { resetDeviceDataState } from '../../../state/device/data';
 
 const mapStateToProps = () => ({});
 
 const mapDispatchToProps = dispatch => ({
-  resetDevice: () => dispatch(resetDeviceState()),
+  resetDevice: () => dispatch(resetDeviceDataState()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProjectSwitcher);
