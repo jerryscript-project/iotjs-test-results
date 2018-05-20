@@ -20,7 +20,7 @@ import { Helmet } from 'react-helmet';
 import Header from './header/header.component';
 import Loading from './loading/loading.component';
 import Alert from './alert/alert.component';
-import Charts from './charts/charts.component';
+import ChartWrapper from './chart-wrapper/chart-wrapper.container';
 
 export default class Device extends React.Component {
 
@@ -61,7 +61,9 @@ export default class Device extends React.Component {
           error ? (
             <Alert device={device} error={error} />
           ) : (
-            <Charts data={measurements} project={project} />
+            <div className="device-content">
+              <ChartWrapper measurements={measurements} project={project}/>
+            </div>
           )
         )}
       </div>

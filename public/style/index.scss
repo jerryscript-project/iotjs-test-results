@@ -15,6 +15,7 @@
  */
 
 @import "~bootstrap/scss/bootstrap";
+@import "~react-dates/lib/css/_datepicker.css";
 
 html {
   position: relative;
@@ -52,4 +53,9 @@ body {
   .card:hover {
     box-shadow: 0 0 8px rgba(108, 117, 125, 0.6);
   }
+}
+
+.DateRangePickerInput {
+  text-align: center;
+  border-radius: 0.2rem;
 }
