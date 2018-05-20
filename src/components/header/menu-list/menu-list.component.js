@@ -16,28 +16,30 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { NavLink } from 'react-router-dom';
+import MenuListItem from '../menu-list-item/menu-list-item.component';
 
-export default class MenuItem extends React.Component {
+export default class MenuList extends React.Component {
 
   constructor(props) {
     super(props);
   }
 
   render() {
-    const { title, link } = this.props;
+    const { items, homeProject } = this.props;
+    const list = items.map((i, index) => {
+      return <MenuListItem key={`${i.key}${index}`} title={i.name} link={`/${homeProject}/${i.key}`} />;
+    });
 
     return (
-      <li className="nav-item">
-        <NavLink className=" nav-link" activeClassName="active" exact to={link}>
-          {title}
-        </NavLink>
-      </li>
+      <div className="navbar-nav">
+        <MenuListItem title="Home" link={`/${homeProject}`} />
+        {list}
+      </div>
     );
   }
 }
 
-MenuItem.propTypes = {
-  title: PropTypes.string.isRequired,
-  link: PropTypes.string.isRequired,
+MenuList.propTypes = {
+  items: PropTypes.array.isRequired,
+  homeProject: PropTypes.string.isRequired,
 };

@@ -19,7 +19,7 @@ import PropTypes from 'prop-types';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import { faGithub } from '@fortawesome/fontawesome-free-brands';
 import ProjectButton from '../project-button/project-button.container';
-import Menu from '../menu/menu.component';
+import MenuList from './menu-list/menu-list.component';
 
 export default class Header extends React.Component {
 
@@ -55,7 +55,7 @@ export default class Header extends React.Component {
             </button>
 
             <div className="collapse navbar-collapse" id="device-menu">
-              <Menu items={devices} homeProject={currentProject.key} />
+              <MenuList items={devices} homeProject={currentProject.key} />
 
               <div className="ml-lg-auto">
                 <a className="nav-link text-light px-0" target="_blank" href={currentProject.url}>
