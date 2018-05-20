@@ -155,7 +155,7 @@ export default class Chart extends React.Component {
         }],
       },
       legend: {
-        position: 'bottom',
+        position: 'top',
       },
     };
 

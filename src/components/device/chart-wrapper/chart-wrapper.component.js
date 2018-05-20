@@ -17,9 +17,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import MomentPropTypes from 'react-moment-proptypes';
+import moment from 'moment';
 import Datepicker from '../datepicker/datepicker.container';
 import Chart from '../chart/chart.component';
-import moment from 'moment';
+import ChartInfo from '../chart-info/chart-info.component';
 
 export default class ChartWrapper extends React.Component {
 
@@ -59,6 +60,8 @@ export default class ChartWrapper extends React.Component {
             maxDate={maxDate} />
           <Chart
             data={data}
+            project={project} />
+          <ChartInfo
             project={project} />
         </div>
       </div>
