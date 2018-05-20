@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { deviceLastResultDatabase } from '../../firebase';
+import { deviceLastResultDatabase } from '../../../firebase';
 import initialState from './initial.state';
 
 // Action types.
@@ -70,9 +70,9 @@ export const fetchOverviewResults = (project, devices) => dispatch => {
 };
 
 // Selectors.
-export const getOverviewLoading = state => state.overviewDeviceList.loading;
-export const getOverviewError = state => state.overviewDeviceList.error;
-export const getOverviewResults = state => state.overviewDeviceList.results;
+export const getOverviewLoading = state => state.overview.deviceList.loading;
+export const getOverviewError = state => state.overview.deviceList.error;
+export const getOverviewResults = state => state.overview.deviceList.results;
 
 // Reducers.
 export default (state = initialState, action = {}) => {

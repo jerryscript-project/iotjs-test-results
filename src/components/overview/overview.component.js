@@ -17,8 +17,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
-import OverviewIntro from '../overview-intro/overview-intro.component';
-import OvervireDeviceList from '../overview-device-list/overview-device-list.container';
+import Intro from './intro/overview-intro.component';
+import DeviceList from './device-list/device-list.container';
 
 export default class Overview extends React.Component {
 
@@ -36,8 +36,8 @@ export default class Overview extends React.Component {
           <title>{projects[match.params.project].name} Test Results - Home</title>
         </Helmet>
 
-        <OverviewIntro title={projects[match.params.project].name} />
-        <OvervireDeviceList project={match.params.project} />
+        <Intro title={projects[match.params.project].name} />
+        <DeviceList project={match.params.project} />
       </div>
     );
   }

@@ -15,9 +15,9 @@
  */
 
 import { connect } from 'react-redux';
-import OverviewDeviceList from './overview-device-list.component';
-import { fetchOverviewResults, getOverviewLoading, getOverviewResults } from '../../state/overview-device-list';
-import { devices } from '../../constants';
+import DeviceList from './device-list.component';
+import { fetchOverviewResults, getOverviewLoading, getOverviewResults } from '../../../state/overview/device-list';
+import { devices } from '../../../constants';
 
 const mapStateToProps = state => ({
   loading: getOverviewLoading(state),
@@ -29,4 +29,4 @@ const mapDispatchToProps = dispatch => ({
   fetchResults: project => dispatch(fetchOverviewResults(project, devices)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(OverviewDeviceList);
+export default connect(mapStateToProps, mapDispatchToProps)(DeviceList);

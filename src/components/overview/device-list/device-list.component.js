@@ -16,9 +16,9 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import OverviewDevice from '../overview-device/overview-device.component';
+import DeviceListItem from '../device-list-item/device-list-item.component';
 
-export default class OverviewDeviceList extends React.Component {
+export default class DeviceList extends React.Component {
 
   constructor(props) {
     super(props);
@@ -37,7 +37,7 @@ export default class OverviewDeviceList extends React.Component {
   render() {
     const { loading, results, devices } = this.props;
     const list = results.map(data => {
-      return <OverviewDevice
+      return <DeviceListItem
               key={`${data.project}-${data.device}`}
               name={devices.filter(device => device.key === data.device).pop().name}
               data={data} />;
@@ -57,7 +57,7 @@ export default class OverviewDeviceList extends React.Component {
   }
 }
 
-OverviewDeviceList.propTypes = {
+DeviceList.propTypes = {
   loading: PropTypes.bool.isRequired,
   results: PropTypes.array.isRequired,
   devices: PropTypes.array.isRequired,

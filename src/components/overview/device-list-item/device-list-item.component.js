@@ -20,7 +20,7 @@ import { Link } from 'react-router-dom';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import { faCheckCircle, faTimesCircle, faArrowAltCircleRight } from '@fortawesome/fontawesome-free-regular';
 
-export default class OverviewDevice extends React.Component {
+export default class DeviceListItem extends React.Component {
 
   constructor(props) {
     super(props);
@@ -81,7 +81,7 @@ export default class OverviewDevice extends React.Component {
   }
 }
 
-OverviewDevice.propTypes = {
+DeviceListItem.propTypes = {
   name: PropTypes.string.isRequired,
   data: PropTypes.object,
 };

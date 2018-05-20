@@ -15,10 +15,10 @@
  */
 
 import { combineReducers } from 'redux';
-import overviewDeviceList from './overview-device-list';
+import overview from './overview/overview.reducer';
 import device from './device';
 
 export default combineReducers({
-  overviewDeviceList,
+  overview,
   device,
 });
