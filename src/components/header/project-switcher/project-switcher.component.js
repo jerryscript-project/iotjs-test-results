@@ -18,7 +18,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-export default class ProjectButton extends React.Component {
+export default class ProjectSwitcher extends React.Component {
 
   constructor(props) {
     super(props);
@@ -42,7 +42,7 @@ export default class ProjectButton extends React.Component {
 }
 
 
-ProjectButton.propTypes = {
+ProjectSwitcher.propTypes = {
   select: PropTypes.object.isRequired,
   current: PropTypes.object.isRequired,
   url: PropTypes.string.isRequired,

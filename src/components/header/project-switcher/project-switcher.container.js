@@ -15,8 +15,8 @@
  */
 
 import { connect } from 'react-redux';
-import ProjectButton from './project-button.component';
-import { resetDeviceState } from '../../state/device';
+import ProjectSwitcher from './project-switcher.component';
+import { resetDeviceState } from '../../../state/device';
 
 const mapStateToProps = () => ({});
 
@@ -24,4 +24,4 @@ const mapDispatchToProps = dispatch => ({
   resetDevice: () => dispatch(resetDeviceState()),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProjectButton);
+export default connect(mapStateToProps, mapDispatchToProps)(ProjectSwitcher);

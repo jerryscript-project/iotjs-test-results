@@ -18,7 +18,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import { faGithub } from '@fortawesome/fontawesome-free-brands';
-import ProjectButton from '../project-button/project-button.container';
+import ProjectSwitcher from './project-switcher/project-switcher.container';
 import MenuList from './menu-list/menu-list.component';
 
 export default class Header extends React.Component {
@@ -38,8 +38,8 @@ export default class Header extends React.Component {
 
             <div className="form-inline mr-2">
               <div className="btn-group" role="group">
-                <ProjectButton select={projects.iotjs} current={currentProject} url={location.pathname} />
-                <ProjectButton select={projects.jerryscript} current={currentProject} url={location.pathname} />
+                <ProjectSwitcher select={projects.iotjs} current={currentProject} url={location.pathname} />
+                <ProjectSwitcher select={projects.jerryscript} current={currentProject} url={location.pathname} />
               </div>
             </div>
 
