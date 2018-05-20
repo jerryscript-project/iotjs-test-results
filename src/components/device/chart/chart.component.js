@@ -115,8 +115,8 @@ export default class Chart extends React.Component {
       labels,
       datasets: [{
         label: 'average memory consumption',
-        borderColor: '#ff7f0e',
-        backgroundColor: '#ff7f0e',
+        borderColor: '#2ca02c',
+        backgroundColor: '#2ca02c',
         data: memory,
         commitData: commits,
         fill: false,
