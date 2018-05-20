@@ -14,11 +14,8 @@
  * limitations under the License.
  */
 
-import { combineReducers } from 'redux';
-import data from './data';
-import datepicker from './datepicker';
-
-export default combineReducers({
-  data,
-  datepicker,
+export default ({
+  focusedInput: null,
+  startDate: null,
+  endDate: null,
 });
