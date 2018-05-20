@@ -17,7 +17,7 @@
 import React from 'react';
 import { Line } from 'react-chartjs-2';
 
-export default class DeviceCharts extends React.Component {
+export default class Charts extends React.Component {
 
   constructor(props) {
     super(props);

@@ -17,10 +17,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
-import DeviceHeader from '../device-header/device-header.component';
-import DeviceLoading from '../device-loading/device-loading.component';
-import DeviceAlert from '../device-alert/device-alert.component';
-import DeviceCharts from '../device-charts/device-charts.component';
+import Header from './header/header.component';
+import Loading from './loading/loading.component';
+import Alert from './alert/alert.component';
+import Charts from './charts/charts.component';
 
 export default class Device extends React.Component {
 
@@ -51,17 +51,17 @@ export default class Device extends React.Component {
           <title>{project.name} Test Results - {device.name}</title>
         </Helmet>
 
-        <DeviceHeader device={device} project={project} />
+        <Header device={device} project={project} />
 
         <hr />
 
         {loading ? (
-          <DeviceLoading deviceName={device.name} />
+          <Loading deviceName={device.name} />
         ) : (
           error ? (
-            <DeviceAlert device={device} error={error} />
+            <Alert device={device} error={error} />
           ) : (
-            <DeviceCharts data={data} project={project} />
+            <Charts data={data} project={project} />
           )
         )}
       </div>

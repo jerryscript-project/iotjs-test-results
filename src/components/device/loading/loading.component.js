@@ -17,30 +17,30 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
-import { faExclamationTriangle } from '@fortawesome/fontawesome-free-solid';
+import { faSpinner } from '@fortawesome/fontawesome-free-solid';
 
-export default class DeviceAlert extends React.Component {
+export default class Loading extends React.Component {
 
   constructor(props) {
     super(props);
   }
 
   render() {
-    const { device, error } = this.props;
+    const { deviceName } = this.props;
 
     return (
-      <div className="alert alert-warning alert-dismissible fade show" role="alert">
-        <FontAwesomeIcon icon={faExclamationTriangle} />
-        <strong> {device.name} Error!</strong> {error.message}
-        <button type="button" className="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
+      <div className="row">
+        <div className="col">
+          <div className="text-center h4">
+            <FontAwesomeIcon icon={faSpinner} spin />
+            <span className="ml-3">Loading {deviceName} data...</span>
+          </div>
+        </div>
       </div>
     );
   }
 }
 
-DeviceAlert.propTypes = {
-  device: PropTypes.object.isRequired,
-  error: PropTypes.object.isRequired,
+Loading.propTypes = {
+  deviceName: PropTypes.string.isRequired,
 };

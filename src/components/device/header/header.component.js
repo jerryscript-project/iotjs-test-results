@@ -17,7 +17,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export default class DeviceHeader extends React.Component {
+export default class Header extends React.Component {
 
   constructor(props) {
     super(props);
@@ -33,7 +33,7 @@ export default class DeviceHeader extends React.Component {
       <div className="row my-2">
         <div className="col-auto">
           <img
-            src={require(`../../../public/images/devices/${device.key}.jpg`)}
+            src={require(`../../../../public/images/devices/${device.key}.jpg`)}
             className="img img-fluid rounded"
             style={imgStyle}
             alt={device.name}
@@ -58,7 +58,7 @@ export default class DeviceHeader extends React.Component {
   }
 }
 
-DeviceHeader.propTypes = {
+Header.propTypes = {
   device: PropTypes.object.isRequired,
   project: PropTypes.object.isRequired,
 };
