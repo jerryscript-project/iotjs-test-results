@@ -29,7 +29,7 @@ export default class Loading extends React.Component {
     const { deviceName } = this.props;
 
     return (
-      <div className="row">
+      <div className="row mt-3">
         <div className="col">
           <div className="text-center h4">
             <FontAwesomeIcon icon={faSpinner} spin />

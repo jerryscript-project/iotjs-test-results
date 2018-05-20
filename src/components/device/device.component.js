@@ -53,8 +53,6 @@ export default class Device extends React.Component {
 
         <Header device={device} project={project} />
 
-        <hr />
-
         {loading ? (
           <Loading deviceName={device.name} />
         ) : (
@@ -63,6 +61,7 @@ export default class Device extends React.Component {
           ) : (
             <div className="device-content">
               <ChartWrapper measurements={measurements} project={project}/>
+              <hr />
             </div>
           )
         )}
