@@ -30,7 +30,7 @@ export default class ChartInfo extends React.Component {
     const { project } = this.props;
 
     return (
-      <div className="row my-2 text-center">
+      <div className="row mt-2 text-center">
         <div className="col">
 
           <div className="btn btn-link" data-toggle="modal" data-target={`#${project.key}-chart-info`}>
