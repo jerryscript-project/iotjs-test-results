@@ -26,7 +26,7 @@ export default class Footer extends React.Component {
     return (
       <footer className="footer bg-dark text-center text-white">
 
-        <p className="m-0">
+        <p className="my-2">
           IoT.js Test Results is an open source project under the
           <a className="ml-1" target="_self" href="https://github.com/Samsung/iotjs-test-results/blob/master/LICENSE">
             Apache License, Version 2.0

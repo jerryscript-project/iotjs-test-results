@@ -59,7 +59,6 @@ export default class Datepicker extends React.Component {
             minimumNights={0}
             numberOfMonths={2}
             hideKeyboardShortcutsPanel={true}
-            verticalSpacing={5}
             withPortal={true}
             displayFormat="YYYY-MM-DD" />
         </div>
