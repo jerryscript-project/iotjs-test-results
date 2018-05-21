@@ -38,14 +38,13 @@ export default class ChartWrapper extends React.Component {
   }
 
   componentWillMount() {
-    if (!this.props.startDate || !this.props.endDate) {
+    if (!this.props.startDate && !this.props.endDate) {
       const { minDate, maxDate } = this.getDates();
 
-      const endDate = maxDate.clone();
-      const start = endDate.clone().subtract(2, 'months');
+      const start = maxDate.clone().subtract(2, 'months');
       const startDate = start.isBefore(minDate) ? minDate.clone() : start;
 
-      this.props.handleDatesChange(startDate, endDate);
+      this.props.handleDatesChange(startDate, maxDate.clone());
     }
   }
 
