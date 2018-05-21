@@ -16,6 +16,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
+import { projects } from '../../../constants';
 
 export default class ChartInfoModal extends React.Component {
 
@@ -24,7 +25,7 @@ export default class ChartInfoModal extends React.Component {
   }
 
   render() {
-    const { project, projects } = this.props;
+    const { project } = this.props;
 
     return (
       <div
@@ -168,5 +169,4 @@ export default class ChartInfoModal extends React.Component {
 
 ChartInfoModal.propTypes = {
   project: PropTypes.object.isRequired,
-  projects: PropTypes.object.isRequired,
 };

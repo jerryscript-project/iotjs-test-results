@@ -21,14 +21,11 @@ import {
   getDeviceDataLoading, getDeviceDataMeasurements, getDeviceDataError,
 } from '../../state/device/data';
 import { resetDevicePagination } from '../../state/device/pagination';
-import { devices, projects } from '../../constants';
 
 const mapStateToProps = state => ({
   loading: getDeviceDataLoading(state),
   measurements: getDeviceDataMeasurements(state),
   error: getDeviceDataError(state),
-  devices,
-  projects,
 });
 
 const mapDispatchToProps = dispatch => ({

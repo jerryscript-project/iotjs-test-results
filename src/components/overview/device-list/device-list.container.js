@@ -17,16 +17,14 @@
 import { connect } from 'react-redux';
 import DeviceList from './device-list.component';
 import { fetchOverviewResults, getOverviewLoading, getOverviewResults } from '../../../state/overview/device-list';
-import { devices } from '../../../constants';
 
 const mapStateToProps = state => ({
   loading: getOverviewLoading(state),
   results: getOverviewResults(state),
-  devices,
 });
 
 const mapDispatchToProps = dispatch => ({
-  fetchResults: project => dispatch(fetchOverviewResults(project, devices)),
+  fetchResults: (project, devices) => dispatch(fetchOverviewResults(project, devices)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(DeviceList);

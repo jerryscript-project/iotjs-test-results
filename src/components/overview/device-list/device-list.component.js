@@ -17,6 +17,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import DeviceListItem from '../device-list-item/device-list-item.component';
+import { devices } from '../../../constants';
 
 export default class DeviceList extends React.Component {
 
@@ -25,17 +26,18 @@ export default class DeviceList extends React.Component {
   }
 
   componentDidMount() {
-    this.props.fetchResults(this.props.project);
+    const { project } = this.props;
+    this.props.fetchResults(project, devices);
   }
 
   componentWillReceiveProps(nextProps) {
     if (this.props.project !== nextProps.project) {
-      this.props.fetchResults(nextProps.project);
+      this.props.fetchResults(nextProps.project, devices);
     }
   }
 
   render() {
-    const { loading, results, devices } = this.props;
+    const { loading, results } = this.props;
     const list = results.map(data => {
       return <DeviceListItem
               key={`${data.project}-${data.device}`}
@@ -60,5 +62,4 @@ export default class DeviceList extends React.Component {
 DeviceList.propTypes = {
   loading: PropTypes.bool.isRequired,
   results: PropTypes.array.isRequired,
-  devices: PropTypes.array.isRequired,
 };

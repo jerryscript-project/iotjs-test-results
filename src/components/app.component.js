@@ -17,9 +17,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Switch, Route } from 'react-router';
-import Header from './header/header.container';
+import Header from './header/header.component';
 import Footer from './footer/footer.component';
-import Overview from './overview/overview.container';
+import Overview from './overview/overview.component';
 import Device from './device/device.container';
 
 export default class App extends React.Component {

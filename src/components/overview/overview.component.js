@@ -19,6 +19,7 @@ import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
 import Intro from './intro/overview-intro.component';
 import DeviceList from './device-list/device-list.container';
+import { projects } from '../../constants';
 
 export default class Overview extends React.Component {
 
@@ -27,7 +28,7 @@ export default class Overview extends React.Component {
   }
 
   render() {
-    const { projects, match } = this.props;
+    const { match } = this.props;
 
     return (
       <div className="container">
@@ -44,6 +45,5 @@ export default class Overview extends React.Component {
 }
 
 Overview.propTypes = {
-  projects: PropTypes.object.isRequired,
   match: PropTypes.object.isRequired,
 };

@@ -20,6 +20,7 @@ import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import { faGithub } from '@fortawesome/fontawesome-free-brands';
 import ProjectSwitcher from './project-switcher/project-switcher.container';
 import MenuList from './menu-list/menu-list.component';
+import { devices, projects } from '../../constants';
 
 export default class Header extends React.Component {
 
@@ -28,7 +29,7 @@ export default class Header extends React.Component {
   }
 
   render() {
-    const { devices, projects, match, location } = this.props;
+    const { match, location } = this.props;
     const currentProject = projects[match.params.project];
 
     return (
@@ -71,8 +72,6 @@ export default class Header extends React.Component {
 }
 
 Header.propTypes = {
-  devices: PropTypes.array.isRequired,
-  projects: PropTypes.object.isRequired,
   match: PropTypes.object.isRequired,
   location: PropTypes.object.isRequired,
 };

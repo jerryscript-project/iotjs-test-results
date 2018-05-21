@@ -18,7 +18,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import { faInfoCircle } from '@fortawesome/fontawesome-free-solid';
-import ChartInfoModal from '../chart-info-modal/chart-info-modal.container';
+import ChartInfoModal from '../chart-info-modal/chart-info-modal.component';
 
 export default class ChartInfo extends React.Component {
 

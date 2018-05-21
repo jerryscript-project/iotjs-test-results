@@ -23,6 +23,7 @@ import Alert from './alert/alert.component';
 import Missing from './missing/missing.component';
 import ChartWrapper from './chart-wrapper/chart-wrapper.container';
 import Pagination from './pagination/pagination.container';
+import { devices, projects } from '../../constants';
 
 export default class Device extends React.Component {
 
@@ -52,9 +53,9 @@ export default class Device extends React.Component {
 
       return (
         <div className="device-content">
-          <ChartWrapper measurements={measurements} project={project}/>
+          <ChartWrapper measurements={measurements} project={project} />
           <hr />
-          <Pagination length={measurements.length}/>
+          <Pagination length={measurements.length} />
         </div>
       );
     };
@@ -85,7 +86,7 @@ export default class Device extends React.Component {
   }
 
   render() {
-    const { match, devices, projects } = this.props;
+    const { match } = this.props;
     const project = projects[match.params.project];
     const device = devices.find(d => d.key === match.params.device);
 
@@ -112,8 +113,6 @@ Device.propTypes = {
   loading: PropTypes.bool.isRequired,
   measurements: PropTypes.array.isRequired,
   error: PropTypes.any,
-  devices: PropTypes.array.isRequired,
-  projects: PropTypes.object.isRequired,
   match: PropTypes.object.isRequired,
   fetchMeasurements: PropTypes.func.isRequired,
   resetPagination: PropTypes.func.isRequired,
