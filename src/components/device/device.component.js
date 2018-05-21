@@ -22,6 +22,7 @@ import Loading from './loading/loading.component';
 import Alert from './alert/alert.component';
 import Missing from './missing/missing.component';
 import ChartWrapper from './chart-wrapper/chart-wrapper.container';
+import Pagination from './pagination/pagination.container';
 
 export default class Device extends React.Component {
 
@@ -53,6 +54,7 @@ export default class Device extends React.Component {
         <div className="device-content">
           <ChartWrapper measurements={measurements} project={project}/>
           <hr />
+          <Pagination length={measurements.length}/>
         </div>
       );
     };
