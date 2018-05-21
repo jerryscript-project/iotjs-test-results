@@ -20,6 +20,7 @@ import { Helmet } from 'react-helmet';
 import Header from './header/header.component';
 import Loading from './loading/loading.component';
 import Alert from './alert/alert.component';
+import Missing from './missing/missing.component';
 import ChartWrapper from './chart-wrapper/chart-wrapper.container';
 
 export default class Device extends React.Component {
@@ -46,7 +47,7 @@ export default class Device extends React.Component {
     this.contentSection = project => {
       const { loading, measurements, error } = this.props;
 
-      if (loading || error) return null;
+      if (loading || error || !measurements.length) return null;
 
       return (
         <div className="device-content">
@@ -54,6 +55,14 @@ export default class Device extends React.Component {
           <hr />
         </div>
       );
+    };
+
+    this.missingSection = (project, device) => {
+      const { loading, measurements, error } = this.props;
+
+      if (loading || error || measurements.length) return null;
+
+      return <Missing deviceName={device.name} projectName={project.name} />;
     };
   }
 
@@ -84,6 +93,7 @@ export default class Device extends React.Component {
 
         {this.loadingSection(device)}
         {this.alertSection(device)}
+        {this.missingSection(project, device)}
         {this.contentSection(project)}
 
       </div>
