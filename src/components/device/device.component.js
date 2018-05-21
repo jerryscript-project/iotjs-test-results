@@ -26,6 +26,35 @@ export default class Device extends React.Component {
 
   constructor(props) {
     super(props);
+
+    this.loadingSection = device => {
+      const { loading } = this.props;
+
+      if (!loading) return null;
+
+      return <Loading deviceName={device.name} />;
+    };
+
+    this.alertSection = device => {
+      const { error } = this.props;
+
+      if (!error) return null;
+
+      return <Alert device={device} error={error} />;
+    };
+
+    this.contentSection = project => {
+      const { loading, measurements, error } = this.props;
+
+      if (loading || error) return null;
+
+      return (
+        <div className="device-content">
+          <ChartWrapper measurements={measurements} project={project}/>
+          <hr />
+        </div>
+      );
+    };
   }
 
   componentDidMount() {
@@ -40,7 +69,7 @@ export default class Device extends React.Component {
   }
 
   render() {
-    const { match, loading, measurements, error, devices, projects } = this.props;
+    const { match, devices, projects } = this.props;
     const project = projects[match.params.project];
     const device = devices.find(d => d.key === match.params.device);
 
@@ -53,18 +82,10 @@ export default class Device extends React.Component {
 
         <Header device={device} project={project} />
 
-        {loading ? (
-          <Loading deviceName={device.name} />
-        ) : (
-          error ? (
-            <Alert device={device} error={error} />
-          ) : (
-            <div className="device-content">
-              <ChartWrapper measurements={measurements} project={project}/>
-              <hr />
-            </div>
-          )
-        )}
+        {this.loadingSection(device)}
+        {this.alertSection(device)}
+        {this.contentSection(project)}
+
       </div>
     );
   }
