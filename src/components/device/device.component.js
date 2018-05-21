@@ -69,13 +69,18 @@ export default class Device extends React.Component {
   }
 
   componentDidMount() {
-    this.props.fetchMeasurements(this.props.match.params.project, this.props.match.params.device);
+    const { match } = this.props;
+
+    this.props.fetchMeasurements(match.params.project, match.params.device);
   }
 
   componentWillReceiveProps(nextProps) {
-    if (this.props.match.params.project !== nextProps.match.params.project ||
-        this.props.match.params.device !== nextProps.match.params.device) {
-      this.props.fetchMeasurements(nextProps.match.params.project, nextProps.match.params.device);
+    const { match, fetchMeasurements, resetPagination } = this.props;
+
+    if (match.params.project !== nextProps.match.params.project ||
+        match.params.device !== nextProps.match.params.device) {
+      fetchMeasurements(nextProps.match.params.project, nextProps.match.params.device);
+      resetPagination();
     }
   }
 
@@ -111,4 +116,5 @@ Device.propTypes = {
   projects: PropTypes.object.isRequired,
   match: PropTypes.object.isRequired,
   fetchMeasurements: PropTypes.func.isRequired,
+  resetPagination: PropTypes.func.isRequired,
 };

@@ -20,6 +20,7 @@ import {
   fetchDeviceDataMeasurements,
   getDeviceDataLoading, getDeviceDataMeasurements, getDeviceDataError,
 } from '../../state/device/data';
+import { resetDevicePagination } from '../../state/device/pagination';
 import { devices, projects } from '../../constants';
 
 const mapStateToProps = state => ({
@@ -32,6 +33,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   fetchMeasurements: (project, device) => dispatch(fetchDeviceDataMeasurements(project, device)),
+  resetPagination: () => dispatch(resetDevicePagination()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Device);
