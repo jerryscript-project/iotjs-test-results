@@ -14,13 +14,8 @@
  * limitations under the License.
  */
 
-import { combineReducers } from 'redux';
-import data from './data';
-import datepicker from './datepicker';
-import pagination from './pagination';
-
-export default combineReducers({
-  data,
-  datepicker,
-  pagination,
+export default ({
+  selected: 0,
+  start: 1,
+  end: 20,
 });

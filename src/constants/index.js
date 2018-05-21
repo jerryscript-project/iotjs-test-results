@@ -61,3 +61,7 @@ export const projects = {
     url: 'https://github.com/jerryscript-project/jerryscript',
   },
 };
+
+export const pagination = {
+  numberOfTestPerPage: 20,
+};
