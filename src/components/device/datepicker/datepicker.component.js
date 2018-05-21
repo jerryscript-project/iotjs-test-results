@@ -27,10 +27,12 @@ export default class Datepicker extends React.Component {
   constructor(props) {
     super(props);
 
-    this.onDatesChange = ({startDate, endDate}) => {
+    this.onDatesChange = ({start, end}) => {
+      const { startDate, endDate } = this.props;
+
       this.props.onDatesChange(
-        startDate || this.props.startDate,
-        endDate || this.props.endDate,
+        start || startDate,
+        end || endDate,
       );
     };
 

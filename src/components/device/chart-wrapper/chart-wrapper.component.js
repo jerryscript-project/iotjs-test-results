@@ -28,8 +28,10 @@ export default class ChartWrapper extends React.Component {
     super(props);
 
     this.getDates = () => {
-      const minDate = moment(this.props.measurements[0].date);
-      const maxDate = moment(this.props.measurements[this.props.measurements.length - 1].date);
+      const { measurements } = this.props;
+
+      const minDate = moment(measurements[0].date);
+      const maxDate = moment(measurements[measurements.length - 1].date);
 
       return { minDate, maxDate };
     };
