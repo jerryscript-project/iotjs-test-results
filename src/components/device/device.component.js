@@ -30,21 +30,13 @@ export default class Device extends React.Component {
   constructor(props) {
     super(props);
 
-    this.loadingSection = device => {
-      const { loading } = this.props;
-
-      if (!loading) return null;
-
-      return <Loading deviceName={device.name} />;
+    this.completeMeasurements = () => {
+      const {} = this.props;
     };
 
-    this.alertSection = device => {
-      const { error } = this.props;
+    this.loadingSection = device => this.props.loading ? <Loading deviceName={device.name} /> : null;
 
-      if (!error) return null;
-
-      return <Alert device={device} error={error} />;
-    };
+    this.alertSection = device => this.props.error ? <Alert device={device} error={this.props.error} /> : null;
 
     this.contentSection = project => {
       const { loading, measurements, error } = this.props;
