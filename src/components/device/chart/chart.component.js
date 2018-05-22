@@ -151,7 +151,7 @@ export default class Chart extends React.Component {
         yAxes: [{
           ticks: {
             callback: (value) => `${value} KB`,
-            suggestedMin: 20,
+            suggestedMin: 40,
             suggestedMax: 50,
           },
         }],
