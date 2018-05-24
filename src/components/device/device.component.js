@@ -17,6 +17,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
+import moment from 'moment';
 import Header from './header/header.component';
 import Loading from './loading/loading.component';
 import Alert from './alert/alert.component';
@@ -30,8 +31,43 @@ export default class Device extends React.Component {
   constructor(props) {
     super(props);
 
-    this.completeMeasurements = () => {
-      const {} = this.props;
+    this.inBetweenDates = (from, to) => {
+      const diff = Math.abs(from.diff(to, 'day'));
+      const correctedDiff = diff === 0 ? diff + 1 : diff;
+      const array = [...Array(correctedDiff).keys()];
+
+      return array.map(i => ({
+        measured: false,
+        date: from.clone().subtract(i + 1, 'day').toISOString(),
+      })).reverse();
+    };
+
+    this.getCompleteMeasurements = () => {
+      const { measurements } = this.props;
+
+      if (!measurements.length) return [];
+
+      let next = moment.utc(measurements[0].date);
+      let previous = null;
+      let completed = [];
+
+      measurements.forEach(m => {
+        const current = moment.utc(m.date.substr(0, 10));
+
+        if (previous && current.isSame(previous, 'day')) return;
+        if (!current.isSame(next, 'day')) completed = [...completed, ...this.inBetweenDates(current, next)];
+
+        next = current.clone().add(1, 'day');
+        previous = current.clone();
+
+        completed = [...completed, { measured: true, ...m }];
+      });
+
+      if (!moment.utc().isSame(next, 'day')) {
+        completed = [...completed, ...this.inBetweenDates(moment.utc(), next)];
+      }
+
+      return completed.reverse();
     };
 
     this.loadingSection = device => this.props.loading ? <Loading deviceName={device.name} /> : null;
