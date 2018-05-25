@@ -79,11 +79,13 @@ export default class Device extends React.Component {
 
       if (loading || error || !measurements.length) return null;
 
+      const renderData = this.getCompleteMeasurements();
+
       return (
         <div className="device-content">
           <ChartWrapper measurements={measurements} project={project} />
           <hr />
-          <Pagination length={measurements.length} />
+          <Pagination length={renderData.length} />
         </div>
       );
     };
