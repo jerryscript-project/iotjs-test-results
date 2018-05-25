@@ -57,7 +57,9 @@ export default class Pagination extends React.Component {
           </li>
         );
 
-        if (lastHiddenPage === p - 1) hidden = null;
+        if (lastHiddenPage === p - 1) {
+          hidden = null;
+        }
 
         lastHiddenPage = p;
         return hidden;

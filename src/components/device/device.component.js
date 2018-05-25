@@ -45,7 +45,9 @@ export default class Device extends React.Component {
     this.getCompleteMeasurements = () => {
       const { measurements } = this.props;
 
-      if (!measurements.length) return [];
+      if (!measurements.length) {
+        return [];
+      }
 
       let next = moment.utc(measurements[0].date);
       let previous = null;
@@ -54,8 +56,13 @@ export default class Device extends React.Component {
       measurements.forEach(m => {
         const current = moment.utc(m.date.substr(0, 10));
 
-        if (previous && current.isSame(previous, 'day')) return;
-        if (!current.isSame(next, 'day')) completed = [...completed, ...this.inBetweenDates(current, next)];
+        if (previous && current.isSame(previous, 'day')) {
+          return;
+        }
+
+        if (!current.isSame(next, 'day')) {
+          completed = [...completed, ...this.inBetweenDates(current, next)];
+        }
 
         next = current.clone().add(1, 'day');
         previous = current.clone();
@@ -77,7 +84,9 @@ export default class Device extends React.Component {
     this.contentSection = project => {
       const { loading, measurements, error } = this.props;
 
-      if (loading || error || !measurements.length) return null;
+      if (loading || error || !measurements.length) {
+        return null;
+      }
 
       const renderData = this.getCompleteMeasurements();
 
@@ -93,7 +102,9 @@ export default class Device extends React.Component {
     this.missingSection = (project, device) => {
       const { loading, measurements, error } = this.props;
 
-      if (loading || error || measurements.length) return null;
+      if (loading || error || measurements.length) {
+        return null;
+      }
 
       return <Missing deviceName={device.name} projectName={project.name} />;
     };

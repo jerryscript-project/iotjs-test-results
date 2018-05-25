@@ -78,7 +78,9 @@ export default class Chart extends React.Component {
     };
 
     this.navigateToCommit = (point, commits) => {
-      if (point && point._index) window.open(`${this.props.project.url}/commit/${commits[point._index]}`);
+      if (point && point._index) {
+        window.open(`${this.props.project.url}/commit/${commits[point._index]}`);
+      }
     };
   }
 
