@@ -26,7 +26,7 @@ export default class Chartjs extends React.Component {
     this.getDateData = date => new Date(date).toISOString().substr(0, 10);
 
     this.getBinaryData = (data, profile) => {
-      if (data.bin[profile]) {
+      if (data && data.measured && data.bin && data.bin[profile]) {
         const bdata = parseInt(data.bin[profile].data) || 0;
         const rodata = parseInt(data.bin[profile].rodata) || 0;
         const text = parseInt(data.bin[profile].text) || 0;
@@ -39,19 +39,31 @@ export default class Chartjs extends React.Component {
       return null;
     };
 
-    this.getMemoryData = tests => ((tests.reduce((acc, test) => {
-      if (test.memstat) {
-        const jerryHeap = parseInt(test.memstat['heap-jerry']) || 0;
-        const systemHeap = parseInt(test.memstat['heap-system']) || 0;
-        const stack = parseInt(test.memstat['stack']) || 0;
+    this.getMemoryData = data => {
+      if (data && data.measured) {
+        return ((data.tests.reduce((acc, test) => {
+          if (test.memstat) {
+            const jerryHeap = parseInt(test.memstat['heap-jerry']) || 0;
+            const systemHeap = parseInt(test.memstat['heap-system']) || 0;
+            const stack = parseInt(test.memstat['stack']) || 0;
 
-        return acc + jerryHeap + systemHeap + stack;
-      } else {
-        return acc;
+            return acc + jerryHeap + systemHeap + stack;
+          } else {
+            return acc;
+          }
+        }, 0) / data.tests.filter(test => test.memstat).length) / 1024).toFixed(1);
       }
-    }, 0) / tests.filter(test => test.memstat).length) / 1024).toFixed(1);
 
-    this.getCommitData = data => data.submodules[this.props.project.key].commit.substring(0, 7);
+      return null;
+    };
+
+    this.getCommitData = data => {
+      if (data && data.measured) {
+        return data.submodules[this.props.project.key].commit.substring(0, 7);
+      }
+
+      return null;
+    };
 
     this.getDisplayData = data => {
       const start = {
@@ -67,7 +79,7 @@ export default class Chartjs extends React.Component {
           acc.labels = [...acc.labels, this.getDateData(d.date)];
           acc.target = [...acc.target, this.getBinaryData(d, 'target-profile')];
           acc.minimal = [...acc.minimal, this.getBinaryData(d, 'minimal-profile')];
-          acc.memory = [...acc.memory, this.getMemoryData(d.tests)];
+          acc.memory = [...acc.memory, this.getMemoryData(d)];
           acc.commits = [...acc.commits, this.getCommitData(d)];
 
           return acc;

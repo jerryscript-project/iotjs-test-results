@@ -70,11 +70,13 @@ export default class Device extends React.Component {
         completed = [...completed, { measured: true, ...m }];
       });
 
-      if (!moment.utc().isSame(previous, 'day')) {
-        completed = [...completed, ...this.getInBetweenDates(moment.utc(), previous)];
+      const todayMinusOne = moment.utc().subtract(1, 'day');
+
+      if (!todayMinusOne.isSame(previous, 'day')) {
+        completed = [...completed, ...this.getInBetweenDates(todayMinusOne, previous)];
       }
 
-      return completed.reverse();
+      return completed;
     };
 
     this.loadingSection = device => this.props.loading ? <Loading deviceName={device.name} /> : null;
@@ -102,7 +104,7 @@ export default class Device extends React.Component {
 
       return (
         <div className="device-content">
-          <Chart measurements={measurements} project={project} />
+          <Chart measurements={renderData} project={project} />
           <hr />
           <Pagination length={renderData.length} />
         </div>
