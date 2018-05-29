@@ -31,7 +31,7 @@ export default class Device extends React.Component {
   constructor(props) {
     super(props);
 
-    this.inBetweenDates = (from, to) => {
+    this.getInBetweenDates = (from, to) => {
       const diff = Math.abs(from.diff(to, 'day'));
       const correctedDiff = diff === 0 ? diff + 1 : diff;
       const array = [...Array(correctedDiff).keys()];
@@ -61,7 +61,7 @@ export default class Device extends React.Component {
         }
 
         if (!current.isSame(next, 'day')) {
-          completed = [...completed, ...this.inBetweenDates(current, next)];
+          completed = [...completed, ...this.getInBetweenDates(current, next)];
         }
 
         next = current.clone().add(1, 'day');
@@ -70,8 +70,8 @@ export default class Device extends React.Component {
         completed = [...completed, { measured: true, ...m }];
       });
 
-      if (!moment.utc().isSame(next, 'day')) {
-        completed = [...completed, ...this.inBetweenDates(moment.utc(), next)];
+      if (!moment.utc().isSame(previous, 'day')) {
+        completed = [...completed, ...this.getInBetweenDates(moment.utc(), previous)];
       }
 
       return completed.reverse();
@@ -80,6 +80,16 @@ export default class Device extends React.Component {
     this.loadingSection = device => this.props.loading ? <Loading deviceName={device.name} /> : null;
 
     this.alertSection = device => this.props.error ? <Alert device={device} error={this.props.error} /> : null;
+
+    this.missingSection = (project, device) => {
+      const { loading, measurements, error } = this.props;
+
+      if (loading || error || measurements.length) {
+        return null;
+      }
+
+      return <Missing deviceName={device.name} projectName={project.name} />;
+    };
 
     this.contentSection = project => {
       const { loading, measurements, error } = this.props;
@@ -97,16 +107,6 @@ export default class Device extends React.Component {
           <Pagination length={renderData.length} />
         </div>
       );
-    };
-
-    this.missingSection = (project, device) => {
-      const { loading, measurements, error } = this.props;
-
-      if (loading || error || measurements.length) {
-        return null;
-      }
-
-      return <Missing deviceName={device.name} projectName={project.name} />;
     };
   }
 
