@@ -15,19 +15,21 @@
  */
 
 import { connect } from 'react-redux';
-import ChartWrapper from './chart-wrapper.component';
+import Datepicker from './datepicker.component';
 import {
-  getDeviceDatepickerStartDate, getDeviceDatepickerEndDate,
-  setDeviceDatepickerDates,
-} from '../../../state/device/datepicker';
+  getDeviceDatepickerStartDate, getDeviceDatepickerEndDate, getDeviceDatepickerFocusedInput,
+  setDeviceDatepickerDates, setDeviceDatepickerFocusedInput,
+} from '../../../../state/device/datepicker';
 
 const mapStateToProps = state => ({
   startDate: getDeviceDatepickerStartDate(state),
   endDate: getDeviceDatepickerEndDate(state),
+  focusedInput: getDeviceDatepickerFocusedInput(state),
 });
 
 const mapDispatchToProps = dispatch => ({
-  handleDatesChange: (startDate, endDate) => dispatch(setDeviceDatepickerDates(startDate, endDate)),
+  onDatesChange: (startDate, endDate) => dispatch(setDeviceDatepickerDates(startDate, endDate)),
+  onFocusChange: focusedInput => dispatch(setDeviceDatepickerFocusedInput(focusedInput)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(ChartWrapper);
+export default connect(mapStateToProps, mapDispatchToProps)(Datepicker);

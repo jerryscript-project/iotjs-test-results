@@ -18,9 +18,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import { faInfoCircle } from '@fortawesome/fontawesome-free-solid';
-import ChartInfoModal from '../chart-info-modal/chart-info-modal.component';
+import InfoModal from '../info-modal/info-modal.component';
 
-export default class ChartInfo extends React.Component {
+export default class Info extends React.Component {
 
   constructor(props) {
     super(props);
@@ -38,7 +38,7 @@ export default class ChartInfo extends React.Component {
             <span className="ml-2">Information about the chart&apos;s data</span>
           </div>
 
-          <ChartInfoModal project={project} />
+          <InfoModal project={project} />
 
         </div>
       </div>
@@ -46,6 +46,6 @@ export default class ChartInfo extends React.Component {
   }
 }
 
-ChartInfo.propTypes = {
+Info.propTypes = {
   project: PropTypes.object.isRequired,
 };

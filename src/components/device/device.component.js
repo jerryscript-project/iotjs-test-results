@@ -22,7 +22,7 @@ import Header from './header/header.component';
 import Loading from './loading/loading.component';
 import Alert from './alert/alert.component';
 import Missing from './missing/missing.component';
-import ChartWrapper from './chart-wrapper/chart-wrapper.container';
+import Chart from './chart/chart.container';
 import Pagination from './pagination/pagination.container';
 import { devices, projects } from '../../constants';
 
@@ -92,7 +92,7 @@ export default class Device extends React.Component {
 
       return (
         <div className="device-content">
-          <ChartWrapper measurements={measurements} project={project} />
+          <Chart measurements={measurements} project={project} />
           <hr />
           <Pagination length={renderData.length} />
         </div>

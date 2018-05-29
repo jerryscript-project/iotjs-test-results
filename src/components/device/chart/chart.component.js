@@ -16,166 +16,54 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Line } from 'react-chartjs-2';
+import MomentPropTypes from 'react-moment-proptypes';
+import moment from 'moment';
+import Datepicker from './datepicker/datepicker.container';
+import Chartjs from './chartjs/chartjs.component';
+import Info from './info/info.component';
 
 export default class Chart extends React.Component {
 
   constructor(props) {
     super(props);
 
-    this.getDateData = date => new Date(date).toISOString().substr(0, 10);
+    this.getDates = () => {
+      const { measurements } = this.props;
 
-    this.getBinaryData = (data, profile) => {
-      if (data.bin[profile]) {
-        const bdata = parseInt(data.bin[profile].data) || 0;
-        const rodata = parseInt(data.bin[profile].rodata) || 0;
-        const text = parseInt(data.bin[profile].text) || 0;
+      const minDate = moment(measurements[0].date);
+      const maxDate = moment(measurements[measurements.length - 1].date);
 
-        const size = bdata + rodata + text;
-
-        return size >= 0 ? (size / 1024).toFixed(1) : null;
-      }
-
-      return null;
-    };
-
-    this.getMemoryData = tests => ((tests.reduce((acc, test) => {
-      if (test.memstat) {
-        const jerryHeap = parseInt(test.memstat['heap-jerry']) || 0;
-        const systemHeap = parseInt(test.memstat['heap-system']) || 0;
-        const stack = parseInt(test.memstat['stack']) || 0;
-
-        return acc + jerryHeap + systemHeap + stack;
-      } else {
-        return acc;
-      }
-    }, 0) / tests.filter(test => test.memstat).length) / 1024).toFixed(1);
-
-    this.getCommitData = data => data.submodules[this.props.project.key].commit.substring(0, 7);
-
-    this.getDisplayData = data => {
-      const start = {
-        labels: [],
-        target: [],
-        minimal: [],
-        memory: [],
-        commits: [],
-      };
-
-      if (data) {
-        return data.reduce((acc, d) => {
-          acc.labels = [...acc.labels, this.getDateData(d.date)];
-          acc.target = [...acc.target, this.getBinaryData(d, 'target-profile')];
-          acc.minimal = [...acc.minimal, this.getBinaryData(d, 'minimal-profile')];
-          acc.memory = [...acc.memory, this.getMemoryData(d.tests)];
-          acc.commits = [...acc.commits, this.getCommitData(d)];
-
-          return acc;
-        }, start);
-      }
-
-      return start;
-    };
-
-    this.navigateToCommit = (point, commits) => {
-      if (point && point._index) {
-        window.open(`${this.props.project.url}/commit/${commits[point._index]}`);
-      }
+      return { minDate, maxDate };
     };
   }
 
+  componentWillMount() {
+    if (!this.props.startDate && !this.props.endDate) {
+      const { minDate, maxDate } = this.getDates();
+
+      const start = maxDate.clone().subtract(2, 'months');
+      const startDate = start.isBefore(minDate) ? minDate.clone() : start;
+
+      this.props.handleDatesChange(startDate, maxDate.clone());
+    }
+  }
+
   render() {
-    const { data } = this.props;
-    const { labels, target, minimal, memory, commits } = this.getDisplayData(data);
-
-    const binaryData = {
-      labels,
-      datasets: [
-        {
-          label: 'target-profile binary size',
-          borderColor: '#ff7f0e',
-          backgroundColor: '#ff7f0e',
-          data: target,
-          commitData: commits,
-          fill: false,
-          lineTension: 0,
-          spanGaps: true,
-        }, {
-          label: 'minimal-profile binary size',
-          borderColor: '#aec7e8',
-          backgroundColor: '#aec7e8',
-          data: minimal,
-          commitData: commits,
-          fill: false,
-          lineTension: 0,
-          spanGaps: true,
-        },
-      ],
-    };
-
-    const memoryData = {
-      labels,
-      datasets: [{
-        label: 'average memory consumption',
-        borderColor: '#2ca02c',
-        backgroundColor: '#2ca02c',
-        data: memory,
-        commitData: commits,
-        fill: false,
-        lineTension: 0,
-        spanGaps: true,
-      }],
-    };
-
-    const options = {
-      tooltips: {
-        position: 'nearest',
-        mode: 'index',
-        intersect: false,
-        titleFontSize: 14,
-        titleMarginBottom: 18,
-        bodyFontSize: 14,
-        bodySpacing: 6,
-        footerFontSize: 14,
-        footerMarginTop: 18,
-        callbacks: {
-          label: (tooltipItem, data) => {
-            const label = data.datasets[tooltipItem.datasetIndex].label;
-            const value = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
-            return ` ${label}: ${value} KB`;
-          },
-          footer: tooltipItem => {
-            return `commit: ${commits[tooltipItem[0].index]}`;
-          },
-        },
-      },
-      scales: {
-        yAxes: [{
-          ticks: {
-            callback: (value) => `${value} KB`,
-            suggestedMin: 40,
-            suggestedMax: 50,
-          },
-        }],
-      },
-      legend: {
-        position: 'top',
-      },
-    };
+    const { measurements, project, startDate, endDate } = this.props;
+    const { minDate, maxDate } = this.getDates();
+    const data = measurements.filter(m => moment(m.date).isBetween(startDate, endDate, 'day', '[]'));
 
     return (
       <div className="row my-2">
-        <div className="col-lg-6">
-          <Line
-            data={binaryData}
-            options={options}
-            getElementAtEvent={point => this.navigateToCommit(point[0], binaryData.datasets[0].commitData)} />
-        </div>
-        <div className="col-lg-6">
-          <Line
-            data={memoryData}
-            options={options}
-            getElementAtEvent={point => this.navigateToCommit(point[0], memoryData.datasets[0].commitData)} />
+        <div className="col">
+          <Datepicker
+            minDate={minDate}
+            maxDate={maxDate} />
+          <Chartjs
+            data={data}
+            project={project} />
+          <Info
+            project={project} />
         </div>
       </div>
     );
@@ -183,6 +71,9 @@ export default class Chart extends React.Component {
 }
 
 Chart.propTypes = {
-  data: PropTypes.array.isRequired,
+  measurements: PropTypes.array.isRequired,
   project: PropTypes.object.isRequired,
+  startDate: MomentPropTypes.momentObj,
+  endDate: MomentPropTypes.momentObj,
+  handleDatesChange: PropTypes.func.isRequired,
 };
