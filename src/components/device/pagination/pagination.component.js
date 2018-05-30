@@ -31,8 +31,8 @@ export default class Pagination extends React.Component {
 
       return [...Array(maxLength).keys()].map(p => {
         const active = selected === p;
-        const start = p * pagination.numberOfTestPerPage + 1;
-        const end = p * pagination.numberOfTestPerPage + pagination.numberOfTestPerPage;
+        const start = p * pagination.numberOfTestPerPage;
+        const end = p * pagination.numberOfTestPerPage + pagination.numberOfTestPerPage - 1;
 
         if (p === 0 ||
             p === maxLength - 1 ||

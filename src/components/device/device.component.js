@@ -23,6 +23,7 @@ import Loading from './loading/loading.component';
 import Alert from './alert/alert.component';
 import Missing from './missing/missing.component';
 import Chart from './chart/chart.container';
+import Results from './results/results.container';
 import Pagination from './pagination/pagination.container';
 import { devices, projects } from '../../constants';
 
@@ -73,7 +74,7 @@ export default class Device extends React.Component {
       const todayMinusOne = moment.utc().subtract(1, 'day');
 
       if (!todayMinusOne.isSame(previous, 'day')) {
-        completed = [...completed, ...this.getInBetweenDates(todayMinusOne, previous)];
+        completed = [...completed, ...this.getInBetweenDates(moment.utc(), todayMinusOne)];
       }
 
       return completed;
@@ -107,6 +108,7 @@ export default class Device extends React.Component {
           <Chart measurements={renderData} project={project} />
           <hr />
           <Pagination length={renderData.length} />
+          <Results measurements={renderData} />
         </div>
       );
     };

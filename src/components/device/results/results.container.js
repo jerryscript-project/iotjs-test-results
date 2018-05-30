@@ -14,8 +14,15 @@
  * limitations under the License.
  */
 
-export default ({
-  selected: 0,
-  start: 0,
-  end: 19,
+import { connect } from 'react-redux';
+import Results from './results.component';
+import { getDevicePaginationStart, getDevicePaginationEnd } from '../../../state/device/pagination';
+
+const mapStateToProps = state => ({
+  start: getDevicePaginationStart(state),
+  end: getDevicePaginationEnd(state),
 });
+
+const mapDispatchToProps = () => ({});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Results);

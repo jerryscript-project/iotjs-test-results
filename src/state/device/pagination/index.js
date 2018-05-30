@@ -62,8 +62,10 @@ export default (state = initialState, action = {}) => {
       return {
         ...state,
         selected: state.selected === 0 ? 0 : state.selected - 1,
-        start: state.start === 1 ? state.start : state.start - pagination.numberOfTestPerPage,
-        end: state.end === pagination.numberOfTestPerPage ? state.end : state.end - pagination.numberOfTestPerPage,
+        start: state.start === 0 ? state.start : state.start - pagination.numberOfTestPerPage,
+        end: state.end === pagination.numberOfTestPerPage - 1
+          ? state.end
+          : state.end - pagination.numberOfTestPerPage,
       };
     case SET_DEVICE_PAGINATION:
       return {
