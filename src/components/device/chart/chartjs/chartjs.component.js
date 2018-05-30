@@ -111,7 +111,6 @@ export default class Chartjs extends React.Component {
           commitData: commits,
           fill: false,
           lineTension: 0,
-          spanGaps: true,
         }, {
           label: 'minimal-profile binary size',
           borderColor: '#aec7e8',
@@ -120,7 +119,6 @@ export default class Chartjs extends React.Component {
           commitData: commits,
           fill: false,
           lineTension: 0,
-          spanGaps: true,
         },
       ],
     };
@@ -135,7 +133,6 @@ export default class Chartjs extends React.Component {
         commitData: commits,
         fill: false,
         lineTension: 0,
-        spanGaps: true,
       }],
     };
 
@@ -161,12 +158,20 @@ export default class Chartjs extends React.Component {
           },
         },
       },
+      spanGaps: true,
       scales: {
         yAxes: [{
           ticks: {
             callback: (value) => `${value} KB`,
             suggestedMin: 40,
             suggestedMax: 50,
+          },
+        }],
+        xAxes: [{
+          ticks: {
+            maxTicksLimit: 5,
+            maxRotation: 0,
+            minRotation: 0,
           },
         }],
       },
