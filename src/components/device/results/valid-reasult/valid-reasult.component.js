@@ -16,35 +16,33 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import ValidResult from './valid-reasult/valid-reasult.component';
-import InvalidResult from './invalid-result/invalid-result.component';
 
-export default class Results extends React.Component {
+export default class ValidResult extends React.Component {
 
   constructor(props) {
     super(props);
   }
 
   render() {
-    const { measurements, start, end } = this.props;
-    const list = [...measurements].reverse().slice(start, end + 1).map(measurement => {
-      if (measurement.measured) {
-        return <ValidResult key={measurement.date} data={measurement}/>;
-      } else {
-        return <InvalidResult key={measurement.date} date={measurement.date}/>;
-      }
-    });
+    const { data } = this.props;
+    const color = data.tests.find(t => t.result === 'fail') ? 'danger' : 'success';
+    const colorBoxStyle = {
+      width: '10px',
+    };
 
     return (
-      <div className="list-group">
-        {list}
+      <div className="list-group-item list-group-item-action py-0 pl-0 pr-3.5 position-relative">
+        <div className="row no-gutters">
+          <div className={`col-auto mr-auto bg-${color}`} style={colorBoxStyle}></div>
+          <div className="col-auto py-2">
+            {data.date}
+          </div>
+        </div>
       </div>
     );
   }
 }
 
-Results.propTypes = {
-  measurements: PropTypes.array.isRequired,
-  start: PropTypes.number.isRequired,
-  end: PropTypes.number.isRequired,
+ValidResult.propTypes = {
+  data: PropTypes.object.isRequired,
 };

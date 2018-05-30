@@ -16,35 +16,27 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import ValidResult from './valid-reasult/valid-reasult.component';
-import InvalidResult from './invalid-result/invalid-result.component';
 
-export default class Results extends React.Component {
+export default class InvalidResult extends React.Component {
 
   constructor(props) {
     super(props);
   }
 
   render() {
-    const { measurements, start, end } = this.props;
-    const list = [...measurements].reverse().slice(start, end + 1).map(measurement => {
-      if (measurement.measured) {
-        return <ValidResult key={measurement.date} data={measurement}/>;
-      } else {
-        return <InvalidResult key={measurement.date} date={measurement.date}/>;
-      }
-    });
+    const { date } = this.props;
 
     return (
-      <div className="list-group">
-        {list}
+      <div className="list-group-item list-group-item-action py-1">
+        <div className="d-flex justify-content-between text-muted">
+          <span>No change today in the repositories</span>
+          <span>{date}</span>
+        </div>
       </div>
     );
   }
 }
 
-Results.propTypes = {
-  measurements: PropTypes.array.isRequired,
-  start: PropTypes.number.isRequired,
-  end: PropTypes.number.isRequired,
+InvalidResult.propTypes = {
+  date: PropTypes.string.isRequired,
 };
