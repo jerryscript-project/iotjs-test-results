@@ -32,14 +32,16 @@ export default class ValidResult extends React.Component {
     };
 
     return (
-      <div className="list-group-item list-group-item-action py-0 pl-0 pr-3.5 position-relative">
+      <div className="list-group-item list-group-item-action list-group-item-light py-0 pl-0 pr-3.5 position-relative">
         <div className="row no-gutters">
           <div className={`col-auto bg-${color}`} style={colorBoxStyle}></div>
           <div className="col-auto p-2">
             <Summary tests={data.tests} />
           </div>
           <div className="col-auto ml-auto py-2">
-            {data.date.format('YYYY-MM-DD')}
+            <span className="font-weight-bold">
+              {data.date.format('YYYY-MM-DD')}
+            </span>
           </div>
         </div>
       </div>
