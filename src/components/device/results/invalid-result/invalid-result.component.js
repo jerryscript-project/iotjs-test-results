@@ -15,7 +15,7 @@
  */
 
 import React from 'react';
-import PropTypes from 'prop-types';
+import MomentPropTypes from 'react-moment-proptypes';
 
 export default class InvalidResult extends React.Component {
 
@@ -30,7 +30,7 @@ export default class InvalidResult extends React.Component {
       <div className="list-group-item list-group-item-action py-1">
         <div className="d-flex justify-content-between text-muted">
           <span>No change today in the repositories</span>
-          <span>{date}</span>
+          <span>{date.format('YYYY-MM-DD')}</span>
         </div>
       </div>
     );
@@ -38,5 +38,5 @@ export default class InvalidResult extends React.Component {
 }
 
 InvalidResult.propTypes = {
-  date: PropTypes.string.isRequired,
+  date: MomentPropTypes.momentObj,
 };

@@ -23,8 +23,6 @@ export default class Chartjs extends React.Component {
   constructor(props) {
     super(props);
 
-    this.getDateData = date => new Date(date).toISOString().substr(0, 10);
-
     this.getBinaryData = (data, profile) => {
       if (data && data.measured && data.bin && data.bin[profile]) {
         const bdata = parseInt(data.bin[profile].data) || 0;
@@ -76,7 +74,7 @@ export default class Chartjs extends React.Component {
 
       if (data) {
         return data.reduce((acc, d) => {
-          acc.labels = [...acc.labels, this.getDateData(d.date)];
+          acc.labels = [...acc.labels, d.date.format('YYYY-MM-DD')];
           acc.target = [...acc.target, this.getBinaryData(d, 'target-profile')];
           acc.minimal = [...acc.minimal, this.getBinaryData(d, 'minimal-profile')];
           acc.memory = [...acc.memory, this.getMemoryData(d)];

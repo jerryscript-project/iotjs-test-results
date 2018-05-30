@@ -39,7 +39,7 @@ export default class Device extends React.Component {
 
       return array.map(i => ({
         measured: false,
-        date: from.clone().subtract(i + 1, 'day').toISOString(),
+        date: from.clone().subtract(i + 1, 'day'),
       })).reverse();
     };
 
@@ -68,7 +68,7 @@ export default class Device extends React.Component {
         next = current.clone().add(1, 'day');
         previous = current.clone();
 
-        completed = [...completed, { measured: true, ...m }];
+        completed = [...completed, { measured: true, ...m, date: current }];
       });
 
       const todayMinusOne = moment.utc().subtract(1, 'day');

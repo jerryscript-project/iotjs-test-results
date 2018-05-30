@@ -17,7 +17,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import MomentPropTypes from 'react-moment-proptypes';
-import moment from 'moment';
 import Datepicker from './datepicker/datepicker.container';
 import Chartjs from './chartjs/chartjs.component';
 import Info from './info/info.component';
@@ -30,8 +29,8 @@ export default class Chart extends React.Component {
     this.getDates = () => {
       const { measurements } = this.props;
 
-      const minDate = moment(measurements[0].date);
-      const maxDate = moment(measurements[measurements.length - 1].date);
+      const minDate = measurements[0].date;
+      const maxDate = measurements[measurements.length - 1].date;
 
       return { minDate, maxDate };
     };
@@ -51,7 +50,7 @@ export default class Chart extends React.Component {
   render() {
     const { measurements, project, startDate, endDate } = this.props;
     const { minDate, maxDate } = this.getDates();
-    const data = measurements.filter(m => moment(m.date).isBetween(startDate, endDate, 'day', '[]'));
+    const data = measurements.filter(m => m.date.isBetween(startDate, endDate, 'day', '[]'));
 
     return (
       <div className="row my-2">

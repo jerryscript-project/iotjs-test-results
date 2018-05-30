@@ -35,7 +35,7 @@ export default class ValidResult extends React.Component {
         <div className="row no-gutters">
           <div className={`col-auto mr-auto bg-${color}`} style={colorBoxStyle}></div>
           <div className="col-auto py-2">
-            {data.date}
+            {data.date.format('YYYY-MM-DD')}
           </div>
         </div>
       </div>

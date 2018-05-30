@@ -29,9 +29,9 @@ export default class Results extends React.Component {
     const { measurements, start, end } = this.props;
     const list = [...measurements].reverse().slice(start, end + 1).map(measurement => {
       if (measurement.measured) {
-        return <ValidResult key={measurement.date} data={measurement}/>;
+        return <ValidResult key={measurement.date.toISOString()} data={measurement}/>;
       } else {
-        return <InvalidResult key={measurement.date} date={measurement.date}/>;
+        return <InvalidResult key={measurement.date.toISOString()} date={measurement.date}/>;
       }
     });
 
