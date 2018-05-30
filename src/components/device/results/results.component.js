@@ -16,7 +16,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import ValidResult from './valid-reasult/valid-reasult.component';
+import ValidResult from './valid-result/valid-result.component';
 import InvalidResult from './invalid-result/invalid-result.component';
 
 export default class Results extends React.Component {
