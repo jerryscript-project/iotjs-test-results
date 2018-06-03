@@ -56,12 +56,12 @@ export default class ValidResult extends React.Component {
 
           <div className="col">
             <div className="row no-gutters py-2 pl-2">
-              <div className="col-auto border-right pr-4">
+              <div className="col-auto pr-4">
                 <Summary tests={data.tests} />
               </div>
 
               {collapsed &&
-                <div className="d-none d-md-block col-auto border-right px-4">
+                <div className="d-none d-md-block col-auto border-left border-right px-4">
                   <Binary profile={data.bin['target-profile']} />
                 </div>
               }
