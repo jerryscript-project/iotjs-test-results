@@ -16,36 +16,40 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import ValidResult from './valid-result/valid-result.component';
-import InvalidResult from './invalid-result/invalid-result.component';
 
-export default class Results extends React.Component {
+export default class Submodule extends React.Component {
 
   constructor(props) {
     super(props);
   }
 
   render() {
-    const { measurements, project, start, end } = this.props;
-    const list = [...measurements].reverse().slice(start, end + 1).map(measurement => {
-      if (measurement.measured) {
-        return <ValidResult key={measurement.date.toISOString()} data={measurement} project={project}/>;
-      } else {
-        return <InvalidResult key={measurement.date.toISOString()} date={measurement.date}/>;
-      }
-    });
+    const { data, project } = this.props;
+    const messageStyle = {
+      width: '340px',
+    };
 
     return (
-      <div className="list-group">
-        {list}
+      <div className="d-flex">
+        <span className="mr-2">
+          {project.name}
+        </span>
+
+        <span className="ml-2 mr-4">
+          <a target="_blank" href={`${project.url}/commit/${data.commit}`}>
+            {data.commit.substring(0, 6)}
+          </a>
+        </span>
+
+        <span className="text-truncate pr-2" style={messageStyle}>
+          {data.message}
+        </span>
       </div>
     );
   }
 }
 
-Results.propTypes = {
-  measurements: PropTypes.array.isRequired,
+Submodule.propTypes = {
+  data: PropTypes.object.isRequired,
   project: PropTypes.object.isRequired,
-  start: PropTypes.number.isRequired,
-  end: PropTypes.number.isRequired,
 };

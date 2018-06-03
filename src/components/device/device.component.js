@@ -108,7 +108,7 @@ export default class Device extends React.Component {
           <Chart measurements={renderData} project={project} />
           <hr />
           <Pagination length={renderData.length} />
-          <Results measurements={renderData} />
+          <Results measurements={renderData} project={project} />
         </div>
       );
     };

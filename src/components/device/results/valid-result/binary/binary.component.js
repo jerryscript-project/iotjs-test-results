@@ -41,8 +41,9 @@ export default class Binary extends React.Component {
     const size = this.getSize();
 
     return (
-      <div className="border-right px-2">
-        <span>Binary size: {size} B</span>
+      <div>
+        <span>Binary size: </span>
+        <span className="font-weight-bold">{size} B</span>
       </div>
     );
   }

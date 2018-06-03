@@ -20,6 +20,7 @@ import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import { faChevronDown, faChevronUp } from '@fortawesome/fontawesome-free-solid';
 import Summary from './summary/summary.component';
 import Binary from './binary/binary.component';
+import Submodule from './submodule/submodule.component';
 
 export default class ValidResult extends React.Component {
 
@@ -39,7 +40,7 @@ export default class ValidResult extends React.Component {
   }
 
   render() {
-    const { data } = this.props;
+    const { data, project } = this.props;
     const { collapsed } = this.state;
     const color = data.tests.find(t => t.result === 'fail') ? 'danger' : 'success';
     const colorBoxStyle = {
@@ -53,11 +54,20 @@ export default class ValidResult extends React.Component {
           <div className={`col-auto bg-${color}`} style={colorBoxStyle}></div>
 
           <div className="col">
-            <div className="d-flex flex-row no-gutters py-2 pl-2">
-              <Summary tests={data.tests} />
-              <Binary profile={data.bin['target-profile']} />
+            <div className="row no-gutters py-2 pl-2">
+              <div className="col-auto border-right pr-4">
+                <Summary tests={data.tests} />
+              </div>
 
-              <div className="ml-auto">
+              <div className="d-none d-md-block col-auto border-right px-4">
+                <Binary profile={data.bin['target-profile']} />
+              </div>
+
+              <div className="d-none d-xl-block col-auto mr-auto px-4">
+                <Submodule data={data.submodules[project.key]} project={project} />
+              </div>
+
+              <div className="col-auto ml-auto">
                 <span className="font-weight-bold pr-3">
                   {data.date.format('YYYY-MM-DD')}
                 </span>
@@ -84,4 +94,5 @@ export default class ValidResult extends React.Component {
 
 ValidResult.propTypes = {
   data: PropTypes.object.isRequired,
+  project: PropTypes.object.isRequired,
 };
