@@ -16,33 +16,66 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
+import FontAwesomeIcon from '@fortawesome/react-fontawesome';
+import { faChevronDown, faChevronUp } from '@fortawesome/fontawesome-free-solid';
 import Summary from './summary/summary.component';
 
 export default class ValidResult extends React.Component {
 
   constructor(props) {
     super(props);
+
+    // Local state for each collapse object
+    this.state = {
+      collapsed: true,
+    };
+
+    this.handleCollapseClick = () => {
+      this.setState({
+        collapsed: !this.state.collapsed,
+      });
+    };
   }
 
   render() {
     const { data } = this.props;
+    const { collapsed } = this.state;
     const color = data.tests.find(t => t.result === 'fail') ? 'danger' : 'success';
     const colorBoxStyle = {
       width: '10px',
     };
 
     return (
-      <div className="list-group-item list-group-item-action list-group-item-light py-0 pl-0 pr-3.5 position-relative">
+      <div className="list-group-item list-group-item-action list-group-item-light py-0 pl-0 pr-3 position-relative">
         <div className="row no-gutters">
+
           <div className={`col-auto bg-${color}`} style={colorBoxStyle}></div>
-          <div className="col-auto p-2">
-            <Summary tests={data.tests} />
+
+          <div className="col">
+            <div className="row no-gutters">
+              <div className="col-auto mr-auto p-2">
+                <Summary tests={data.tests} />
+              </div>
+
+              <div className="col-auto py-2">
+                <span className="font-weight-bold pr-3">
+                  {data.date.format('YYYY-MM-DD')}
+                </span>
+
+                <div className="d-inline valid-collapse-button" onClick={this.handleCollapseClick}>
+                  <FontAwesomeIcon icon={collapsed ? faChevronDown : faChevronUp} />
+                </div>
+              </div>
+            </div>
+
+            {!collapsed &&
+              <div className="row no-gutters">
+                <span>Content placeholder</span>
+              </div>
+            }
+
           </div>
-          <div className="col-auto ml-auto py-2">
-            <span className="font-weight-bold">
-              {data.date.format('YYYY-MM-DD')}
-            </span>
-          </div>
+
         </div>
       </div>
     );

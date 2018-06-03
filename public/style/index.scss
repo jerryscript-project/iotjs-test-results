@@ -58,3 +58,10 @@ body {
   text-align: center;
   border-radius: 0.2rem;
 }
+
+.valid-collapse-button {
+  cursor: pointer;
+  &:hover {
+    color: #ffa500;
+  }
+}

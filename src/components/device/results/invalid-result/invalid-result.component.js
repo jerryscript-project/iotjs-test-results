@@ -27,7 +27,7 @@ export default class InvalidResult extends React.Component {
     const { date } = this.props;
 
     return (
-      <div className="list-group-item list-group-item-action py-1">
+      <div className="list-group-item list-group-item-action py-1 pr-5">
         <div className="d-flex justify-content-between text-muted">
           <span>No change today in the repositories</span>
           <span>{date.format('YYYY-MM-DD')}</span>
