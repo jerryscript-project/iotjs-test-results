@@ -25,12 +25,15 @@ export default class InvalidResult extends React.Component {
 
   render() {
     const { date } = this.props;
+    const dateStle = {
+      minWidth: '110px',
+    };
 
     return (
       <div className="list-group-item list-group-item-action py-1 pr-5">
         <div className="d-flex justify-content-between text-muted">
           <span>No change today in the repositories</span>
-          <span>{date.format('YYYY-MM-DD')}</span>
+          <span className="text-right" style={dateStle}>{date.format('YYYY-MM-DD')}</span>
         </div>
       </div>
     );
