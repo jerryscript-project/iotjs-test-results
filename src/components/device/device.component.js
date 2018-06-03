@@ -71,10 +71,10 @@ export default class Device extends React.Component {
         completed = [...completed, { measured: true, ...m, date: current }];
       });
 
-      const todayMinusOne = moment.utc().subtract(1, 'day');
+      const lastPlusOne = previous.clone().add(1, 'day');
 
-      if (!todayMinusOne.isSame(previous, 'day')) {
-        completed = [...completed, ...this.getInBetweenDates(moment.utc(), todayMinusOne)];
+      if (!lastPlusOne.isSame(previous, 'day')) {
+        completed = [...completed, ...this.getInBetweenDates(moment.utc(), lastPlusOne)];
       }
 
       return completed;
