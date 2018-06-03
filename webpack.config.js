@@ -1,6 +1,6 @@
 const path = require('path');
 
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const paths = {
@@ -19,7 +19,10 @@ const plugins = [
     template: path.join(paths.public, 'html', 'index.html'),
     favicon: path.join(paths.public, 'images', 'favicon-check-circle-o.ico'),
   }),
-  new ExtractTextPlugin('css/[name].css'),
+  new MiniCssExtractPlugin({
+    filename: 'css/[name].css',
+    chunkFilename: 'css/[id].css',
+  }),
 ];
 
 const rules = [
@@ -49,10 +52,11 @@ const rules = [
     }],
   }, {
     test: /\.(scss|css)$/,
-    use: ExtractTextPlugin.extract({
-      fallback: 'style-loader',
-      use: 'css-loader!sass-loader',
-    }),
+    use: [
+      MiniCssExtractPlugin.loader,
+      'css-loader',
+      'sass-loader',
+    ],
   }, {
     test: /\.js$/,
     exclude: /(node_modules)/,
