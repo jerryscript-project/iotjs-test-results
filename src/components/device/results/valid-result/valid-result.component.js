@@ -19,6 +19,7 @@ import PropTypes from 'prop-types';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import { faChevronDown, faChevronUp } from '@fortawesome/fontawesome-free-solid';
 import Summary from './summary/summary.component';
+import Binary from './binary/binary.component';
 
 export default class ValidResult extends React.Component {
 
@@ -52,12 +53,11 @@ export default class ValidResult extends React.Component {
           <div className={`col-auto bg-${color}`} style={colorBoxStyle}></div>
 
           <div className="col">
-            <div className="row no-gutters">
-              <div className="col-auto mr-auto p-2">
-                <Summary tests={data.tests} />
-              </div>
+            <div className="d-flex flex-row no-gutters py-2 pl-2">
+              <Summary tests={data.tests} />
+              <Binary profile={data.bin['target-profile']} />
 
-              <div className="col-auto py-2">
+              <div className="ml-auto">
                 <span className="font-weight-bold pr-3">
                   {data.date.format('YYYY-MM-DD')}
                 </span>

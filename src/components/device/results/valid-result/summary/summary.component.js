@@ -40,7 +40,7 @@ export default class Summary extends React.Component {
     };
 
     return (
-      <div className="d-flex justify-content-between text-left">
+      <div className="d-flex justify-content-between text-left border-right pr-2">
         <div className="text-success pl-0" style={boxStyle}>
           <FontAwesomeIcon icon={faCheckCircle} className="mr-1" />
           <span>
