@@ -15,31 +15,20 @@
  */
 
 import React from 'react';
-import MomentPropTypes from 'react-moment-proptypes';
 
-export default class InvalidResult extends React.Component {
+export default class Details extends React.Component {
 
   constructor(props) {
     super(props);
   }
 
   render() {
-    const { date } = this.props;
-    const dateStle = {
-      minWidth: '110px',
-    };
-
     return (
-      <div className="list-group-item list-group-item-action py-2 pr-5">
-        <div className="d-flex justify-content-between text-muted">
-          <span>No change today in the repositories</span>
-          <span className="text-right" style={dateStle}>{date.format('YYYY-MM-DD')}</span>
+      <div className="row no-gutters py-3 px-2">
+        <div className="col-auto mr-auto">
+          Placeholder
         </div>
       </div>
     );
   }
 }
-
-InvalidResult.propTypes = {
-  date: MomentPropTypes.momentObj,
-};

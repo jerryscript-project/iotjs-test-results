@@ -21,6 +21,7 @@ import { faChevronDown, faChevronUp } from '@fortawesome/fontawesome-free-solid'
 import Summary from './summary/summary.component';
 import Binary from './binary/binary.component';
 import Submodule from './submodule/submodule.component';
+import Details from './details/details.component';
 
 export default class ValidResult extends React.Component {
 
@@ -59,13 +60,17 @@ export default class ValidResult extends React.Component {
                 <Summary tests={data.tests} />
               </div>
 
-              <div className="d-none d-md-block col-auto border-right px-4">
-                <Binary profile={data.bin['target-profile']} />
-              </div>
+              {collapsed &&
+                <div className="d-none d-md-block col-auto border-right px-4">
+                  <Binary profile={data.bin['target-profile']} />
+                </div>
+              }
 
-              <div className="d-none d-xl-block col-auto mr-auto px-4">
-                <Submodule data={data.submodules[project.key]} project={project} />
-              </div>
+              {collapsed &&
+                <div className="d-none d-xl-block col-auto mr-auto px-4">
+                  <Submodule data={data.submodules[project.key]} project={project} />
+                </div>
+              }
 
               <div className="col-auto ml-auto">
                 <span className="font-weight-bold pr-3">
@@ -78,11 +83,7 @@ export default class ValidResult extends React.Component {
               </div>
             </div>
 
-            {!collapsed &&
-              <div className="row no-gutters">
-                <span>Content placeholder</span>
-              </div>
-            }
+            {!collapsed && <Details />}
 
           </div>
 
