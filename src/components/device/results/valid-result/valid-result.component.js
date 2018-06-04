@@ -47,9 +47,10 @@ export default class ValidResult extends React.Component {
     const colorBoxStyle = {
       width: '10px',
     };
+    const action = collapsed ? 'list-group-item-action' : '';
 
     return (
-      <div className="list-group-item list-group-item-action list-group-item-light py-0 pl-0 pr-3 position-relative">
+      <div className={`list-group-item ${action} list-group-item-light py-0 pl-0 pr-3 position-relative`}>
         <div className="row no-gutters">
 
           <div className={`col-auto bg-${color}`} style={colorBoxStyle}></div>
@@ -83,7 +84,7 @@ export default class ValidResult extends React.Component {
               </div>
             </div>
 
-            {!collapsed && <Details />}
+            {!collapsed && <Details data={data} />}
 
           </div>
 

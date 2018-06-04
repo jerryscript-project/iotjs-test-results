@@ -15,6 +15,8 @@
  */
 
 import React from 'react';
+import PropTypes from 'prop-types';
+import SizeTable from '../size-table/size-table.component';
 
 export default class Details extends React.Component {
 
@@ -23,12 +25,18 @@ export default class Details extends React.Component {
   }
 
   render() {
+    const { data } = this.props;
+
     return (
       <div className="row no-gutters py-3 px-2">
-        <div className="col-auto mr-auto">
-          Placeholder
+        <div className="col-xl-4 col-lg-4 col-md-6 col">
+          <SizeTable info={data.bin} />
         </div>
       </div>
     );
   }
 }
+
+Details.propTpes = {
+  data: PropTypes.object.isRequired,
+};
