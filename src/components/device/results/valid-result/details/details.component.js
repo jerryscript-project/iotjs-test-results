@@ -17,6 +17,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import SizeTable from '../size-table/size-table.component';
+import CommitTable from '../commit-table/commit-table.component';
 
 export default class Details extends React.Component {
 
@@ -28,9 +29,13 @@ export default class Details extends React.Component {
     const { data } = this.props;
 
     return (
-      <div className="row no-gutters py-3 px-2">
-        <div className="col-xl-4 col-lg-4 col-md-6 col">
+      <div className="row py-3 px-2">
+        <div className="col-xl-4 col-lg-4">
           <SizeTable info={data.bin} />
+        </div>
+
+        <div className="col-xl-8 col-lg-8">
+          <CommitTable info={data.submodules} />
         </div>
       </div>
     );

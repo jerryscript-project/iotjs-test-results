@@ -62,6 +62,29 @@ export const projects = {
   },
 };
 
+export const submodules = {
+  iotjs: {
+    name: 'IoT.js',
+    url: 'https://github.com/Samsung/iotjs/commit/',
+  },
+  jerryscript: {
+    name: 'JerryScript',
+    url: 'https://github.com/jerryscript-project/jerryscript/commit/',
+  },
+  nuttx: {
+    name: 'NuttX',
+    url: 'https://bitbucket.org/nuttx/nuttx/commits/',
+  },
+  'nuttx-apps': {
+    name: 'NuttX Apps',
+    url: 'https://bitbucket.org/nuttx/apps/commits/',
+  },
+  tizenrt: {
+    name: 'TizenRT',
+    url: 'https://github.com/Samsung/TizenRT/commit/',
+  },
+};
+
 export const pagination = {
   numberOfTestPerPage: 20,
 };
