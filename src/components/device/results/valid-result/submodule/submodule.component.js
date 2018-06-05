@@ -25,6 +25,9 @@ export default class Submodule extends React.Component {
 
   render() {
     const { data, project } = this.props;
+    const commitStyle = {
+      width: '55px',
+    };
     const messageStyle = {
       width: '340px',
     };
@@ -35,7 +38,7 @@ export default class Submodule extends React.Component {
           {project.name}
         </span>
 
-        <span className="ml-2 mr-4">
+        <span className="ml-2 mr-4 text-center" style={commitStyle}>
           <a target="_blank" href={`${project.url}/commit/${data.commit}`}>
             {data.commit.substring(0, 6)}
           </a>
