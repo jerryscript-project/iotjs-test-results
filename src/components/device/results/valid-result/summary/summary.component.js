@@ -41,19 +41,19 @@ export default class Summary extends React.Component {
 
     return (
       <div className="d-flex justify-content-between text-left">
-        <div className="text-success pl-0" style={boxStyle}>
+        <div className="text-success pl-0" style={boxStyle} title="Passed">
           <FontAwesomeIcon icon={faCheckCircle} className="mr-1" />
           <span>
             {pass}
           </span>
         </div>
-        <div className="text-danger" style={boxStyle}>
+        <div className="text-danger" style={boxStyle} title="Failed">
           <FontAwesomeIcon icon={faTimesCircle} className="mr-1" />
           <span>
             {fail}
           </span>
         </div>
-        <span className="text-warning" style={boxStyle}>
+        <span className="text-warning" style={boxStyle} title="Skipped">
           <FontAwesomeIcon icon={faArrowAltCircleRight} className="mr-1" />
           <span>
             {skip}

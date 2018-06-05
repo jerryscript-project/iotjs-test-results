@@ -44,7 +44,7 @@ export default class Submodule extends React.Component {
           </a>
         </span>
 
-        <span className="text-truncate pr-2" style={messageStyle}>
+        <span className="text-truncate pr-2" style={messageStyle} title={data.message}>
           {data.message}
         </span>
       </div>
