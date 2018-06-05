@@ -57,7 +57,7 @@ export default class ValidResult extends React.Component {
 
           <div className="col">
             <div className="row no-gutters py-2 pl-2">
-              <div className="col-auto pr-4">
+              <div className="col-auto pr-2">
                 <Summary tests={data.tests} />
               </div>
 
