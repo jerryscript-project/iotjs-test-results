@@ -83,6 +83,10 @@ export const submodules = {
     name: 'TizenRT',
     url: 'https://github.com/Samsung/TizenRT/commit/',
   },
+  freya: {
+    name: 'Freya',
+    url: 'https://github.com/szeged/Freya/commit/',
+  },
 };
 
 export const pagination = {

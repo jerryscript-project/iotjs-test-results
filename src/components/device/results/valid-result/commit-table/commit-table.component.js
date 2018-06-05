@@ -27,6 +27,10 @@ export default class CommitTable extends React.Component {
   render() {
     const { info } = this.props;
     const trs = Object.keys(info).map((key, i) => {
+      if (!submodules[key]) {
+        return null;
+      }
+
       return (
         <tr key={`${key}-${i}`}>
           <th scope="row">{submodules[key].name}</th>
