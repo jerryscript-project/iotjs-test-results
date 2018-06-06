@@ -18,6 +18,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import SizeTable from '../size-table/size-table.component';
 import CommitTable from '../commit-table/commit-table.component';
+import TestList from '../test-list/test-list.component';
 
 export default class Details extends React.Component {
 
@@ -30,12 +31,22 @@ export default class Details extends React.Component {
 
     return (
       <div className="row py-3 px-2">
-        <div className="col-xl-4 col-lg-4">
-          <SizeTable info={data.bin} />
-        </div>
+        <div className="col">
+          <div className="row">
+            <div className="col-xl-4 col-lg-4">
+              <SizeTable info={data.bin} />
+            </div>
 
-        <div className="col-xl-8 col-lg-8">
-          <CommitTable info={data.submodules} />
+            <div className="col-xl-8 col-lg-8">
+              <CommitTable info={data.submodules} />
+            </div>
+          </div>
+
+          <div className="row">
+            <div className="col">
+              <TestList />
+            </div>
+          </div>
         </div>
       </div>
     );
