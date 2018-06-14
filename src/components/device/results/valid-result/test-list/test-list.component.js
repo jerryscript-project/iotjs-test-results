@@ -43,7 +43,7 @@ export default class TestList extends React.Component {
         return (
           <div
             key={key}
-            className={`btn btn-outline-${filter.type}${activeClass}`}
+            className={`btn btn-sm btn-outline-${filter.type}${activeClass}`}
             onClick={() => this.handleButtonClick(key)}>
             <span className="text-capitalize">{key}</span>
           </div>
@@ -56,7 +56,7 @@ export default class TestList extends React.Component {
     const buttonList = this.getButtons();
 
     return (
-      <div className="text-center">
+      <div className="text-left">
         <h6>Ran test cases and their results</h6>
         <div className="btn-group" role="group">
           {buttonList}
