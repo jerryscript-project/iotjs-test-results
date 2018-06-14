@@ -73,7 +73,7 @@ export default class Device extends React.Component {
 
       const lastPlusOne = previous.clone().add(1, 'day');
 
-      if (!lastPlusOne.clone().isSame(moment.utc(), 'day')) {
+      if (!previous.isSame(moment.utc(), 'day') && !lastPlusOne.isSame(moment.utc(), 'day')) {
         completed = [...completed, ...this.getInBetweenDates(moment.utc(), lastPlusOne)];
       }
 
