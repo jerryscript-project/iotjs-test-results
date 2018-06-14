@@ -15,6 +15,8 @@
  */
 
 import React from 'react';
+import PropTypes from 'prop-types';
+import TestListTable from '../test-list-table/test-list-table.component';
 
 export default class TestList extends React.Component {
 
@@ -22,9 +24,9 @@ export default class TestList extends React.Component {
     super(props);
 
     this.state = {
-      passed: { active: false, type: 'success' },
-      failed: { active: true, type: 'danger' },
-      skipped: { active: false, type: 'warning' },
+      passed: { active: false, type: 'success', id: 'pass' },
+      failed: { active: true, type: 'danger', id: 'fail' },
+      skipped: { active: false, type: 'warning', id: 'skip' },
     };
 
     this.handleButtonClick = filter => {
@@ -50,20 +52,48 @@ export default class TestList extends React.Component {
         );
       });
     };
+
+    this.getData = () => {
+      const { data } = this.props;
+      const filters = Object.keys(this.state).filter(key => this.state[key].active).map(f => this.state[f].id);
+
+      if (data && data.tests) {
+        return data.tests.filter(t => filters.includes(t.result));
+      }
+
+      return [];
+    };
   }
 
   render() {
     const buttonList = this.getButtons();
+    const filteredData = this.getData();
 
     return (
-      <div className="text-left">
-        <h6>Ran test cases and their results</h6>
-        <div className="btn-group" role="group">
-          {buttonList}
+      <div className="tests-details">
+
+        <div className="row mb-2">
+          <div className="col">
+            <div className="text-left">
+              <h6>Ran test cases and their results</h6>
+              <div className="btn-group" role="group">
+                {buttonList}
+              </div>
+            </div>
+          </div>
         </div>
+
+        <div className="row">
+          <div className="col">
+            <TestListTable data={filteredData} />
+          </div>
+        </div>
+
       </div>
     );
   }
 }
 
-TestList.propTpes = {};
+TestList.propTpes = {
+  data: PropTypes.object.isRequired,
+};

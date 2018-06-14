@@ -16,11 +16,8 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import SizeTable from '../size-table/size-table.component';
-import CommitTable from '../commit-table/commit-table.component';
-import TestList from '../test-list/test-list.component';
 
-export default class Details extends React.Component {
+export default class TestListTable extends React.Component {
 
   constructor(props) {
     super(props);
@@ -28,31 +25,34 @@ export default class Details extends React.Component {
 
   render() {
     const { data } = this.props;
+    const body = data.length ? (
+        <tr className="text-center">
+          <td colSpan="4">There are available test results</td>
+        </tr>
+      ) : (
+        <tr className="text-center">
+          <td colSpan="4">There are no available test results in the selected view</td>
+        </tr>
+      );
 
     return (
-      <div className="row py-3 px-2">
-        <div className="col">
-          <div className="row">
-            <div className="col-xl-4 col-lg-4">
-              <SizeTable info={data.bin} />
-            </div>
-
-            <div className="col-xl-8 col-lg-8">
-              <CommitTable info={data.submodules} />
-            </div>
-          </div>
-
-          <div className="row">
-            <div className="col">
-              <TestList {...this.props} />
-            </div>
-          </div>
-        </div>
-      </div>
+      <table className="table table-bordered table-sm table-hover">
+        <thead>
+          <tr>
+            <th scope="col">Test</th>
+            <th scope="col">Memory</th>
+            <th scope="col">Change</th>
+            <th scope="col">Output / Reason</th>
+          </tr>
+        </thead>
+        <tbody>
+          {body}
+        </tbody>
+      </table>
     );
   }
 }
 
-Details.propTpes = {
+TestListTable.propTpes = {
   data: PropTypes.object.isRequired,
 };
