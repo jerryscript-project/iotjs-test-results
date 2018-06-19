@@ -82,6 +82,7 @@ module.exports = {
     'node': true,
     'es6': true,
     'jquery': true,
+    'jest': true,
   },
   'parser': 'babel-eslint',
   'parserOptions': {
