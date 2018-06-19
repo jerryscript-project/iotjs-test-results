@@ -16,45 +16,51 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import TestListTableBody from '../test-list-table-body/test-list-table-body.component';
 
-export default class TestListTable extends React.Component {
+export default class TestListTableBody extends React.Component {
 
   constructor(props) {
     super(props);
+
+    this.getRowColor = result => {
+      switch (result) {
+        case 'fail':
+          return 'danger';
+        case 'skip':
+          return 'warning';
+        case 'pass':
+        default:
+          return 'success';
+      }
+    };
   }
 
   render() {
     const { data } = this.props;
 
-    const body = data.length ? (
-        <TestListTableBody {...this.props}/>
-      ) : (
-        <tbody>
-          <tr className="text-center">
-            <td colSpan="4">There are no available test results in the selected view</td>
-          </tr>
-        </tbody>
+    const rows = Object.keys(data).map(key => {
+      const color = this.getRowColor(data[key].result);
+
+      return (
+        <tr key={`${key.toString()}-${data[key].name}`} className={`table-${color}`}>
+          <td>
+            {data[key].name}
+          </td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
       );
+    });
 
     return (
-      <table className="table table-bordered table-sm table-hover">
-        <thead>
-          <tr>
-            <th scope="col">Test</th>
-            <th scope="col">Memory</th>
-            <th scope="col">Change</th>
-            <th scope="col">Output / Reason</th>
-          </tr>
-        </thead>
-
-        {body}
-
-      </table>
+      <tbody>
+        {rows}
+      </tbody>
     );
   }
 }
 
-TestListTable.propTpes = {
+TestListTableBody.propTpes = {
   data: PropTypes.object.isRequired,
 };
