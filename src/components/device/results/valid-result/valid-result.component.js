@@ -62,13 +62,13 @@ export default class ValidResult extends React.Component {
               </div>
 
               {collapsed &&
-                <div className="d-none d-md-block col-auto border-left border-right px-4">
+                <div className="d-none d-md-block col-auto border-left border-right px-1">
                   <Binary profile={data.bin['target-profile']} />
                 </div>
               }
 
               {collapsed &&
-                <div className="d-none d-xl-block col-auto mr-auto px-4">
+                <div className="d-none d-xl-block col-auto mr-auto px-3">
                   <Submodule data={data.submodules[project.key]} project={project} />
                 </div>
               }

@@ -26,6 +26,7 @@ export default class TestList extends React.Component {
     this.state = {
       passed: { active: false, type: 'success', id: 'pass' },
       failed: { active: true, type: 'danger', id: 'fail' },
+      timeout: {active: true, type: 'info', id: 'timeout'},
       skipped: { active: false, type: 'warning', id: 'skip' },
     };
 

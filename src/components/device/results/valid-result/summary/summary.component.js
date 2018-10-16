@@ -17,7 +17,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
-import { faCheckCircle, faTimesCircle, faArrowAltCircleRight } from '@fortawesome/fontawesome-free-regular';
+import { faCheckCircle, faTimesCircle, faArrowAltCircleRight, faClock } from '@fortawesome/fontawesome-free-regular';
 
 export default class Summary extends React.Component {
 
@@ -27,13 +27,14 @@ export default class Summary extends React.Component {
 
   render() {
     const { tests } = this.props;
-    const { pass, fail, skip } = tests.reduce((acc, t) => {
+    const { pass, fail, skip, timeout } = tests.reduce((acc, t) => {
       acc[t.result]++;
       return acc;
     }, {
       pass: 0,
       fail: 0,
       skip: 0,
+      timeout: 0,
     });
     const boxStyle = {
       width: '60px',
@@ -45,6 +46,12 @@ export default class Summary extends React.Component {
           <FontAwesomeIcon icon={faCheckCircle} className="mr-1" />
           <span>
             {pass}
+          </span>
+        </div>
+        <div className="text-info" style={boxStyle} title="Timeout">
+          <FontAwesomeIcon icon={faClock} className="mr-1" />
+          <span>
+            {timeout}
           </span>
         </div>
         <div className="text-danger" style={boxStyle} title="Failed">

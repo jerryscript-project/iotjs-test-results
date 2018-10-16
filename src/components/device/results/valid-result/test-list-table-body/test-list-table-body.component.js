@@ -24,6 +24,8 @@ export default class TestListTableBody extends React.Component {
 
     this.getRowColor = result => {
       switch (result) {
+        case 'timeout':
+          return 'info';
         case 'fail':
           return 'danger';
         case 'skip':
