@@ -84,9 +84,9 @@ export default class TestList extends React.Component {
           </div>
         </div>
 
-        <div className="row">
-          <div className="col">
-            <TestListTable data={filteredData} />
+        <div className="row" style={{maxHeight: '300px'}}>
+          <div className="col" style={{overflowX: 'hidden'}}>
+            <TestListTable data={filteredData}/>
           </div>
         </div>
 

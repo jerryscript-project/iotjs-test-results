@@ -26,9 +26,9 @@ export default class Binary extends React.Component {
       const { profile } = this.props;
 
       if (profile) {
-        const data = profile.data || 0;
-        const rodata = profile.rodata || 0;
-        const text = profile.text || 0;
+        const data = parseInt(profile.data) || 0;
+        const rodata = parseInt(profile.rodata) || 0;
+        const text = parseInt(profile.text) || 0;
 
         return data + rodata + text;
       }

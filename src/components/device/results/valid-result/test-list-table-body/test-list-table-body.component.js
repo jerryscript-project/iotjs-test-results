@@ -35,22 +35,36 @@ export default class TestListTableBody extends React.Component {
           return 'success';
       }
     };
-  }
 
+    this.getMemory = data => {
+      const memStats = ['n/a', 'n/a', 'n/a', 'n/a'];
+
+      if (data.result != 'pass' || !('memstat' in data))
+        return memStats;
+
+      ['heap-jerry', 'heap-system', 'stack', 'change'].forEach((area, i) => {
+        const postfix = (area == 'change') ? '%' : 'B';
+        memStats[i] = isNaN(parseInt(data.memstat[area])) ? 'n/a' : data.memstat[area] + postfix;
+      });
+
+      return memStats;
+    };
+
+  }
   render() {
     const { data } = this.props;
-
     const rows = Object.keys(data).map(key => {
       const color = this.getRowColor(data[key].result);
+      const memory = this.getMemory(data[key]);
 
       return (
-        <tr key={`${key.toString()}-${data[key].name}`} className={`table-${color}`}>
-          <td>
-            {data[key].name}
-          </td>
-          <td></td>
-          <td></td>
-          <td></td>
+        <tr key={`${key.toString()}-${data[key].name}`} className={`table-${color}`} style={{overflowY: 'auto'}}>
+          <td>{data[key].name}</td>
+          <td>{memory[0]}</td>
+          <td>{memory[1]}</td>
+          <td>{memory[2]}</td>
+          <td>{memory[3]}</td>
+          <td>{data[key].output}</td>
         </tr>
       );
     });

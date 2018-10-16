@@ -32,7 +32,7 @@ export default class TestListTable extends React.Component {
       ) : (
         <tbody>
           <tr className="text-center">
-            <td colSpan="4">There are no available test results in the selected view</td>
+            <td colSpan="6">There are no available test results in the selected view</td>
           </tr>
         </tbody>
       );
@@ -41,10 +41,15 @@ export default class TestListTable extends React.Component {
       <table className="table table-bordered table-sm table-hover">
         <thead>
           <tr>
-            <th scope="col">Test</th>
-            <th scope="col">Memory</th>
-            <th scope="col">Change</th>
-            <th scope="col">Output / Reason</th>
+            <th rowSpan="2" scope="col">Test</th>
+            <th colSpan="3" scope="col">Memory</th>
+            <th rowSpan="2" scope="col">Change</th>
+            <th rowSpan="2" scope="col">Output / Reason</th>
+          </tr>
+          <tr>
+            <th>Jerry</th>
+            <th>Malloc</th>
+            <th>Stack</th>
           </tr>
         </thead>
 
