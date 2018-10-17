@@ -11,7 +11,6 @@ jobs:
   - stage: Check
     script:
     - ./tools/check_signed_off.sh --travis
-    - npm run lint-travis
   - stage: Test
     script:
     - npm run test

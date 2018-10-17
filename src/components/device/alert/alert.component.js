@@ -16,15 +16,10 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import FontAwesomeIcon from '@fortawesome/react-fontawesome';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faExclamationTriangle } from '@fortawesome/fontawesome-free-solid';
 
 export default class Alert extends React.Component {
-
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     const { device, error } = this.props;
 

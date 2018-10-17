@@ -16,15 +16,10 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import FontAwesomeIcon from '@fortawesome/react-fontawesome';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner } from '@fortawesome/fontawesome-free-solid';
 
 export default class Loading extends React.Component {
-
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     const { deviceName } = this.props;
 

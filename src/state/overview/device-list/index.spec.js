@@ -14,18 +14,18 @@
  * limitations under the License.
  */
 
-import * as deviceList from '../../../state/overview/device-list';
-import initialState from '../../../state/overview/device-list/initial.state';
+import * as deviceList from './';
+import initialState from './initial.state';
 
 describe('device list action creators', () => {
-  it('fetchOverviewResultsRequest', () => {
+  test('fetchOverviewResultsRequest', () => {
     const expectedAction = {
       type: deviceList.FETCH_OVERVIEW_RESULTS_REQUEST,
     };
     expect(deviceList.fetchOverviewResultsRequest()).toEqual(expectedAction);
   });
 
-  it('fetchOverviewResultsSuccess (iotjs, stm32)', () => {
+  test('fetchOverviewResultsSuccess (iotjs, stm32)', () => {
     const project = 'iotjs';
     const device = 'stm32';
     const result = [{ test: 'issue.test.js', result: 'pass' }];
@@ -38,7 +38,7 @@ describe('device list action creators', () => {
     expect(deviceList.fetchOverviewResultsSuccess(project, device, result)).toEqual(expectedAction);
   });
 
-  it('fetchOverviewResultsSuccess (jerryscript, stm32)', () => {
+  test('fetchOverviewResultsSuccess (jerryscript, stm32)', () => {
     const project = 'jerryscript';
     const device = 'stm32';
     const result = [{ test: 'run-pass.test.js', result: 'pass' }];
@@ -51,7 +51,7 @@ describe('device list action creators', () => {
     expect(deviceList.fetchOverviewResultsSuccess(project, device, result)).toEqual(expectedAction);
   });
 
-  it('fetchOverviewResultsFailure', () => {
+  test('fetchOverviewResultsFailure', () => {
     const error = new Error('Something bad happened');
     const expectedAction = {
       type: deviceList.FETCH_OVERVIEW_RESULTS_FAILURE,
@@ -60,14 +60,14 @@ describe('device list action creators', () => {
     expect(deviceList.fetchOverviewResultsFailure(error)).toEqual(expectedAction);
   });
 
-  it('removeOverviewResults', () => {
+  test('removeOverviewResults', () => {
     const expectedAction = {
       type: deviceList.REMOVE_OVERVIEW_RESULTS,
     };
     expect(deviceList.removeOverviewResults()).toEqual(expectedAction);
   });
 
-  it('setOverviewLoading (true)', () => {
+  test('setOverviewLoading (true)', () => {
     const loading = true;
     const expectedAction = {
       type: deviceList.SET_OVERVIEW_LOADING,
@@ -76,7 +76,7 @@ describe('device list action creators', () => {
     expect(deviceList.setOverviewLoading(loading)).toEqual(expectedAction);
   });
 
-  it('setOverviewLoading (false)', () => {
+  test('setOverviewLoading (false)', () => {
     const loading = true;
     const expectedAction = {
       type: deviceList.SET_OVERVIEW_LOADING,
@@ -105,27 +105,27 @@ describe('device list selectors', () => {
     },
   };
 
-  it('should return the loading value (initialState)', () => {
+  test('should return the loading value (initialState)', () => {
     expect(deviceList.getOverviewLoading(initState)).toEqual(initialState.loading);
   });
 
-  it('should return the loading value (randomState)', () => {
+  test('should return the loading value (randomState)', () => {
     expect(deviceList.getOverviewLoading(randomState)).toEqual(loading);
   });
 
-  it('should return the results value (initialState)', () => {
+  test('should return the results value (initialState)', () => {
     expect(deviceList.getOverviewResults(initState)).toEqual(initialState.results);
   });
 
-  it('should return the results value (randomState)', () => {
+  test('should return the results value (randomState)', () => {
     expect(deviceList.getOverviewResults(randomState)).toEqual(results);
   });
 
-  it('should return the error value (initialState)', () => {
+  test('should return the error value (initialState)', () => {
     expect(deviceList.getOverviewError(initState)).toEqual(initialState.error);
   });
 
-  it('should return the error value (randomState)', () => {
+  test('should return the error value (randomState)', () => {
     expect(deviceList.getOverviewError(randomState)).toEqual(error);
   });
 });
@@ -153,11 +153,11 @@ describe('device list reducers', () => {
     error: new Error('The server is not available'),
   };
 
-  it('should return the initialState (undefined)', () => {
+  test('should return the initialState (undefined)', () => {
     expect(deviceList.default(undefined, {})).toEqual(initialState);
   });
 
-  it('should handle the FETCH_OVERVIEW_RESULTS_REQUEST action (initialState)', () => {
+  test('should handle the FETCH_OVERVIEW_RESULTS_REQUEST action (initialState)', () => {
     const action = {
       type: deviceList.FETCH_OVERVIEW_RESULTS_REQUEST,
       loading: state.loading,
@@ -169,7 +169,7 @@ describe('device list reducers', () => {
     expect(deviceList.default(initialState, action)).toEqual(expectedState);
   });
 
-  it('should handle the FETCH_OVERVIEW_RESULTS_REQUEST action (state)', () => {
+  test('should handle the FETCH_OVERVIEW_RESULTS_REQUEST action (state)', () => {
     const loading = true;
     const action = {
       type: deviceList.FETCH_OVERVIEW_RESULTS_REQUEST,
@@ -182,7 +182,7 @@ describe('device list reducers', () => {
     expect(deviceList.default(state, action)).toEqual(expectedState);
   });
 
-  it('should handle the FETCH_OVERVIEW_RESULTS_SUCCESS action (initialState)', () => {
+  test('should handle the FETCH_OVERVIEW_RESULTS_SUCCESS action (initialState)', () => {
     const result = { test: 'new.test.js', result: 'skip' };
     const action = {
       type: deviceList.FETCH_OVERVIEW_RESULTS_SUCCESS,
@@ -204,7 +204,7 @@ describe('device list reducers', () => {
     expect(deviceList.default(initialState, action)).toEqual(expectedState);
   });
 
-  it('should handle the FETCH_OVERVIEW_RESULTS_SUCCESS action (state)', () => {
+  test('should handle the FETCH_OVERVIEW_RESULTS_SUCCESS action (state)', () => {
     const project = 'jerryscript';
     const device = 'stm32';
     const result = { test: 'colibri.test.js', result: 'pass'};
@@ -228,7 +228,7 @@ describe('device list reducers', () => {
     expect(deviceList.default(state, action)).toEqual(expectedState);
   });
 
-  it('should handle the FETCH_OVERVIEW_RESULTS_FAILURE action (initialState)', () => {
+  test('should handle the FETCH_OVERVIEW_RESULTS_FAILURE action (initialState)', () => {
     const action = {
       type: deviceList.FETCH_OVERVIEW_RESULTS_FAILURE,
       error: state.error,
@@ -241,7 +241,7 @@ describe('device list reducers', () => {
     expect(deviceList.default(initialState, action)).toEqual(expectedState);
   });
 
-  it('should handle the FETCH_OVERVIEW_RESULTS_FAILURE action (state)', () => {
+  test('should handle the FETCH_OVERVIEW_RESULTS_FAILURE action (state)', () => {
     const error = new Error('Broken');
     const action = {
       type: deviceList.FETCH_OVERVIEW_RESULTS_FAILURE,
@@ -255,7 +255,7 @@ describe('device list reducers', () => {
     expect(deviceList.default(state, action)).toEqual(expectedState);
   });
 
-  it('should handle the REMOVE_OVERVIEW_RESULTS action (initialState)', () => {
+  test('should handle the REMOVE_OVERVIEW_RESULTS action (initialState)', () => {
     const action = {
       type: deviceList.REMOVE_OVERVIEW_RESULTS,
     };
@@ -266,7 +266,7 @@ describe('device list reducers', () => {
     expect(deviceList.default(initialState, action)).toEqual(expectedState);
   });
 
-  it('should handle the REMOVE_OVERVIEW_RESULTS action (state)', () => {
+  test('should handle the REMOVE_OVERVIEW_RESULTS action (state)', () => {
     const action = {
       type: deviceList.REMOVE_OVERVIEW_RESULTS,
     };
@@ -277,7 +277,7 @@ describe('device list reducers', () => {
     expect(deviceList.default(state, action)).toEqual(expectedState);
   });
 
-  it('should handle the SET_OVERVIEW_LOADING action (initialState, true)', () => {
+  test('should handle the SET_OVERVIEW_LOADING action (initialState, true)', () => {
     const action = {
       type: deviceList.SET_OVERVIEW_LOADING,
       loading: true,
@@ -289,7 +289,7 @@ describe('device list reducers', () => {
     expect(deviceList.default(initialState, action)).toEqual(expectedState);
   });
 
-  it('should handle the SET_OVERVIEW_LOADING action (initialState, false)', () => {
+  test('should handle the SET_OVERVIEW_LOADING action (initialState, false)', () => {
     const action = {
       type: deviceList.SET_OVERVIEW_LOADING,
       loading: false,
@@ -301,7 +301,7 @@ describe('device list reducers', () => {
     expect(deviceList.default(initialState, action)).toEqual(expectedState);
   });
 
-  it('should handle the SET_OVERVIEW_LOADING action (state, true)', () => {
+  test('should handle the SET_OVERVIEW_LOADING action (state, true)', () => {
     const action = {
       type: deviceList.SET_OVERVIEW_LOADING,
       loading: true,
@@ -313,7 +313,7 @@ describe('device list reducers', () => {
     expect(deviceList.default(state, action)).toEqual(expectedState);
   });
 
-  it('should handle the SET_OVERVIEW_LOADING action (state, false)', () => {
+  test('should handle the SET_OVERVIEW_LOADING action (state, false)', () => {
     const action = {
       type: deviceList.SET_OVERVIEW_LOADING,
       loading: false,

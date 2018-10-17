@@ -19,11 +19,6 @@ import PropTypes from 'prop-types';
 import { submodules } from '../../../../../constants';
 
 export default class CommitTable extends React.Component {
-
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     const { info } = this.props;
     const trs = Object.keys(info).map((key, i) => {
@@ -35,7 +30,7 @@ export default class CommitTable extends React.Component {
         <tr key={`${key}-${i}`}>
           <th scope="row">{submodules[key].name}</th>
           <td>
-            <a target="_blank" href={`${submodules[key].url}${info[key].commit}`}>
+            <a target="_blank" rel="noopener noreferrer" href={`${submodules[key].url}${info[key].commit}`}>
               {info[key].commit.substring(0, 6)}
             </a>
           </td>

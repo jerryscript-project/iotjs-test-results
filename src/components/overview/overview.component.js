@@ -22,11 +22,6 @@ import DeviceList from './device-list/device-list.container';
 import { projects } from '../../constants';
 
 export default class Overview extends React.Component {
-
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     const { match } = this.props;
 

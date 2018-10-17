@@ -19,11 +19,6 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 export default class ProjectSwitcher extends React.Component {
-
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     const { select, current, url, resetDevice } = this.props;
     const active = select.key === current.key;

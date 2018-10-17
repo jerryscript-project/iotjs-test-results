@@ -20,11 +20,6 @@ import ValidResult from './valid-result/valid-result.component';
 import InvalidResult from './invalid-result/invalid-result.component';
 
 export default class Results extends React.Component {
-
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     const { measurements, project, start, end } = this.props;
     const measurementList = measurements.slice().reverse();

@@ -16,11 +16,11 @@
 
 import moment from 'moment';
 import { START_DATE, END_DATE } from 'react-dates/constants';
-import * as datepicker from '../../../state/device/datepicker';
-import initialState from '../../../state/device/datepicker/initial.state';
+import * as datepicker from './';
+import initialState from './initial.state';
 
 describe('datepickerdatepicker action creators', () => {
-  it('setDeviceDatepickerDates', () => {
+  test('setDeviceDatepickerDates', () => {
     const startDate = moment.utc().clone().subtract(10, 'day');
     const endDate = moment.utc();
     const expectedAction = {
@@ -31,7 +31,7 @@ describe('datepickerdatepicker action creators', () => {
     expect(datepicker.setDeviceDatepickerDates(startDate, endDate)).toEqual(expectedAction);
   });
 
-  it('setDeviceDatepickerFocusedInput (start date)', () => {
+  test('setDeviceDatepickerFocusedInput (start date)', () => {
     const focusedInput = START_DATE;
     const expectedAction = {
       type: datepicker.SET_DEVICE_DATEPICKER_FOCUSED_INPUT,
@@ -40,7 +40,7 @@ describe('datepickerdatepicker action creators', () => {
     expect(datepicker.setDeviceDatepickerFocusedInput(focusedInput)).toEqual(expectedAction);
   });
 
-  it('setDeviceDatepickerFocusedInput (end date)', () => {
+  test('setDeviceDatepickerFocusedInput (end date)', () => {
     const focusedInput = END_DATE;
     const expectedAction = {
       type: datepicker.SET_DEVICE_DATEPICKER_FOCUSED_INPUT,
@@ -69,27 +69,27 @@ describe('datepicker selectors', () => {
     },
   };
 
-  it('should return the focusedInput value (initialState)', () => {
+  test('should return the focusedInput value (initialState)', () => {
     expect(datepicker.getDeviceDatepickerFocusedInput(initState)).toEqual(initialState.focusedInput);
   });
 
-  it('should return the focusedInput value (randomState)', () => {
+  test('should return the focusedInput value (randomState)', () => {
     expect(datepicker.getDeviceDatepickerFocusedInput(randomState)).toEqual(focusedInput);
   });
 
-  it('should return the startDate value (initialState)', () => {
+  test('should return the startDate value (initialState)', () => {
     expect(datepicker.getDeviceDatepickerStartDate(initState)).toEqual(initialState.startDate);
   });
 
-  it('should return the startDate value (randomState)', () => {
+  test('should return the startDate value (randomState)', () => {
     expect(datepicker.getDeviceDatepickerStartDate(randomState)).toEqual(startDate);
   });
 
-  it('should return the endDate value (initialState)', () => {
+  test('should return the endDate value (initialState)', () => {
     expect(datepicker.getDeviceDatepickerEndDate(initState)).toEqual(initialState.endDate);
   });
 
-  it('should return the endDate value (randomState)', () => {
+  test('should return the endDate value (randomState)', () => {
     expect(datepicker.getDeviceDatepickerEndDate(randomState)).toEqual(endDate);
   });
 });
@@ -101,11 +101,11 @@ describe('datepicker reducers', () => {
     endDate: moment.utc().clone().subtract(3, 'day'),
   };
 
-  it('should return the initialState (undefined)', () => {
+  test('should return the initialState (undefined)', () => {
     expect(datepicker.default(undefined, {})).toEqual(initialState);
   });
 
-  it('should handle the SET_DEVICE_DATEPICKER_DATES action (initialState)', () => {
+  test('should handle the SET_DEVICE_DATEPICKER_DATES action (initialState)', () => {
     const startDate = moment.utc().clone().subtract(40, 'day');
     const endDate = moment.utc();
     const action = {
@@ -121,7 +121,7 @@ describe('datepicker reducers', () => {
     expect(datepicker.default(initialState, action)).toEqual(expectedState);
   });
 
-  it('should handle the SET_DEVICE_DATEPICKER_DATES action (state)', () => {
+  test('should handle the SET_DEVICE_DATEPICKER_DATES action (state)', () => {
     const startDate = moment.utc().clone().subtract(22, 'day');
     const endDate = moment.utc();
     const action = {
@@ -137,7 +137,7 @@ describe('datepicker reducers', () => {
     expect(datepicker.default(state, action)).toEqual(expectedState);
   });
 
-  it('should handle the SET_DEVICE_DATEPICKER_FOCUSED_INPUT action (initialState, START_DATE)', () => {
+  test('should handle the SET_DEVICE_DATEPICKER_FOCUSED_INPUT action (initialState, START_DATE)', () => {
     const focusedInput = START_DATE;
     const action = {
       type: datepicker.SET_DEVICE_DATEPICKER_FOCUSED_INPUT,
@@ -150,7 +150,7 @@ describe('datepicker reducers', () => {
     expect(datepicker.default(initialState, action)).toEqual(expectedState);
   });
 
-  it('should handle the SET_DEVICE_DATEPICKER_FOCUSED_INPUT action (initialState, END_DATE)', () => {
+  test('should handle the SET_DEVICE_DATEPICKER_FOCUSED_INPUT action (initialState, END_DATE)', () => {
     const focusedInput = END_DATE;
     const action = {
       type: datepicker.SET_DEVICE_DATEPICKER_FOCUSED_INPUT,
@@ -163,7 +163,7 @@ describe('datepicker reducers', () => {
     expect(datepicker.default(initialState, action)).toEqual(expectedState);
   });
 
-  it('should handle the SET_DEVICE_DATEPICKER_FOCUSED_INPUT action (state, START_DATE)', () => {
+  test('should handle the SET_DEVICE_DATEPICKER_FOCUSED_INPUT action (state, START_DATE)', () => {
     const focusedInput = START_DATE;
     const action = {
       type: datepicker.SET_DEVICE_DATEPICKER_FOCUSED_INPUT,
@@ -176,7 +176,7 @@ describe('datepicker reducers', () => {
     expect(datepicker.default(state, action)).toEqual(expectedState);
   });
 
-  it('should handle the SET_DEVICE_DATEPICKER_FOCUSED_INPUT action (state, END_DATE)', () => {
+  test('should handle the SET_DEVICE_DATEPICKER_FOCUSED_INPUT action (state, END_DATE)', () => {
     const focusedInput = END_DATE;
     const action = {
       type: datepicker.SET_DEVICE_DATEPICKER_FOCUSED_INPUT,

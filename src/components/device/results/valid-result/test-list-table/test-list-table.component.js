@@ -19,11 +19,6 @@ import PropTypes from 'prop-types';
 import TestListTableBody from '../test-list-table-body/test-list-table-body.component';
 
 export default class TestListTable extends React.Component {
-
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     const { data } = this.props;
 

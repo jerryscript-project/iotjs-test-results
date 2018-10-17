@@ -17,11 +17,6 @@
 import React from 'react';
 
 export default class Footer extends React.Component {
-
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     return (
       <footer className="footer bg-dark text-center text-white">

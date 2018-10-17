@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 
-import * as data from '../../../state/device/data';
-import initialState from '../../../state/device/data/initial.state';
+import * as data from './';
+import initialState from './initial.state';
 
 describe('data action creators', () => {
   const propsNull = {
@@ -32,7 +32,7 @@ describe('data action creators', () => {
   };
   const error = new Error('Could not find any data');
 
-  it('fetchDeviceDataMeasurementsRequest (iotjs)', () => {
+  test('fetchDeviceDataMeasurementsRequest (iotjs)', () => {
     const expectedAction = {
       type: data.FETCH_DEVICE_DATA_MEASUREMENTS_REQUEST,
       project: propsOne.project,
@@ -41,7 +41,7 @@ describe('data action creators', () => {
     expect(data.fetchDeviceDataMeasurementsRequest(propsOne.project, propsOne.device)).toEqual(expectedAction);
   });
 
-  it('fetchDeviceDataMeasurementsRequest (jerryscript)', () => {
+  test('fetchDeviceDataMeasurementsRequest (jerryscript)', () => {
     const expectedAction = {
       type: data.FETCH_DEVICE_DATA_MEASUREMENTS_REQUEST,
       project: propsTwo.project,
@@ -50,7 +50,7 @@ describe('data action creators', () => {
     expect(data.fetchDeviceDataMeasurementsRequest(propsTwo.project, propsOne.device)).toEqual(expectedAction);
   });
 
-  it('fetchDeviceDataMeasurementsRequest (null)', () => {
+  test('fetchDeviceDataMeasurementsRequest (null)', () => {
     const expectedAction = {
       type: data.FETCH_DEVICE_DATA_MEASUREMENTS_REQUEST,
       project: propsNull.project,
@@ -59,7 +59,7 @@ describe('data action creators', () => {
     expect(data.fetchDeviceDataMeasurementsRequest(propsNull.project, propsNull.device)).toEqual(expectedAction);
   });
 
-  it('fetchDeviceDataMeasurementsSuccess (iotjs)', () => {
+  test('fetchDeviceDataMeasurementsSuccess (iotjs)', () => {
     const expectedAction = {
       type: data.FETCH_DEVICE_DATA_MEASUREMENTS_SUCCESS,
       project: propsOne.project,
@@ -68,7 +68,7 @@ describe('data action creators', () => {
     expect(data.fetchDeviceDataMeasurementsSuccess(propsOne.project, propsTwo.device)).toEqual(expectedAction);
   });
 
-  it('fetchDeviceDataMeasurementsSuccess (jerryscript)', () => {
+  test('fetchDeviceDataMeasurementsSuccess (jerryscript)', () => {
     const expectedAction = {
       type: data.FETCH_DEVICE_DATA_MEASUREMENTS_SUCCESS,
       project: propsTwo.project,
@@ -77,7 +77,7 @@ describe('data action creators', () => {
     expect(data.fetchDeviceDataMeasurementsSuccess(propsTwo.project, propsTwo.device)).toEqual(expectedAction);
   });
 
-  it('fetchDeviceDataMeasurementsSuccess (null)', () => {
+  test('fetchDeviceDataMeasurementsSuccess (null)', () => {
     const expectedAction = {
       type: data.FETCH_DEVICE_DATA_MEASUREMENTS_SUCCESS,
       project: propsNull.project,
@@ -86,7 +86,7 @@ describe('data action creators', () => {
     expect(data.fetchDeviceDataMeasurementsSuccess(propsNull.project, propsNull.device)).toEqual(expectedAction);
   });
 
-  it('fetchDeviceDataMeasurementsFailure (iotjs)', () => {
+  test('fetchDeviceDataMeasurementsFailure (iotjs)', () => {
     const expectedAction = {
       type: data.FETCH_DEVICE_DATA_MEASUREMENTS_FAILURE,
       project: propsOne.project,
@@ -96,7 +96,7 @@ describe('data action creators', () => {
     expect(data.fetchDeviceDataMeasurementsFailure(propsOne.project, propsOne.device, error)).toEqual(expectedAction);
   });
 
-  it('fetchDeviceDataMeasurementsFailure (jerryscript)', () => {
+  test('fetchDeviceDataMeasurementsFailure (jerryscript)', () => {
     const expectedAction = {
       type: data.FETCH_DEVICE_DATA_MEASUREMENTS_FAILURE,
       project: propsTwo.project,
@@ -106,7 +106,7 @@ describe('data action creators', () => {
     expect(data.fetchDeviceDataMeasurementsFailure(propsTwo.project, propsOne.device, error)).toEqual(expectedAction);
   });
 
-  it('fetchDeviceDataMeasurementsFailure (null)', () => {
+  test('fetchDeviceDataMeasurementsFailure (null)', () => {
     const expectedAction = {
       type: data.FETCH_DEVICE_DATA_MEASUREMENTS_FAILURE,
       project: propsNull.project,
@@ -116,7 +116,7 @@ describe('data action creators', () => {
     expect(data.fetchDeviceDataMeasurementsFailure(propsNull.project, propsNull.device, error)).toEqual(expectedAction);
   });
 
-  it('resetDeviceDataState', () => {
+  test('resetDeviceDataState', () => {
     const expectedAction = {
       type: data.RESET_DEVICE_DATA_STATE,
     };
@@ -143,27 +143,27 @@ describe('data selectors', () => {
     },
   };
 
-  it('should return the loading value (initialState)', () => {
+  test('should return the loading value (initialState)', () => {
     expect(data.getDeviceDataLoading(initState)).toEqual(initialState.loading);
   });
 
-  it('should return the loading value (randomState)', () => {
+  test('should return the loading value (randomState)', () => {
     expect(data.getDeviceDataLoading(randomState)).toEqual(loading);
   });
 
-  it('should return the measurements value (initialState)', () => {
+  test('should return the measurements value (initialState)', () => {
     expect(data.getDeviceDataMeasurements(initState)).toEqual(initialState.measurements);
   });
 
-  it('should return the measurements value (randomState)', () => {
+  test('should return the measurements value (randomState)', () => {
     expect(data.getDeviceDataMeasurements(randomState)).toEqual(measurements);
   });
 
-  it('should return the error value (initialState)', () => {
+  test('should return the error value (initialState)', () => {
     expect(data.getDeviceDataError(initState)).toEqual(initialState.error);
   });
 
-  it('should return the error value (randomState)', () => {
+  test('should return the error value (randomState)', () => {
     expect(data.getDeviceDataError(randomState)).toEqual(error);
   });
 });
@@ -177,11 +177,11 @@ describe('data reducers', () => {
     error: new Error('The time has come for these cookies....'),
   };
 
-  it('should return the initialState (undefined)', () => {
+  test('should return the initialState (undefined)', () => {
     expect(data.default(undefined, {})).toEqual(initialState);
   });
 
-  it('should handle the FETCH_DEVICE_DATA_MEASUREMENTS_REQUEST action (initialState)', () => {
+  test('should handle the FETCH_DEVICE_DATA_MEASUREMENTS_REQUEST action (initialState)', () => {
     const action = {
       type: data.FETCH_DEVICE_DATA_MEASUREMENTS_REQUEST,
       project: state.project,
@@ -196,7 +196,7 @@ describe('data reducers', () => {
     expect(data.default(initialState, action)).toEqual(expectedState);
   });
 
-  it('should handle the FETCH_DEVICE_DATA_MEASUREMENTS_REQUEST action (state)', () => {
+  test('should handle the FETCH_DEVICE_DATA_MEASUREMENTS_REQUEST action (state)', () => {
     const project = 'jerryscript';
     const device = 'artik530';
     const action = {
@@ -213,7 +213,7 @@ describe('data reducers', () => {
     expect(data.default(state, action)).toEqual(expectedState);
   });
 
-  it('should handle the FETCH_DEVICE_DATA_MEASUREMENTS_SUCCESS action (initialState)', () => {
+  test('should handle the FETCH_DEVICE_DATA_MEASUREMENTS_SUCCESS action (initialState)', () => {
     const action = {
       type: data.FETCH_DEVICE_DATA_MEASUREMENTS_SUCCESS,
       project: state.project,
@@ -230,7 +230,7 @@ describe('data reducers', () => {
     expect(data.default(initialState, action)).toEqual(expectedState);
   });
 
-  it('should handle the FETCH_DEVICE_DATA_MEASUREMENTS_SUCCESS action (state)', () => {
+  test('should handle the FETCH_DEVICE_DATA_MEASUREMENTS_SUCCESS action (state)', () => {
     const project = 'jerryscript';
     const device = 'stm32';
     const measurements = [{ test: 'colibri.test.js', result: 'pass'}, { test: 'catchme.test.js', result: 'fail'}];
@@ -250,7 +250,7 @@ describe('data reducers', () => {
     expect(data.default(state, action)).toEqual(expectedState);
   });
 
-  it('should handle the FETCH_DEVICE_DATA_MEASUREMENTS_FAILURE action (initialState)', () => {
+  test('should handle the FETCH_DEVICE_DATA_MEASUREMENTS_FAILURE action (initialState)', () => {
     const action = {
       type: data.FETCH_DEVICE_DATA_MEASUREMENTS_FAILURE,
       project: state.project,
@@ -267,7 +267,7 @@ describe('data reducers', () => {
     expect(data.default(initialState, action)).toEqual(expectedState);
   });
 
-  it('should handle the FETCH_DEVICE_DATA_MEASUREMENTS_FAILURE action (state)', () => {
+  test('should handle the FETCH_DEVICE_DATA_MEASUREMENTS_FAILURE action (state)', () => {
     const project = 'iotjs';
     const device = 'stm32';
     const error = new Error('Another bite to dust');
@@ -287,14 +287,14 @@ describe('data reducers', () => {
     expect(data.default(state, action)).toEqual(expectedState);
   });
 
-  it('should handle the RESET_DEVICE_DATA_STATE action (initialState)', () => {
+  test('should handle the RESET_DEVICE_DATA_STATE action (initialState)', () => {
     const action = {
       type: data.RESET_DEVICE_DATA_STATE,
     };
     expect(data.default(initialState, action)).toEqual(initialState);
   });
 
-  it('should handle the RESET_DEVICE_DATA_STATE action (state)', () => {
+  test('should handle the RESET_DEVICE_DATA_STATE action (state)', () => {
     const action = {
       type: data.RESET_DEVICE_DATA_STATE,
     };

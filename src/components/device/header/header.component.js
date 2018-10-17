@@ -18,11 +18,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 export default class Header extends React.Component {
-
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     const { device, project } = this.props;
     const imgStyle = {
@@ -33,7 +28,7 @@ export default class Header extends React.Component {
       <div className="row my-2">
         <div className="col-auto">
           <img
-            src={require(`../../../../public/images/devices/${device.key}.jpg`)}
+            src={require(`../../../assets/devices/${device.key}.jpg`)}
             className="img img-fluid rounded"
             style={imgStyle}
             alt={device.name}
@@ -42,15 +37,15 @@ export default class Header extends React.Component {
         <div className="col">
           <p className="mt-1">
             <span className="font-weight-bold">Test device: </span>
-            <a href={device.link} target="_blank">{device.name}</a>
+            <a href={device.link} target="_blank" rel="noopener noreferrer">{device.name}</a>
           </p>
           <p>
             <span className="font-weight-bold">Platform: </span>
-            <a href={device.platform.link} target="_blank">{device.platform.name}</a>
+            <a href={device.platform.link} target="_blank" rel="noopener noreferrer">{device.platform.name}</a>
           </p>
           <p>
             <span className="font-weight-bold">Repository: </span>
-            <a href={project.url} target="_blank">{project.name} master branch</a>
+            <a href={project.url} target="_blank" rel="noopener noreferrer">{project.name} master branch</a>
           </p>
         </div>
       </div>

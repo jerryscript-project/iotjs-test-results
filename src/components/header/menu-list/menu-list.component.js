@@ -19,11 +19,6 @@ import PropTypes from 'prop-types';
 import MenuListItem from '../menu-list-item/menu-list-item.component';
 
 export default class MenuList extends React.Component {
-
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     const { items, homeProject } = this.props;
     const list = items.map((i, index) => {

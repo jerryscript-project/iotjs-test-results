@@ -14,26 +14,26 @@
  * limitations under the License.
  */
 
-import * as pagination from '../../../state/device/pagination';
-import initialState from '../../../state/device/pagination/initial.state';
+import * as pagination from './';
+import initialState from './initial.state';
 import { pagination as constants } from '../../../constants';
 
 describe('pagination action creators', () => {
-  it('increaseDevicePagination', () => {
+  test('increaseDevicePagination', () => {
     const expectedAction = {
       type: pagination.INCREASE_DEVICE_PAGINATION,
     };
     expect(pagination.increaseDevicePagination()).toEqual(expectedAction);
   });
 
-  it('decreaseDevicePagination', () => {
+  test('decreaseDevicePagination', () => {
     const expectedAction = {
       type: pagination.DECREASE_DEVICE_PAGINATION,
     };
     expect(pagination.decreaseDevicePagination()).toEqual(expectedAction);
   });
 
-  it('setDevicePagination', () => {
+  test('setDevicePagination', () => {
     const selected = 3;
     const start = 30;
     const end = 49;
@@ -46,7 +46,7 @@ describe('pagination action creators', () => {
     expect(pagination.setDevicePagination(selected, start, end)).toEqual(expectedAction);
   });
 
-  it('resetDevicePagination', () => {
+  test('resetDevicePagination', () => {
     const expectedAction = {
       type: pagination.RESET_DEVICE_PAGINATION,
     };
@@ -73,27 +73,27 @@ describe('pagination selectors', () => {
     },
   };
 
-  it('should return the selected value (initialState)', () => {
+  test('should return the selected value (initialState)', () => {
     expect(pagination.getDevicePaginationSelected(initState)).toEqual(initialState.selected);
   });
 
-  it('should return the selected value (randomState)', () => {
+  test('should return the selected value (randomState)', () => {
     expect(pagination.getDevicePaginationSelected(randomState)).toEqual(selected);
   });
 
-  it('should return the start value (initialState)', () => {
+  test('should return the start value (initialState)', () => {
     expect(pagination.getDevicePaginationStart(initState)).toEqual(initialState.start);
   });
 
-  it('should return the start value (randomState)', () => {
+  test('should return the start value (randomState)', () => {
     expect(pagination.getDevicePaginationStart(randomState)).toEqual(start);
   });
 
-  it('should return the end value (initialState)', () => {
+  test('should return the end value (initialState)', () => {
     expect(pagination.getDevicePaginationEnd(initState)).toEqual(initialState.end);
   });
 
-  it('should return the end value (randomState)', () => {
+  test('should return the end value (randomState)', () => {
     expect(pagination.getDevicePaginationEnd(randomState)).toEqual(end);
   });
 });
@@ -105,11 +105,11 @@ describe('pagination reducers', () => {
     end: initialState.end + (10 * constants.numberOfTestPerPage),
   };
 
-  it('should return the initialState (undefined)', () => {
+  test('should return the initialState (undefined)', () => {
     expect(pagination.default(undefined, {})).toEqual(initialState);
   });
 
-  it('should handle the INCREASE_DEVICE_PAGINATION action (initialState)', () => {
+  test('should handle the INCREASE_DEVICE_PAGINATION action (initialState)', () => {
     const action = {
       type: pagination.INCREASE_DEVICE_PAGINATION,
     };
@@ -121,7 +121,7 @@ describe('pagination reducers', () => {
     expect(pagination.default(initialState, action)).toEqual(expectedState);
   });
 
-  it('should handle the INCREASE_DEVICE_PAGINATION action (state)', () => {
+  test('should handle the INCREASE_DEVICE_PAGINATION action (state)', () => {
     const action = {
       type: pagination.INCREASE_DEVICE_PAGINATION,
     };
@@ -133,14 +133,14 @@ describe('pagination reducers', () => {
     expect(pagination.default(state, action)).toEqual(expectedState);
   });
 
-  it('should handle the DECREASE_DEVICE_PAGINATION action (initialState)', () => {
+  test('should handle the DECREASE_DEVICE_PAGINATION action (initialState)', () => {
     const action = {
       type: pagination.DECREASE_DEVICE_PAGINATION,
     };
     expect(pagination.default(initialState, action)).toEqual(initialState);
   });
 
-  it('should handle the DECREASE_DEVICE_PAGINATION action (state)', () => {
+  test('should handle the DECREASE_DEVICE_PAGINATION action (state)', () => {
     const action = {
       type: pagination.DECREASE_DEVICE_PAGINATION,
     };
@@ -152,7 +152,7 @@ describe('pagination reducers', () => {
     expect(pagination.default(state, action)).toEqual(expectedState);
   });
 
-  it('should handle the SET_DEVICE_PAGINATION action (initialState)', () => {
+  test('should handle the SET_DEVICE_PAGINATION action (initialState)', () => {
     const selected = 4;
     const start = initialState.start + (4 * constants.numberOfTestPerPage);
     const end = initialState.end + (4 * constants.numberOfTestPerPage);
@@ -170,7 +170,7 @@ describe('pagination reducers', () => {
     expect(pagination.default(initialState, action)).toEqual(expectedState);
   });
 
-  it('should handle the SET_DEVICE_PAGINATION action (state)', () => {
+  test('should handle the SET_DEVICE_PAGINATION action (state)', () => {
     const selected = 12;
     const start = initialState.start + (12 * constants.numberOfTestPerPage);
     const end = initialState.end + (12 * constants.numberOfTestPerPage);
@@ -188,14 +188,14 @@ describe('pagination reducers', () => {
     expect(pagination.default(state, action)).toEqual(expectedState);
   });
 
-  it('should handle the RESET_DEVICE_PAGINATION action (initialState)', () => {
+  test('should handle the RESET_DEVICE_PAGINATION action (initialState)', () => {
     const action = {
       type: pagination.RESET_DEVICE_PAGINATION,
     };
     expect(pagination.default(initialState, action)).toEqual(initialState);
   });
 
-  it('should handle the RESET_DEVICE_PAGINATION action (state)', () => {
+  test('should handle the RESET_DEVICE_PAGINATION action (state)', () => {
     const action = {
       type: pagination.RESET_DEVICE_PAGINATION,
     };

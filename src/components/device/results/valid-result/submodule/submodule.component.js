@@ -18,11 +18,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 export default class Submodule extends React.Component {
-
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     const { data, project } = this.props;
     const commitStyle = {
@@ -39,7 +34,7 @@ export default class Submodule extends React.Component {
         </span>
 
         <span className="ml-2 mr-4 text-center" style={commitStyle}>
-          <a target="_blank" href={`${project.url}/commit/${data.commit}`}>
+          <a target="_blank" rel="noopener noreferrer" href={`${project.url}/commit/${data.commit}`}>
             {data.commit.substring(0, 6)}
           </a>
         </span>

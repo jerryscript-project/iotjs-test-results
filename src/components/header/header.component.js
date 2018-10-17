@@ -16,18 +16,13 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import FontAwesomeIcon from '@fortawesome/react-fontawesome';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGithub } from '@fortawesome/fontawesome-free-brands';
 import ProjectSwitcher from './project-switcher/project-switcher.container';
 import MenuList from './menu-list/menu-list.component';
 import { devices, projects } from '../../constants';
 
 export default class Header extends React.Component {
-
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     const { match, location } = this.props;
     const currentProject = projects[match.params.project];
@@ -59,7 +54,7 @@ export default class Header extends React.Component {
               <MenuList items={devices} homeProject={currentProject.key} />
 
               <div className="ml-lg-auto">
-                <a className="nav-link text-light px-0" target="_blank" href={currentProject.url}>
+                <a className="nav-link text-light px-0" target="_blank" rel="noopener noreferrer" href={currentProject.url}>
                   {currentProject.name} <FontAwesomeIcon icon={faGithub} />
                 </a>
               </div>

@@ -19,11 +19,6 @@ import PropTypes from 'prop-types';
 import { projects } from '../../../../constants';
 
 export default class InfoModal extends React.Component {
-
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     const { project } = this.props;
 
@@ -123,7 +118,8 @@ export default class InfoModal extends React.Component {
                   </p>
                   <img
                     className="img-fluid mx-auto d-block"
-                    src={require('../../../../../public/images/info/average_memory_consumtion.png')} />
+                    alt="Average memory consumption"
+                    src={require('../../../../assets/info/average_memory_consumtion.png')} />
                   <p>
                     The average memory chart shows the average memory consumption which is computed by adding the memory
                     allocated by malloc and JerryScript plus the stack size.
@@ -141,7 +137,8 @@ export default class InfoModal extends React.Component {
                     </p>
                   <img
                     className="img-fluid mx-auto d-block"
-                    src={require('../../../../../public/images/info/minimum_system_requirement.png')} />
+                    alt="Minimum system requirement"
+                    src={require('../../../../assets/info/minimum_system_requirement.png')} />
                   <p>
                     The minimum memory requirement chart shows the minimum memory settings of the test system when all
                     tests are executed. Any system with these resources are capable of running with the test system:

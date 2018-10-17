@@ -39,11 +39,11 @@ export default class TestListTableBody extends React.Component {
     this.getMemory = data => {
       const memStats = ['n/a', 'n/a', 'n/a', 'n/a'];
 
-      if (data.result != 'pass' || !('memstat' in data))
+      if (data.result !== 'pass' || !('memstat' in data))
         return memStats;
 
       ['heap-jerry', 'heap-system', 'stack', 'change'].forEach((area, i) => {
-        const postfix = (area == 'change') ? '%' : 'B';
+        const postfix = (area === 'change') ? '%' : 'B';
         memStats[i] = isNaN(parseInt(data.memstat[area])) ? 'n/a' : data.memstat[area] + postfix;
       });
 

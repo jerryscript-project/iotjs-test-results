@@ -18,11 +18,6 @@ import React from 'react';
 import MomentPropTypes from 'react-moment-proptypes';
 
 export default class InvalidResult extends React.Component {
-
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     const { date } = this.props;
     const dateStle = {

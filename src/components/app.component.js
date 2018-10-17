@@ -23,11 +23,6 @@ import Overview from './overview/overview.component';
 import Device from './device/device.container';
 
 export default class App extends React.Component {
-
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     const { match } = this.props;
 

@@ -19,11 +19,6 @@ import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 
 export default class MenuListItem extends React.Component {
-
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     const { title, link } = this.props;
 

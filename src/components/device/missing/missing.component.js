@@ -16,15 +16,10 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import FontAwesomeIcon from '@fortawesome/react-fontawesome';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCommentAlt } from '@fortawesome/fontawesome-free-regular';
 
 export default class Missing extends React.Component {
-
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     const { deviceName, projectName } = this.props;
 

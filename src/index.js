@@ -20,8 +20,10 @@ import { Provider } from 'react-redux';
 import { HashRouter } from 'react-router-dom';
 import routes from './routes';
 import configureStore from './state/configure.store';
+import 'bootstrap';
+import 'popper.js';
 
-import '../public/style/index.scss';
+import './style/index.scss';
 
 const store = configureStore();
 

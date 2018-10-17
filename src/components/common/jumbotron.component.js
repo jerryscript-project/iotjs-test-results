@@ -18,11 +18,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 export default class Jumbotron extends React.Component {
-
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     const { children } = this.props;
 

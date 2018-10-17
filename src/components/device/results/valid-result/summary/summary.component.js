@@ -16,15 +16,10 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import FontAwesomeIcon from '@fortawesome/react-fontawesome';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheckCircle, faTimesCircle, faArrowAltCircleRight, faClock } from '@fortawesome/fontawesome-free-regular';
 
 export default class Summary extends React.Component {
-
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     const { tests } = this.props;
     const { pass, fail, skip, timeout } = tests.reduce((acc, t) => {

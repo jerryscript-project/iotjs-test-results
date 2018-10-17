@@ -21,11 +21,6 @@ import CommitTable from '../commit-table/commit-table.component';
 import TestList from '../test-list/test-list.component';
 
 export default class Details extends React.Component {
-
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     const { data } = this.props;
 

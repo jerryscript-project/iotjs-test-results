@@ -16,16 +16,11 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import FontAwesomeIcon from '@fortawesome/react-fontawesome';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faInfoCircle } from '@fortawesome/fontawesome-free-solid';
 import InfoModal from '../info-modal/info-modal.component';
 
 export default class Info extends React.Component {
-
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     const { project } = this.props;
 

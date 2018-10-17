@@ -17,15 +17,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import FontAwesomeIcon from '@fortawesome/react-fontawesome';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheckCircle, faTimesCircle, faArrowAltCircleRight } from '@fortawesome/fontawesome-free-regular';
 
 export default class DeviceListItem extends React.Component {
-
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     const { name, data } = this.props;
 
