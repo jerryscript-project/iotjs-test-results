@@ -14,8 +14,17 @@
  * limitations under the License.
  */
 
-import initialState from './initial.state';
+import { createAction, handleActions } from 'redux-actions';
 import { deviceResultDatabase } from '../../../firebase';
+
+// Initial state
+export const initialState = {
+  loading: true,
+  project: '',
+  device: '',
+  measurements: [],
+  error: null,
+};
 
 // Action types
 export const FETCH_DEVICE_DATA_MEASUREMENTS_REQUEST = 'FETCH_DEVICE_DATA_MEASUREMENTS_REQUEST';
@@ -24,29 +33,57 @@ export const FETCH_DEVICE_DATA_MEASUREMENTS_FAILURE = 'FETCH_DEVICE_DATA_MEASURE
 export const RESET_DEVICE_DATA_STATE = 'RESET_DEVICE_DATA_STATE';
 
 // Action creators
-export const fetchDeviceDataMeasurementsRequest = (project, device) => ({
-  type: FETCH_DEVICE_DATA_MEASUREMENTS_REQUEST,
-  project,
-  device,
-});
+export const fetchDeviceDataMeasurementsRequest = createAction(
+  FETCH_DEVICE_DATA_MEASUREMENTS_REQUEST,
+  (project, device) => ({ project, device })
+);
 
-export const fetchDeviceDataMeasurementsSuccess = (project, device, measurements) => ({
-  type: FETCH_DEVICE_DATA_MEASUREMENTS_SUCCESS,
-  project,
-  device,
-  measurements,
-});
+export const fetchDeviceDataMeasurementsSuccess = createAction(
+  FETCH_DEVICE_DATA_MEASUREMENTS_SUCCESS,
+  (project, device, measurements) => ({ project, device, measurements })
+);
 
-export const fetchDeviceDataMeasurementsFailure = (project, device, error) => ({
-  type: FETCH_DEVICE_DATA_MEASUREMENTS_FAILURE,
-  project,
-  device,
-  error,
-});
+export const fetchDeviceDataMeasurementsFailure = createAction(
+  FETCH_DEVICE_DATA_MEASUREMENTS_FAILURE,
+  (project, device, error) => ({ project, device, error })
+);
 
-export const resetDeviceDataState = () => ({
-  type: RESET_DEVICE_DATA_STATE,
-});
+export const resetDeviceDataState = createAction(
+  RESET_DEVICE_DATA_STATE
+);
+
+// Selectors
+export const getDeviceDataLoading = state => state.device.data.loading;
+export const getDeviceDataMeasurements = state => state.device.data.measurements;
+export const getDeviceDataError = state => state.device.data.error;
+
+// Reducer
+export const reducer = handleActions(
+  {
+    [fetchDeviceDataMeasurementsRequest]: (state, { payload: { project, device } }) => ({
+      ...state,
+      loading: true,
+      project,
+      device
+    }),
+    [fetchDeviceDataMeasurementsSuccess]: (state, { payload: { project, device, measurements } }) => ({
+      ...state,
+      loading: false,
+      project,
+      device,
+      measurements
+    }),
+    [fetchDeviceDataMeasurementsFailure]: (state, { payload: { project, device, error } }) => ({
+      ...state,
+      loading: false,
+      project,
+      device,
+      error
+    }),
+    [resetDeviceDataState]: () => initialState
+  },
+  initialState
+);
 
 // Async action creators
 export const fetchDeviceDataMeasurements = (project, device) => dispatch => {
@@ -62,42 +99,4 @@ export const fetchDeviceDataMeasurements = (project, device) => dispatch => {
   }, error => {
     dispatch(fetchDeviceDataMeasurementsFailure(project, device, error));
   });
-};
-
-// Selectors
-export const getDeviceDataLoading = state => state.device.data.loading;
-export const getDeviceDataMeasurements = state => state.device.data.measurements;
-export const getDeviceDataError = state => state.device.data.error;
-
-// Reducers
-export default (state = initialState, action = {}) => {
-  switch (action.type) {
-    case FETCH_DEVICE_DATA_MEASUREMENTS_REQUEST:
-      return {
-        ...state,
-        loading: true,
-        project: action.project,
-        device: action.device,
-      };
-    case FETCH_DEVICE_DATA_MEASUREMENTS_SUCCESS:
-      return {
-        ...state,
-        loading: false,
-        project: action.project,
-        device: action.device,
-        measurements: action.measurements,
-      };
-    case FETCH_DEVICE_DATA_MEASUREMENTS_FAILURE:
-      return {
-        ...state,
-        loading: false,
-        project: action.project,
-        device: action.device,
-        error: action.error,
-      };
-    case RESET_DEVICE_DATA_STATE:
-      return initialState;
-    default:
-      return state;
-  }
 };

@@ -15,9 +15,9 @@
  */
 
 import { combineReducers } from 'redux';
-import data from './data';
-import datepicker from './datepicker';
-import pagination from './pagination';
+import { reducer as data } from './data';
+import { reducer as datepicker } from './datepicker';
+import { reducer as pagination } from './pagination';
 
 export default combineReducers({
   data,

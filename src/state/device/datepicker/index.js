@@ -14,44 +14,40 @@
  * limitations under the License.
  */
 
-import initialState from './initial.state';
+import { createAction, handleActions } from 'redux-actions';
+
+// Initial state
+export const initialState = {
+  focusedInput: null,
+  startDate: null,
+  endDate: null,
+};
 
 // Actions types
 export const SET_DEVICE_DATEPICKER_DATES = 'SET_DEVICE_DATEPICKER_DATES';
 export const SET_DEVICE_DATEPICKER_FOCUSED_INPUT = 'SET_DEVICE_DATEPICKER_FOCUSED_INPUT';
 
 // Action creators
-export const setDeviceDatepickerDates = (startDate, endDate) => ({
-  type: SET_DEVICE_DATEPICKER_DATES,
-  startDate,
-  endDate,
-});
+export const setDeviceDatepickerDates = createAction(
+  SET_DEVICE_DATEPICKER_DATES,
+  (startDate, endDate) => ({ startDate, endDate })
+);
 
-export const setDeviceDatepickerFocusedInput = focusedInput => ({
-  type: SET_DEVICE_DATEPICKER_FOCUSED_INPUT,
-  focusedInput,
-});
+export const setDeviceDatepickerFocusedInput = createAction(
+  SET_DEVICE_DATEPICKER_FOCUSED_INPUT,
+  focusedInput => focusedInput
+);
 
 // Selectors
 export const getDeviceDatepickerStartDate = state => state.device.datepicker.startDate;
 export const getDeviceDatepickerEndDate = state => state.device.datepicker.endDate;
 export const getDeviceDatepickerFocusedInput = state => state.device.datepicker.focusedInput;
 
-// Reducers
-export default (state = initialState, action = {}) => {
-  switch (action.type) {
-    case SET_DEVICE_DATEPICKER_DATES:
-      return {
-        ...state,
-        startDate: action.startDate,
-        endDate: action.endDate,
-      };
-    case SET_DEVICE_DATEPICKER_FOCUSED_INPUT:
-      return {
-        ...state,
-        focusedInput: action.focusedInput,
-      };
-    default:
-      return state;
-  }
-};
+// Reducer
+export const reducer = handleActions(
+  {
+    [setDeviceDatepickerDates]: (state, { payload: { startDate, endDate } }) => ({ ...state, startDate, endDate }),
+    [setDeviceDatepickerFocusedInput]: (state, { payload: focusedInput }) => ({ ...state, focusedInput })
+  },
+  initialState
+);

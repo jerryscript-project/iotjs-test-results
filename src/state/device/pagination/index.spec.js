@@ -15,20 +15,19 @@
  */
 
 import * as pagination from './';
-import initialState from './initial.state';
 import { pagination as constants } from '../../../constants';
 
 describe('pagination action creators', () => {
   test('increaseDevicePagination', () => {
     const expectedAction = {
-      type: pagination.INCREASE_DEVICE_PAGINATION,
+      type: pagination.INCREASE_DEVICE_PAGINATION
     };
     expect(pagination.increaseDevicePagination()).toEqual(expectedAction);
   });
 
   test('decreaseDevicePagination', () => {
     const expectedAction = {
-      type: pagination.DECREASE_DEVICE_PAGINATION,
+      type: pagination.DECREASE_DEVICE_PAGINATION
     };
     expect(pagination.decreaseDevicePagination()).toEqual(expectedAction);
   });
@@ -39,16 +38,14 @@ describe('pagination action creators', () => {
     const end = 49;
     const expectedAction = {
       type: pagination.SET_DEVICE_PAGINATION,
-      selected,
-      start,
-      end,
+      payload: { selected, start, end }
     };
     expect(pagination.setDevicePagination(selected, start, end)).toEqual(expectedAction);
   });
 
   test('resetDevicePagination', () => {
     const expectedAction = {
-      type: pagination.RESET_DEVICE_PAGINATION,
+      type: pagination.RESET_DEVICE_PAGINATION
     };
     expect(pagination.resetDevicePagination()).toEqual(expectedAction);
   });
@@ -63,18 +60,18 @@ describe('pagination selectors', () => {
       pagination: {
         selected,
         start,
-        end,
-      },
-    },
+        end
+      }
+    }
   };
   const initState = {
     device: {
-      pagination: {...initialState},
-    },
+      pagination: { ...pagination.initialState }
+    }
   };
 
   test('should return the selected value (initialState)', () => {
-    expect(pagination.getDevicePaginationSelected(initState)).toEqual(initialState.selected);
+    expect(pagination.getDevicePaginationSelected(initState)).toEqual(pagination.initialState.selected);
   });
 
   test('should return the selected value (randomState)', () => {
@@ -82,7 +79,7 @@ describe('pagination selectors', () => {
   });
 
   test('should return the start value (initialState)', () => {
-    expect(pagination.getDevicePaginationStart(initState)).toEqual(initialState.start);
+    expect(pagination.getDevicePaginationStart(initState)).toEqual(pagination.initialState.start);
   });
 
   test('should return the start value (randomState)', () => {
@@ -90,7 +87,7 @@ describe('pagination selectors', () => {
   });
 
   test('should return the end value (initialState)', () => {
-    expect(pagination.getDevicePaginationEnd(initState)).toEqual(initialState.end);
+    expect(pagination.getDevicePaginationEnd(initState)).toEqual(pagination.initialState.end);
   });
 
   test('should return the end value (randomState)', () => {
@@ -101,104 +98,92 @@ describe('pagination selectors', () => {
 describe('pagination reducers', () => {
   const state = {
     selected: 10,
-    start: initialState.start + (10 * constants.numberOfTestPerPage),
-    end: initialState.end + (10 * constants.numberOfTestPerPage),
+    start: pagination.initialState.start + (10 * constants.numberOfTestPerPage),
+    end: pagination.initialState.end + (10 * constants.numberOfTestPerPage)
   };
 
   test('should return the initialState (undefined)', () => {
-    expect(pagination.default(undefined, {})).toEqual(initialState);
+    expect(pagination.reducer(undefined, {})).toEqual(pagination.initialState);
   });
 
   test('should handle the INCREASE_DEVICE_PAGINATION action (initialState)', () => {
     const action = {
-      type: pagination.INCREASE_DEVICE_PAGINATION,
+      type: pagination.INCREASE_DEVICE_PAGINATION
     };
     const expectedState = {
       selected: 1,
-      start: initialState.start + constants.numberOfTestPerPage,
-      end: initialState.end + constants.numberOfTestPerPage,
+      start: pagination.initialState.start + constants.numberOfTestPerPage,
+      end: pagination.initialState.end + constants.numberOfTestPerPage
     };
-    expect(pagination.default(initialState, action)).toEqual(expectedState);
+    expect(pagination.reducer(pagination.initialState, action)).toEqual(expectedState);
   });
 
   test('should handle the INCREASE_DEVICE_PAGINATION action (state)', () => {
     const action = {
-      type: pagination.INCREASE_DEVICE_PAGINATION,
+      type: pagination.INCREASE_DEVICE_PAGINATION
     };
     const expectedState = {
       selected: 11,
       start: state.start + constants.numberOfTestPerPage,
-      end: state.end + constants.numberOfTestPerPage,
+      end: state.end + constants.numberOfTestPerPage
     };
-    expect(pagination.default(state, action)).toEqual(expectedState);
+    expect(pagination.reducer(state, action)).toEqual(expectedState);
   });
 
   test('should handle the DECREASE_DEVICE_PAGINATION action (initialState)', () => {
     const action = {
-      type: pagination.DECREASE_DEVICE_PAGINATION,
+      type: pagination.DECREASE_DEVICE_PAGINATION
     };
-    expect(pagination.default(initialState, action)).toEqual(initialState);
+    expect(pagination.reducer(pagination.initialState, action)).toEqual(pagination.initialState);
   });
 
   test('should handle the DECREASE_DEVICE_PAGINATION action (state)', () => {
     const action = {
-      type: pagination.DECREASE_DEVICE_PAGINATION,
+      type: pagination.DECREASE_DEVICE_PAGINATION
     };
     const expectedState = {
       selected: 9,
       start: state.start - constants.numberOfTestPerPage,
-      end: state.end - constants.numberOfTestPerPage,
+      end: state.end - constants.numberOfTestPerPage
     };
-    expect(pagination.default(state, action)).toEqual(expectedState);
+    expect(pagination.reducer(state, action)).toEqual(expectedState);
   });
 
   test('should handle the SET_DEVICE_PAGINATION action (initialState)', () => {
     const selected = 4;
-    const start = initialState.start + (4 * constants.numberOfTestPerPage);
-    const end = initialState.end + (4 * constants.numberOfTestPerPage);
+    const start = pagination.initialState.start + (4 * constants.numberOfTestPerPage);
+    const end = pagination.initialState.end + (4 * constants.numberOfTestPerPage);
     const action = {
       type: pagination.SET_DEVICE_PAGINATION,
-      selected,
-      start,
-      end,
+      payload: { selected, start, end }
     };
-    const expectedState = {
-      selected,
-      start,
-      end,
-    };
-    expect(pagination.default(initialState, action)).toEqual(expectedState);
+    const expectedState = { selected, start, end };
+    expect(pagination.reducer(pagination.initialState, action)).toEqual(expectedState);
   });
 
   test('should handle the SET_DEVICE_PAGINATION action (state)', () => {
     const selected = 12;
-    const start = initialState.start + (12 * constants.numberOfTestPerPage);
-    const end = initialState.end + (12 * constants.numberOfTestPerPage);
+    const start = pagination.initialState.start + (12 * constants.numberOfTestPerPage);
+    const end = pagination.initialState.end + (12 * constants.numberOfTestPerPage);
     const action = {
       type: pagination.SET_DEVICE_PAGINATION,
-      selected,
-      start,
-      end,
+      payload: { selected, start, end }
     };
-    const expectedState = {
-      selected,
-      start,
-      end,
-    };
-    expect(pagination.default(state, action)).toEqual(expectedState);
+    const expectedState = { selected, start, end };
+    expect(pagination.reducer(state, action)).toEqual(expectedState);
   });
 
   test('should handle the RESET_DEVICE_PAGINATION action (initialState)', () => {
     const action = {
-      type: pagination.RESET_DEVICE_PAGINATION,
+      type: pagination.RESET_DEVICE_PAGINATION
     };
-    expect(pagination.default(initialState, action)).toEqual(initialState);
+    expect(pagination.reducer(pagination.initialState, action)).toEqual(pagination.initialState);
   });
 
   test('should handle the RESET_DEVICE_PAGINATION action (state)', () => {
     const action = {
-      type: pagination.RESET_DEVICE_PAGINATION,
+      type: pagination.RESET_DEVICE_PAGINATION
     };
-    expect(pagination.default(state, action)).toEqual(initialState);
+    expect(pagination.reducer(state, action)).toEqual(pagination.initialState);
   });
 });
