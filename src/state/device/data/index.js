@@ -15,7 +15,6 @@
  */
 
 import { createAction, handleActions } from 'redux-actions';
-import { deviceResultDatabase } from '../../../firebase';
 
 // Initial state
 export const initialState = {
@@ -86,10 +85,10 @@ export const reducer = handleActions(
 );
 
 // Async action creators
-export const fetchDeviceDataMeasurements = (project, device) => dispatch => {
+export const fetchDeviceDataMeasurements = (project, device) => (dispatch, getState, { fire }) => {
   dispatch(fetchDeviceDataMeasurementsRequest(project, device));
 
-  deviceResultDatabase(project, device).then(snapshot => {
+  fire.deviceResultDatabase(project, device).then(snapshot => {
     let measurements = [];
     snapshot.forEach(child => {
       measurements = [...measurements, child.val()];

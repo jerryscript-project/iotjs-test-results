@@ -18,14 +18,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { HashRouter } from 'react-router-dom';
+import { store } from './state/configure.store';
 import routes from './routes';
-import configureStore from './state/configure.store';
 import 'bootstrap';
 import 'popper.js';
 
 import './style/index.scss';
-
-const store = configureStore();
 
 ReactDOM.render(
   <Provider store={store}>

@@ -17,11 +17,18 @@
 import { createStore, applyMiddleware } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
-import RootReducer from './root.reducer';
+import * as fire from '../side.effects/firebase';
+import rootReducer from './root.reducer';
 
-export default () => {
-  return createStore(
-    RootReducer,
-    process.env.NODE_ENV === 'development' ? composeWithDevTools(applyMiddleware(thunk)) : applyMiddleware(thunk)
-  );
-};
+const isDevelopment = process.env.NODE_ENV === 'development';
+
+const middlewares = applyMiddleware(
+  thunk.withExtraArgument({
+    fire
+  })
+);
+
+export const store = createStore(
+  rootReducer,
+  isDevelopment ? composeWithDevTools(middlewares) : middlewares
+);

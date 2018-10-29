@@ -28,10 +28,8 @@ const config = {
 
 firebase.initializeApp(config);
 
-export const deviceLastResultDatabase = (project, device) => {
-  return firebase.database().ref(`${project}/${device}/`).limitToLast(1).once('value');
-};
+export const deviceLastResultDatabase = (project, device) =>
+  firebase.database().ref(`${project}/${device}/`).limitToLast(1).once('value');
 
-export const deviceResultDatabase = (project, device) => {
-  return firebase.database().ref().child(`${project}/${device}/`).once('value');
-};
+export const deviceResultDatabase = (project, device) =>
+  firebase.database().ref().child(`${project}/${device}/`).once('value');
