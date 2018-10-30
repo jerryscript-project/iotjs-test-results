@@ -14,23 +14,6 @@
  * limitations under the License.
  */
 
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
-import { ConnectedRouter } from 'connected-react-router';
-import { store } from './state/configure.store';
-import { history } from './side.effects/history';
-import routes from './routes';
-import 'bootstrap';
-import 'popper.js';
+import { createHashHistory } from 'history';
 
-import './style/index.scss';
-
-ReactDOM.render(
-  <Provider store={store}>
-    <ConnectedRouter history={history}>
-      {routes}
-    </ConnectedRouter>
-  </Provider>,
-  document.getElementById('root')
-);
+export const history = createHashHistory();

@@ -16,19 +16,22 @@
 
 import { createStore, applyMiddleware } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
+import { connectRouter, routerMiddleware } from 'connected-react-router';
 import thunk from 'redux-thunk';
 import * as fire from '../side.effects/firebase';
+import { history } from '../side.effects/history';
 import rootReducer from './root.reducer';
 
 const isDevelopment = process.env.NODE_ENV === 'development';
 
 const middlewares = applyMiddleware(
+  routerMiddleware(history),
   thunk.withExtraArgument({
     fire
   })
 );
 
 export const store = createStore(
-  rootReducer,
+  connectRouter(history)(rootReducer),
   isDevelopment ? composeWithDevTools(middlewares) : middlewares
 );
