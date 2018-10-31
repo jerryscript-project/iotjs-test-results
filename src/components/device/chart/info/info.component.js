@@ -17,7 +17,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faInfoCircle } from '@fortawesome/fontawesome-free-solid';
 import InfoModal from '../info-modal/info-modal.component';
 
 export default class Info extends React.Component {
@@ -29,7 +28,7 @@ export default class Info extends React.Component {
         <div className="col">
 
           <div className="btn btn-link" data-toggle="modal" data-target={`#${project.key}-chart-info`}>
-            <FontAwesomeIcon icon={faInfoCircle} />
+            <FontAwesomeIcon icon="info-circle" />
             <span className="ml-2">Information about the chart&apos;s data</span>
           </div>
 

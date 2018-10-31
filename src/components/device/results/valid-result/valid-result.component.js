@@ -17,7 +17,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronDown, faChevronUp } from '@fortawesome/fontawesome-free-solid';
 import Summary from './summary/summary.component';
 import Binary from './binary/binary.component';
 import Submodule from './submodule/submodule.component';
@@ -79,7 +78,7 @@ export default class ValidResult extends React.Component {
                 </span>
 
                 <div className="d-inline valid-collapse-button" onClick={this.handleCollapseClick}>
-                  <FontAwesomeIcon icon={collapsed ? faChevronDown : faChevronUp} />
+                  <FontAwesomeIcon icon={collapsed ? 'chevron-down' : 'chevron-up'} />
                 </div>
               </div>
             </div>

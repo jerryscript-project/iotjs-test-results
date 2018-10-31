@@ -17,7 +17,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSpinner } from '@fortawesome/fontawesome-free-solid';
 
 export default class Loading extends React.Component {
   render() {
@@ -27,7 +26,7 @@ export default class Loading extends React.Component {
       <div className="row mt-3">
         <div className="col">
           <div className="text-center h4">
-            <FontAwesomeIcon icon={faSpinner} spin />
+            <FontAwesomeIcon icon="spinner" spin />
             <span className="ml-3">Loading {deviceName} data...</span>
           </div>
         </div>

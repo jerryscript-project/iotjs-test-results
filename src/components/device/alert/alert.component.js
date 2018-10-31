@@ -17,7 +17,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faExclamationTriangle } from '@fortawesome/fontawesome-free-solid';
 
 export default class Alert extends React.Component {
   render() {
@@ -25,7 +24,7 @@ export default class Alert extends React.Component {
 
     return (
       <div className="alert alert-warning alert-dismissible fade show" role="alert">
-        <FontAwesomeIcon icon={faExclamationTriangle} />
+        <FontAwesomeIcon icon="exclamation-triangle" />
         <strong> {device.name} Error!</strong> {error.message}
         <button type="button" className="close" data-dismiss="alert" aria-label="Close">
           <span aria-hidden="true">&times;</span>

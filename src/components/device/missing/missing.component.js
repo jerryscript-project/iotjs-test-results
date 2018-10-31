@@ -17,7 +17,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCommentAlt } from '@fortawesome/fontawesome-free-regular';
 
 export default class Missing extends React.Component {
   render() {
@@ -27,7 +26,7 @@ export default class Missing extends React.Component {
       <div className="row mt-3">
         <div className="col">
           <div className="text-center h4">
-            <FontAwesomeIcon icon={faCommentAlt} />
+            <FontAwesomeIcon icon="comment-alt" />
             <span className="ml-3">
               There is no available data under {projectName} project on {deviceName} device
             </span>

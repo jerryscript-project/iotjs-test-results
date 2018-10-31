@@ -20,11 +20,15 @@ import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'connected-react-router';
 import { store } from './state/configure.store';
 import { history } from './side.effects/history';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import icons from './fontawesome';
 import routes from './routes';
 import 'bootstrap';
 import 'popper.js';
 
 import './style/index.scss';
+
+library.add(...icons);
 
 ReactDOM.render(
   <Provider store={store}>

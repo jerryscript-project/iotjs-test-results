@@ -17,7 +17,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheckCircle, faTimesCircle, faArrowAltCircleRight, faClock } from '@fortawesome/fontawesome-free-regular';
 
 export default class Summary extends React.Component {
   render() {
@@ -38,25 +37,25 @@ export default class Summary extends React.Component {
     return (
       <div className="d-flex justify-content-between text-left">
         <div className="text-success pl-0" style={boxStyle} title="Passed">
-          <FontAwesomeIcon icon={faCheckCircle} className="mr-1" />
+          <FontAwesomeIcon icon="check-circle" className="mr-1" />
           <span>
             {pass}
           </span>
         </div>
         <div className="text-info" style={boxStyle} title="Timeout">
-          <FontAwesomeIcon icon={faClock} className="mr-1" />
+          <FontAwesomeIcon icon="clock" className="mr-1" />
           <span>
             {timeout}
           </span>
         </div>
         <div className="text-danger" style={boxStyle} title="Failed">
-          <FontAwesomeIcon icon={faTimesCircle} className="mr-1" />
+          <FontAwesomeIcon icon="times-circle" className="mr-1" />
           <span>
             {fail}
           </span>
         </div>
         <span className="text-warning" style={boxStyle} title="Skipped">
-          <FontAwesomeIcon icon={faArrowAltCircleRight} className="mr-1" />
+          <FontAwesomeIcon icon="arrow-alt-circle-right" className="mr-1" />
           <span>
             {skip}
           </span>
