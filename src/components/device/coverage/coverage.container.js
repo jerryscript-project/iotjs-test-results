@@ -14,15 +14,21 @@
  * limitations under the License.
  */
 
-import { combineReducers } from 'redux';
-import { reducer as data } from './data';
-import { reducer as datepicker } from './datepicker';
-import { reducer as pagination } from './pagination';
-import { reducer as coverage} from './coverage';
+import { connect } from 'react-redux';
+import Coverage from './coverage.component';
+import {
+  getDeviceCoverageLoading, getDeviceCoverage,
+  getDeviceCoverageError,fetchDeviceCoverage
+} from '../../../state/device/coverage';
 
-export default combineReducers({
-  data,
-  datepicker,
-  pagination,
-  coverage
+const mapStateToProps = state => ({
+  load: getDeviceCoverageLoading(state),
+  coverage: getDeviceCoverage(state),
+  error: getDeviceCoverageError(state),
 });
+
+const mapDispatchToProps = dispatch => ({
+  fetchCoverage: (device) => dispatch(fetchDeviceCoverage(device)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Coverage);

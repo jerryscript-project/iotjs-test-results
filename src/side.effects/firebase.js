@@ -33,3 +33,6 @@ export const deviceLastResultDatabase = (project, device) =>
 
 export const deviceResultDatabase = (project, device) =>
   firebase.database().ref().child(`${project}/${device}/`).once('value');
+
+export const iotjsCoverageResults = (device) =>
+  firebase.database().ref().child(`coverage/iotjs/${device}/`).once('value');

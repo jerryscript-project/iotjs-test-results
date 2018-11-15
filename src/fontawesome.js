@@ -4,13 +4,16 @@ import {
   faSpinner,
   faCommentAlt,
   faChevronDown,
-  faChevronUp
+  faChevronUp,
+  faChartArea,
+  faSort
 } from '@fortawesome/fontawesome-free-solid';
 import {
   faCheckCircle,
   faTimesCircle,
   faArrowAltCircleRight,
-  faClock
+  faClock,
+  faCommentDots
 } from '@fortawesome/fontawesome-free-regular';
 import {
   faGithub
@@ -24,11 +27,14 @@ export default [
   faCommentAlt,
   faChevronDown,
   faChevronUp,
+  faChartArea,
+  faSort,
   // regular
   faCheckCircle,
   faTimesCircle,
   faArrowAltCircleRight,
   faClock,
+  faCommentDots,
   //brands
   faGithub
 ];

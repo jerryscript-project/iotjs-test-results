@@ -26,6 +26,7 @@ import Chart from './chart/chart.container';
 import Results from './results/results.container';
 import Pagination from './pagination/pagination.container';
 import { devices, projects } from '../../constants';
+import Coverage from './coverage/coverage.container';
 
 export default class Device extends React.Component {
 
@@ -102,11 +103,14 @@ export default class Device extends React.Component {
       }
 
       const renderData = this.getCompleteMeasurements();
+      const {match} = this.props;
+      const device = devices.find(d => d.key === match.params.device);
 
       return (
         <div className="device-content">
           <Chart measurements={renderData} project={project} />
           <hr />
+          <Coverage project={project} device={device}/>
           <Pagination length={renderData.length} />
           <Results measurements={renderData} project={project} />
         </div>
