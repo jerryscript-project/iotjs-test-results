@@ -18,6 +18,7 @@ import React from 'react';
 import ReactTable from 'react-table';
 import 'react-table/react-table.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Link } from 'react-router-dom'
 
 export default class CoverageTable extends React.Component {
   constructor(props) {
@@ -37,7 +38,6 @@ export default class CoverageTable extends React.Component {
     };
   }
   render () {
-
     const { coverage } = this.props;
     const rows = Object.keys(coverage).map((fileName)=> {
       const coverageInfo = ['Not reached by test suite'];
@@ -75,6 +75,12 @@ export default class CoverageTable extends React.Component {
             </span>
           ),
           accessor: "fileName",
+          Cell: fileName =>
+            <Link className={`btn btn-link file-name`}
+              to={`coverage/${fileName.value}`}
+              target="_blank" >
+              {fileName.value}
+            </Link>,
         },
         {
           Header: "Progress Bar",

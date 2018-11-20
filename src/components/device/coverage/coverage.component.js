@@ -16,8 +16,8 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
+import CoverageTable from './coverage-table/coverage-table.component'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import CoverageModal from './coverage-modal/coverage-modal.component';
 
 export default class Coverage extends React.Component {
   constructor(props) {
@@ -27,6 +27,42 @@ export default class Coverage extends React.Component {
       const { coverage } = this.props;
       return coverage;
     };
+
+    this.getBadgeColor = result => {
+      if (result >= 60) return 'success';
+      if (result >= 30) return 'warning';
+      return 'danger';
+    };
+
+    this.getCommitInfo = data => {
+      const info = data[0].submodules.iotjs;
+      const commit = {
+        fullHash: info.commit,
+        splitHash: info.commit.substring(0, 5),
+        date: info.date.substring(0, 10),
+        message: info.message,
+      };
+      return commit;
+    };
+
+    this.getLineInfo = data => {
+      const info = data[0].coverage_info;
+
+      const all = Object.keys(info).reduce((total, js) =>  {
+        return total + parseInt(info[js].coverage[1]);
+      }, 0);
+      const covered = Object.keys(info).reduce((total, js) =>  {
+        return total + parseInt(info[js].coverage[0]);
+      }, 0);
+      const percentage = Math.floor((covered / all) * 100);
+
+      const lineInfo = {
+        all: all,
+        covered: covered,
+        percentage: percentage,
+      };
+      return lineInfo;
+    };
   }
 
   componentDidMount() {
@@ -35,29 +71,74 @@ export default class Coverage extends React.Component {
   }
 
   render() {
-    const { project, device, load, error } = this.props;
+    const { project, device, location, load, error } = this.props;
 
-    if (project.key !== 'iotjs' || device.key === 'stm32f4dis' || load || error) {
+    if ((project.key !== 'iotjs' || device.key === 'stm32f4dis') && !load) {
+      return (
+        <div className="row mt-3">
+          <div className="col">
+            <div className="text-center h4">
+              <FontAwesomeIcon icon="comment-alt" />
+              <span className="ml-3">
+              Coverage info is not supported on {project.name} with {device.name} target
+              </span>
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    if (load || error) {
       return null;
     }
+
     const coverage = this.getCoverage();
+    const commit = this.getCommitInfo(coverage);
+    const lineInfo = this.getLineInfo(coverage);
+    const color = this.getBadgeColor(lineInfo.percentage);
+    const coverageTable = coverage[0].coverage_info;
 
-    return (
-      <div className="row mt-2 text-center">
-        <div className="col">
-
-          <div className="btn btn-link" data-toggle="modal" data-target="#coverage-info">
-            <FontAwesomeIcon icon="chart-area" />
-            <span className="ml-2">Coverage</span>
+    const fileName = location.substring(location.lastIndexOf('/') + 1);
+    if (fileName === 'coverage' || fileName === '') {
+      return (
+        <div className="container">
+          <div className="row">
+            <div className="col-sm">
+              <strong>Statements: </strong>
+              {lineInfo.covered + '/' + lineInfo.all + '  '}
+              <span className={`badge table-${color}`}>{lineInfo.percentage + '%'}</span>
+            </div>
+            <div className="col-sm">
+              <strong>Lines:  </strong>
+              {lineInfo.covered + '/' + lineInfo.all + '  '}
+              <span className={`badge table-${color}`}>{lineInfo.percentage + '%'}</span>
+            </div>
           </div>
-          <CoverageModal project={project} device={device} coverage={coverage}/>
-          <hr />
+          <div className="row">
+            <div className="col-sm">
+              <strong>Commit: </strong>
+              <a href={`${project.url}/commit/${commit.fullHash}`}>{commit.splitHash}</a>
+            </div>
+            <div className="col-sm">
+            <strong>Date: </strong>
+              {commit.date}
+            </div>
+          </div>
+          <div className="mt-2">
+            <CoverageTable coverage = {coverageTable} />
+          </div>
         </div>
-      </div>
+      );
+    }
+    else {
+      return (
+        <div className="container">
+          Work in Progress... Coverage info of {fileName} will be here.
+        </div>
+      );
+    }
 
-    )
   }
-
 }
 
 Coverage.propTypes = {

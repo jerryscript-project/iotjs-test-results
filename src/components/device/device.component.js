@@ -26,7 +26,10 @@ import Chart from './chart/chart.container';
 import Results from './results/results.container';
 import Pagination from './pagination/pagination.container';
 import { devices, projects } from '../../constants';
+import { Link } from "react-router-dom";
+import { Switch, Route } from 'react-router';
 import Coverage from './coverage/coverage.container';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export default class Device extends React.Component {
 
@@ -110,11 +113,33 @@ export default class Device extends React.Component {
         <div className="device-content">
           <Chart measurements={renderData} project={project} />
           <hr />
-          <Coverage project={project} device={device}/>
+          <div className="row mt-2 text-center">
+            <div className="col">
+              <Link to={`${device.key}/coverage`} target="_blank">
+                <FontAwesomeIcon icon="chart-area" />
+                <span className="ml-2">Coverage</span>
+              </Link>
+            </div>
+          </div>
+          <hr />
           <Pagination length={renderData.length} />
           <Results measurements={renderData} project={project} />
         </div>
       );
+    };
+
+    this.loadCoverage = (project, device) => {
+      const { loading, error } = this.props;
+
+      if (error) {
+        return null;
+      }
+
+      if (loading) {
+        return (<Loading deviceName={'coverage'}/>);
+      }
+
+      return (<Coverage project={project} device={device} location={this.props.location.pathname}/>);
     };
   }
 
@@ -148,11 +173,24 @@ export default class Device extends React.Component {
 
         <Header device={device} project={project} />
 
-        {this.loadingSection(device)}
-        {this.alertSection(device)}
-        {this.missingSection(project, device)}
-        {this.contentSection(project)}
 
+        <Switch>
+          <Route
+            exact path={`${match.path}`}
+            render={() => <div className="container">
+                            {this.loadingSection(device)}
+                            {this.alertSection(device)}
+                            {this.missingSection(project, device)}
+                            {this.contentSection(project)}
+                          </div>}
+          />
+          <Route
+            path={`${match.path}/coverage`}
+            render={() => <div className="container">
+                            {this.loadCoverage(project, device)}
+                          </div>}
+          />
+        </Switch>
       </div>
     );
   }
