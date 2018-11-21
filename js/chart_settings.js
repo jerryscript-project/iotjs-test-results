@@ -67,7 +67,7 @@ function generate_chart(data, type, y_axis_min) {
     var target_profile = 'bin.target_binary_size';
     var minimal_profile = 'bin.minimal_binary_size';
 
-    var label_name_first = 'target-profile binary size (KB)';
+    var label_name_first = 'target-es5.1-profile binary size (KB)';
     var label_name_second = 'minimal-profile binary size (KB)';
 
     var typedData = {
@@ -201,9 +201,9 @@ function update_chart(from, to) {
       data.date = iso_date(data.date);
 
 
-      var target_binary_size = parseInt(data.bin['target-profile']['data'] +
-                                        data.bin['target-profile']['rodata'] +
-                                        data.bin['target-profile']['text'])
+      var target_binary_size = parseInt(data.bin['target-es5_1-profile']['data'] +
+                                        data.bin['target-es5_1-profile']['rodata'] +
+                                        data.bin['target-es5_1-profile']['text'])
 
       data.bin.target_binary_size = NaN;
       if (target_binary_size >= 0) {
