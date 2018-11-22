@@ -43,6 +43,9 @@ export default class ValidResult extends React.Component {
     const { data, project } = this.props;
     const { collapsed } = this.state;
     const color = data.tests.find(t => t.result === 'fail') ? 'danger' : 'success';
+
+    const binary_data = (project.key === 'iotjs') ? 'target-es5_1-profile' : 'target-es2015subset-profile';
+
     const colorBoxStyle = {
       width: '10px',
     };
@@ -62,7 +65,7 @@ export default class ValidResult extends React.Component {
 
               {collapsed &&
                 <div className="d-none d-md-block col-auto border-left border-right px-1">
-                  <Binary profile={data.bin['target-profile']} />
+                  <Binary profile={data.bin[`${binary_data}`]} />
                 </div>
               }
 

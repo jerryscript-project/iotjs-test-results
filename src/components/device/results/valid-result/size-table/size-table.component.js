@@ -46,14 +46,16 @@ export default class SizeTable extends React.Component {
   }
 
   render() {
-    const target = this.getSizeData('target');
+    const es2015sub = this.getSizeData('target-es2015subset');
+    const es5_1 = this.getSizeData('target-es5_1');
     const minimal = this.getSizeData('minimal');
-    const trs = Object.keys(target).map((key, i) => {
+    const trs = Object.keys(es2015sub).map((key, i) => {
       return (
         <tr key={`${key}-${i}`}>
           <th scope="row">{key}</th>
-          <td className="text-right">{target[key]} B</td>
-          <td className="text-right">{minimal[key]} B</td>
+          <td className="text-center text-nowrap">{es2015sub[key]} B</td>
+          <td className="text-center text-nowrap">{es5_1[key]} B</td>
+          <td className="text-center text-nowrap">{minimal[key]} B</td>
         </tr>
       );
     });
@@ -65,8 +67,9 @@ export default class SizeTable extends React.Component {
           <thead>
             <tr>
               <th scope="col"></th>
-              <th scope="col" className="text-right">Target Profile</th>
-              <th scope="col" className="text-right">Minimal Profile</th>
+              <th scope="col" className="text-center">es2015subset</th>
+              <th scope="col" className="text-center">es5.1</th>
+              <th scope="col" className="text-center">Minimal</th>
             </tr>
           </thead>
           <tbody>

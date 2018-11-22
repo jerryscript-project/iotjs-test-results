@@ -24,7 +24,7 @@ export default class Submodule extends React.Component {
       width: '55px',
     };
     const messageStyle = {
-      width: '340px',
+      width: '310px',
     };
 
     return (

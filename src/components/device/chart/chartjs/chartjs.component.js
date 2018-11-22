@@ -31,7 +31,7 @@ export default class Chartjs extends React.Component {
 
         const size = bdata + rodata + text;
 
-        return size >= 0 ? (size / 1024).toFixed(1) : null;
+        return size > 0 ? (size / 1024).toFixed(1) : null;
       }
 
       return null;
@@ -66,7 +66,8 @@ export default class Chartjs extends React.Component {
     this.getDisplayData = data => {
       const start = {
         labels: [],
-        target: [],
+        es5_1: [],
+        es2015subset: [],
         minimal: [],
         memory: [],
         commits: [],
@@ -75,7 +76,8 @@ export default class Chartjs extends React.Component {
       if (data) {
         return data.reduce((acc, d) => {
           acc.labels = [...acc.labels, d.date.format('YYYY-MM-DD')];
-          acc.target = [...acc.target, this.getBinaryData(d, 'target-profile')];
+          acc.es5_1 = [...acc.es5_1, this.getBinaryData(d, 'target-es5_1-profile')];
+          acc.es2015subset = [...acc.es2015subset, this.getBinaryData(d, 'target-es2015subset-profile')];
           acc.minimal = [...acc.minimal, this.getBinaryData(d, 'minimal-profile')];
           acc.memory = [...acc.memory, this.getMemoryData(d)];
           acc.commits = [...acc.commits, this.getCommitData(d)];
@@ -96,24 +98,32 @@ export default class Chartjs extends React.Component {
 
   render() {
     const { data } = this.props;
-    const { labels, target, minimal, memory, commits } = this.getDisplayData(data);
+    const { labels, es5_1, es2015subset, minimal, memory, commits } = this.getDisplayData(data);
 
     const binaryData = {
       labels,
       datasets: [
         {
-          label: 'target-profile binary size',
+          label: 'target-es5.1-profile binary size',
           borderColor: '#ff7f0e',
           backgroundColor: '#ff7f0e',
-          data: target,
+          data: es5_1,
           commitData: commits,
           fill: false,
           lineTension: 0,
-        }, {
+        },{
           label: 'minimal-profile binary size',
           borderColor: '#aec7e8',
           backgroundColor: '#aec7e8',
           data: minimal,
+          commitData: commits,
+          fill: false,
+          lineTension: 0,
+        },{
+          label: 'target-es2015subset-profile binary size',
+          borderColor: '#8a6acb',
+          backgroundColor: '#8a6acb',
+          data: es2015subset,
           commitData: commits,
           fill: false,
           lineTension: 0,
