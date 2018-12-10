@@ -87,3 +87,32 @@ body {
   border: 1px saturation($color: #333);
   transition: width .2s ease-in;
 }
+
+.line-number {
+  color: gray;
+  padding-right: '0.3em';
+  font-size: '0.8em'
+}
+
+.source {
+  font-family: monospace;
+  font-size: 90%;
+}
+
+.source-line {
+  width: 100%;
+  height: 0.5em;
+  background-color:#037c0d;
+}
+
+.row-background-red {
+  background-color: rgb(250, 128, 114);
+}
+
+.row-background-green {
+  background-color: rgb(161, 215, 106);
+}
+
+.row-background-white {
+  background-color: rgb(255, 255, 255);
+}

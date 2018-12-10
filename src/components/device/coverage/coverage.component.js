@@ -16,7 +16,8 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import CoverageTable from './coverage-table/coverage-table.component'
+import CoverageTable from './coverage-table/coverage-table.component';
+import CoverageSource from './coverage-source/coverage-source.component';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export default class Coverage extends React.Component {
@@ -133,7 +134,7 @@ export default class Coverage extends React.Component {
     else {
       return (
         <div className="container">
-          Work in Progress... Coverage info of {fileName} will be here.
+          <CoverageSource coverage={coverage} fileName={fileName.slice(0, -3)}/>
         </div>
       );
     }

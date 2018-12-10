@@ -18,7 +18,7 @@ import React from 'react';
 import ReactTable from 'react-table';
 import 'react-table/react-table.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 
 export default class CoverageTable extends React.Component {
   constructor(props) {
@@ -54,7 +54,7 @@ export default class CoverageTable extends React.Component {
         {
           fileName: `${fileName}.js`,
           percentageBar:
-          <div className='progress-bar' >
+          <div className="progress-bar" >
             <div className='filler' style={{ width:`${percentage[0]}%` ,
                                             background:`#${color}`}}/>
           </div>,
