@@ -72,23 +72,14 @@ function set_info(device) {
         .text("Raspbian Jessie");
       $("#info-image").attr('src', "img/raspberrypi2.jpg");
       break;
-    case "artik053":
+    case "rpi3":
       $("#info-device")
-        .attr('href', "https://developer.artik.io/documentation/artik-05x/")
-        .text("Artik 053");
-      $("#info-platform")
-        .attr('href', "https://github.com/Samsung/TizenRT")
-        .text("TizenRT");
-      $("#info-image").attr('src', "img/artik053.jpg");
-      break;
-    case "artik530":
-      $("#info-device")
-        .attr('href', "https://www.artik.io/modules/artik-530/")
-        .text("Artik 530");
+        .attr('href', "https://www.raspberrypi.org/products/raspberry-pi-3-model-b/")
+        .text("Raspberry Pi 3 Model B");
       $("#info-platform")
         .attr('href', "https://www.tizen.org/")
         .text("Tizen");
-      $("#info-image").attr('src', "img/artik530.jpg");
+      $("#info-image").attr('src', "img/raspberrypi3.jpg");
       break;
   }
 }
