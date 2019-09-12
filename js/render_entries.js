@@ -253,30 +253,12 @@ function _render_tests_table(uid, tests, earlier_tests_map) {
   return raw_html;
 }
 
-function render_nochange(date) {
-  var raw_html = '<div class="nochange">';
-
-  raw_html += '<div>No change today in the repositories</div>';
-  raw_html += '<div class="date">' + date.toISOString().substr(0, 10) + '</div>';
-  raw_html += '</div>';
-
-  return raw_html;
-}
-
 function date_floor(date) {
   return new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate()));
 }
 
 function subtract_one_day(date) {
   date.setUTCDate(date.getUTCDate() - 1);
-}
-
-function add_nochange_between(from, until, container) {
-  subtract_one_day(from);
-  while (from > until) {
-    container.append(render_nochange(from));
-    subtract_one_day(from);
-  }
 }
 
 function render_testruns(idx, idx_end) {
@@ -327,20 +309,12 @@ function render_testruns(idx, idx_end) {
       testruns_div.empty();
 
       idx = 0;
-      var prev_testrun_date = date_floor(new Date(testruns[idx].date));
-      var first_date = date_floor(prev_element == "" ? new Date() : new Date(prev_element.date));
-      add_nochange_between(first_date, prev_testrun_date, testruns_div);
-
       anim_idx = 0;
       for (; idx <= idx_end; idx++) {
         if (idx >= testruns.length)
           break;
 
         var testrun = testruns[idx];
-        var testrun_date = date_floor(new Date(testrun.date));
-        add_nochange_between(prev_testrun_date, testrun_date, testruns_div);
-        prev_testrun_date = testrun_date;
-
         var testrun_id = "testrun_" + idx;
         var next_testrun = (idx + 1) >= testruns.length ? { tests: {} } : testruns[idx + 1];
 
